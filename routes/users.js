@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const userController = require('../controllers/userController');
+import  userController from '../controllers/userController.js';
 
 // Route pour obtenir tous les synthétiseurs
 router.get('/', userController.getAllUsers);
 
 // Route pour créer un nouveau synthétiseur
-router.user('/', userController.createUser);
+router.post('/', userController.createUser);
 
-module.exports = router;
+export default router; 

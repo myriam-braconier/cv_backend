@@ -1,8 +1,8 @@
 
-const Profile = require('../models/Profile');
+import Profile from '../models/Profile.js';
 
 // Fonction pour obtenir tous les synthétiseurs
-exports.getAllProfiles = async (req, res) => {
+export const getAllProfiles = async (req, res) => {
     try {
         const synths = await Profile.findAll();
         res.json(synths);
@@ -12,7 +12,7 @@ exports.getAllProfiles = async (req, res) => {
 };
 
 // Fonction pour créer un nouveau synthétiseur
-exports.createProfile = async (req, res) => {
+export const createProfile = async (req, res) => {
     try {
         const newSynth = await Profile.create(req.body);
         res.status(201).json(newSynth);
@@ -20,3 +20,6 @@ exports.createProfile = async (req, res) => {
         res.status(400).json({ error: 'Failed to create profile' });
     }
 };
+
+// Exporter les fonctions avec un export par défaut
+export default { getAllProfiles, createProfile};

@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const postController = require('../controllers/postController');
+import postController from '../controllers/postController.js';
 
 // Route pour obtenir tous les synthétiseurs
 router.get('/', postController.getAllPosts);
@@ -8,4 +8,4 @@ router.get('/', postController.getAllPosts);
 // Route pour créer un nouveau synthétiseur
 router.post('/', postController.createPost);
 
-module.exports = router;
+export default router; 

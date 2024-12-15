@@ -1,27 +1,25 @@
-const express = require('express');
+import express from "express";
 const app = express();
-const port = 3000;
+const port = 4000;
 
+// Importer les routes 
+import synthetiserRoutes from "./routes/synthetisers.js";
+import userRoutes from "./routes/users.js";
+import roleRoutes from "./routes/roles.js";
+import profileRoutes from "./routes/profiles.js";
+import postRoutes from "./routes/posts.js";
 // Middleware pour analyser le corps des requêtes JSON
 app.use(express.json());
 
-// Importer les routes des synthétiseurs
-const synthesizerRoutes = require('./routes/synthesizers');
-app.use('/synthesizers', synthesizerRoutes);
 
-const userRoutes = require('./routes/users');
-app.use('/users', userRoutes);
 
-const roleRoutes = require('./routes/roles');
-app.use('/roles', roleRoutes);
-
-const profileRoutes = require('./routes/profiles');
-app.use('/profiles', profileRoutes);
-
-const postRoutes = require('./routes/posts');
-app.use('/posts', postRoutes);
+app.use("/synthetisers", synthetiserRoutes);
+app.use("/users", userRoutes);
+app.use("/roles", roleRoutes);
+app.use("/profiles", profileRoutes);
+app.use("/posts", postRoutes);
 
 // Démarrer le serveur
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+	console.log(`Server is running at http://localhost:${port}`);
 });

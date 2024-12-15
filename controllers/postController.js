@@ -1,8 +1,8 @@
 
-const Post = require('../models/Post');
+import Post from '../models/Post.js';
 
 // Fonction pour obtenir tous les synthétiseurs
-exports.getAllPosts = async (req, res) => {
+export const getAllPosts = async (req, res) => {
     try {
         const synths = await Post.findAll();
         res.json(synths);
@@ -12,7 +12,7 @@ exports.getAllPosts = async (req, res) => {
 };
 
 // Fonction pour créer un nouveau synthétiseur
-exports.createPost = async (req, res) => {
+export const createPost = async (req, res) => {
     try {
         const newSynth = await Post.create(req.body);
         res.status(201).json(newSynth);
@@ -20,3 +20,6 @@ exports.createPost = async (req, res) => {
         res.status(400).json({ error: 'Failed to create post' });
     }
 };
+
+// Exporter les fonctions avec un export par défaut
+export default { getAllPosts, createPost };

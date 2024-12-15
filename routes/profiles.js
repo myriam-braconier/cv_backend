@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const profileController = require('../controllers/profileController');
+import profileController from '../controllers/profileController.js';
 
 // Route pour obtenir tous les synthétiseurs
 router.get('/', profileController.getAllProfiles);
 
 // Route pour créer un nouveau synthétiseur
-router.profile('/', profileController.createProfile);
+router.post('/', profileController.createProfile);
 
-module.exports = router;
+export default router; 

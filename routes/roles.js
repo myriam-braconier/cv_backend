@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const roleController = require('../controllers/roleController');
+import roleController from '../controllers/roleController.js';
 
 // Route pour obtenir tous les synthétiseurs
 router.get('/', roleController.getAllRoles);
 
 // Route pour créer un nouveau synthétiseur
-router.role('/', roleController.createRole);
+router.post('/', roleController.createRole);
 
-module.exports = router;
+export default router; 

@@ -1,185 +1,1649 @@
 [
-{"marque": "Korg", "modele": "Drumlogue", "image_url": "https://synthetiseur.net/images/pt/korg-drumlogue.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2022 • Desktop • Analogique, Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 11 voix de polyphonie • Synthèse: ROM, Echantillonnage", "url": "https://synthetiseur.net/korg/drumlogue/"},
-{"marque": "Korg", "modele": "Wavestate SE", "image_url": "https://synthetiseur.net/images/pt/korg-wavestatese_1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2021 • Clavier • Numérique • 4 oscillateurs • 3 enveloppes • 1 filtre • 3 lfos • 120 voix de polyphonie • Synthèse: Soustractive, Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestatese/"},
-{"marque": "Korg", "modele": "ARP 2600 M", "image_url": "https://synthetiseur.net/images/pt/korg-arp2600m_1.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2021 • Desktop, Clavier • Analogique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arp2600m/"},
-{"marque": "Korg", "modele": "Modwave", "image_url": "https://synthetiseur.net/images/pt/korg-modwave_1.jpg", "note": "86%", "nb_avis": "16 avis", "specifications": "2021 • Clavier • Numérique • 3 oscillateurs • 4 enveloppes • 1 filtre • 5 lfos • 32 voix de polyphonie • Synthèse: Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/modwave/"},
-{"marque": "Korg", "modele": "Minikorg 700FS", "image_url": "https://synthetiseur.net/images/pt/korg-minikorg700fs_1.jpg", "note": null, "nb_avis": null, "specifications": "2021 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/minikorg700fs/"},
-{"marque": "Korg", "modele": "Volca Sample 2", "image_url": "https://synthetiseur.net/images/pt/korg-volcasample2_1.jpg", "note": "78%", "nb_avis": "12 avis", "specifications": "2020 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 8 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage", "url": "https://synthetiseur.net/korg/volcasample2/"},
-{"marque": "Korg", "modele": "i3 (2020)", "image_url": "https://synthetiseur.net/images/pt/korg-i3_2020_1.jpg", "note": "92%", "nb_avis": "5 avis", "specifications": "2020 • Clavier • Numérique • 2 oscillateurs • 64 voix de polyphonie • Synthèse: ROM, Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/i3_2020/"},
-{"marque": "Korg", "modele": "Nautilus 61/73/88", "image_url": "https://synthetiseur.net/images/pt/korg-nautilus_1.jpg", "note": "80%", "nb_avis": "11 avis", "specifications": "2020 • Clavier • Numérique • 4 oscillateurs • 6 enveloppes • 2 filtres • 2 lfos • 200 voix de polyphonie • Multitimbral 16 parties • Synthèse: 11 types de synthèse", "url": "https://synthetiseur.net/korg/nautilus/"},
-{"marque": "Korg", "modele": "OpSix", "image_url": "https://synthetiseur.net/images/pt/korg-opsix_1.jpg", "note": "92%", "nb_avis": "10 avis", "specifications": "2020 • Clavier • Numérique • 6 oscillateurs • 6 enveloppes • 1 filtre • 3 lfos • 32 voix de polyphonie • Monotimbral • Synthèse: Modulation de Fréquence", "url": "https://synthetiseur.net/korg/opsix/"},
-{"marque": "Korg", "modele": "Wavestate", "image_url": "https://synthetiseur.net/images/pt/korg-wavestate_1.jpg", "note": "95%", "nb_avis": "32 avis", "specifications": "2020 • Clavier • Numérique • 4 oscillateurs • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Synthèse: Soustractive, Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestate/"},
-{"marque": "Korg", "modele": "ARP 2600 FS", "image_url": "https://synthetiseur.net/images/pt/korg-arp2600.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "2020 • Desktop, Clavier • Analogique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arp2600/"},
-{"marque": "Korg", "modele": "SV-2", "image_url": "https://synthetiseur.net/images/pt/korg-sv2.jpg", "note": "97%", "nb_avis": "13 avis", "specifications": "2020 • Clavier • Numérique • 1 oscillateur • 128 voix de polyphonie • Multitimbral 2 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/sv2/"},
-{"marque": "Korg", "modele": "Krome EX 61/73/88", "image_url": "https://synthetiseur.net/images/pt/korg-kromeex_1.jpg", "note": "92%", "nb_avis": "10 avis", "specifications": "2019 • Clavier • Numérique • 2 oscillateurs • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/kromeex/"},
-{"marque": "Korg", "modele": "NTS-1", "image_url": "https://synthetiseur.net/images/pt/korg-nts1_1.jpg", "note": "88%", "nb_avis": "31 avis", "specifications": "2019 • Desktop • Numérique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/nts1/"},
-{"marque": "Korg", "modele": "Volca Modular", "image_url": "https://synthetiseur.net/images/pt/korg-volcamodular_1.jpg", "note": "89%", "nb_avis": "14 avis", "specifications": "2019 • Desktop • Analogique, Numérique • 1 oscillateur • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Monotimbral • Synthèse: Modulation de Fréquence, Soustractive, Wave Folding", "url": "https://synthetiseur.net/korg/volcamodular/"},
-{"marque": "Korg", "modele": "Volca Nubass", "image_url": "https://synthetiseur.net/images/pt/korg-volcanubass_1.jpg", "note": "75%", "nb_avis": "4 avis", "specifications": "2019 • Desktop • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral", "url": "https://synthetiseur.net/korg/volcanubass/"},
-{"marque": "Korg", "modele": "Minilogue XD Module", "image_url": "https://synthetiseur.net/images/pt/korg-miniloguexdmodule_1.jpg", "note": "94%", "nb_avis": "7 avis", "specifications": "2019 • Desktop • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Monotimbral • Synthèse: Distorsion, Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/miniloguexdmodule/"},
-{"marque": "Korg", "modele": "Minilogue XD", "image_url": "https://synthetiseur.net/images/pt/korg-miniloguexd_1.jpg", "note": "96%", "nb_avis": "29 avis", "specifications": "2019 • Clavier • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Monotimbral • Synthèse: Distorsion, Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/miniloguexd/"},
-{"marque": "Korg", "modele": "KR-55 Pro", "image_url": "https://synthetiseur.net/images/pt/korg-kr55pro_1.jpg", "note": "70%", "nb_avis": "6 avis", "specifications": "2018 • Console (stand alone) • Numérique • 24 voix de polyphonie • Multitimbral 24 parties", "url": "https://synthetiseur.net/korg/kr55pro/"},
-{"marque": "Korg", "modele": "Prologue 8/16", "image_url": "https://synthetiseur.net/images/pt/korg-prologue_1.jpg", "note": "93%", "nb_avis": "3 avis", "specifications": "2018 • Clavier • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 16 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/prologue/"},
-{"marque": "Korg", "modele": "ARP Odyssey Module Rev 3", "image_url": "https://synthetiseur.net/images/pt/korg-arpodysseymodule3_1.jpg", "note": "100%", "nb_avis": "3 avis", "specifications": "2017 • Desktop • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arpodysseymodule3/"},
-{"marque": "Korg", "modele": "ARP Odyssey Module Rev 1", "image_url": "https://synthetiseur.net/images/pt/korg-arpodysseymodule1_1.jpg", "note": "96%", "nb_avis": "5 avis", "specifications": "2017 • Desktop • Analogique • 2 oscillateurs • 2 filtres • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arpodysseymodule1/"},
-{"marque": "Korg", "modele": "Kronos LS", "image_url": "https://synthetiseur.net/images/pt/korg-kronosls.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "2017 • Clavier • Numérique • 4 oscillateurs • 6 enveloppes • 2 filtres • 2 lfos • 180 voix de polyphonie • Multitimbral 16 parties • Synthèse: 11 types de synthèse", "url": "https://synthetiseur.net/korg/kronosls/"},
-{"marque": "Korg", "modele": "Grandstage 73/88", "image_url": "https://synthetiseur.net/images/pt/korg-grandstage_1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2017 • Clavier • Numérique • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/grandstage/"},
-{"marque": "Korg", "modele": "Kross 2 61/88", "image_url": "https://synthetiseur.net/images/pt/korg-kross2.jpg", "note": "85%", "nb_avis": "17 avis", "specifications": "2017 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage", "url": "https://synthetiseur.net/korg/kross2/"},
-{"marque": "Korg", "modele": "Vox Continental 61/73", "image_url": "https://synthetiseur.net/images/pt/korg-voxcontinental.jpg", "note": "90%", "nb_avis": "16 avis", "specifications": "2017 • Clavier • Numérique • 2 oscillateurs • 4 enveloppes • 2 filtres • 4 lfos • 128 voix de polyphonie • Multitimbral 4 parties • Synthèse: Modélisation Physique, ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/voxcontinental/"},
-{"marque": "Korg", "modele": "microKEY Air 61", "image_url": "https://synthetiseur.net/images/pt/korg-microkeyair61.jpg", "note": "100%", "nb_avis": "5 avis", "specifications": "2016 • Clavier • 61 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkeyair61/"},
-{"marque": "Korg", "modele": "microKEY Air 37", "image_url": "https://synthetiseur.net/images/pt/korg-microkeyair37.jpg", "note": "100%", "nb_avis": "3 avis", "specifications": "2016 • Clavier • 37 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkeyair37/"},
-{"marque": "Korg", "modele": "nanoKEY Studio", "image_url": "https://synthetiseur.net/images/pt/korg-nanokeystudio.jpg", "note": "78%", "nb_avis": "12 avis", "specifications": "2016 • Clavier • 25 touches avec dynamique tactile et rétro-éclairage", "url": "https://synthetiseur.net/korg/nanokeystudio/"},
-{"marque": "Korg", "modele": "microKEY Air 25", "image_url": "https://synthetiseur.net/images/pt/korg-microkeyair25.jpg", "note": "94%", "nb_avis": "7 avis", "specifications": "2016 • Clavier • 25 touches Natural Touch", "url": "https://synthetiseur.net/korg/microkeyair25/"},
-{"marque": "Korg", "modele": "MicroKORG S", "image_url": "https://synthetiseur.net/images/pt/korg-microkorgs_1.jpg", "note": "84%", "nb_avis": "11 avis", "specifications": "2016 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/microkorgs/"},
-{"marque": "Korg", "modele": "Volca Kick", "image_url": "https://synthetiseur.net/images/pt/korg-volcakick_1.jpg", "note": "93%", "nb_avis": "14 avis", "specifications": "2016 • Desktop • Analogique • 1 oscillateur • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/volcakick/"},
-{"marque": "Korg", "modele": "Odyssey Module", "image_url": "https://synthetiseur.net/images/pt/korg-odyssey_1.jpg", "note": null, "nb_avis": null, "specifications": "2016 • Desktop • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/odyssey/"},
-{"marque": "Korg", "modele": "Monologue", "image_url": "https://synthetiseur.net/images/pt/korg-monologue_1.jpg", "note": "93%", "nb_avis": "42 avis", "specifications": "2016 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monologue/"},
-{"marque": "Korg", "modele": "Volca FM", "image_url": "https://synthetiseur.net/images/pt/korg-volcafm.jpg", "note": "85%", "nb_avis": "19 avis", "specifications": "2016 • Desktop, Clavier • Numérique • 6 oscillateurs • 6 enveloppes • 1 lfo • 3 voix de polyphonie • Monotimbral • Synthèse: Modulation de Fréquence", "url": "https://synthetiseur.net/korg/volcafm/"},
-{"marque": "Korg", "modele": "Minilogue", "image_url": "https://synthetiseur.net/images/pt/korg-minilogue_1.jpg", "note": "94%", "nb_avis": "20 avis", "specifications": "2016 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Multitimbral 4 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/minilogue/"},
-{"marque": "Korg", "modele": "microKEY 61 MkII", "image_url": "https://synthetiseur.net/images/pt/korg-microkey61mk2.jpg", "note": "47%", "nb_avis": "3 avis", "specifications": "2015 • Clavier • 61 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkey61mk2/"},
-{"marque": "Korg", "modele": "microKEY 49 MkII", "image_url": "https://synthetiseur.net/images/pt/korg-microkey49mk2.jpg", "note": "85%", "nb_avis": "8 avis", "specifications": "2015 • Clavier • 49 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkey49mk2/"},
-{"marque": "Korg", "modele": "microKEY Air 49", "image_url": "https://synthetiseur.net/images/pt/korg-microkeyair49.jpg", "note": "86%", "nb_avis": "7 avis", "specifications": "2015 • Clavier • 49 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkeyair49/"},
-{"marque": "Korg", "modele": "microKEY 37 MkII", "image_url": "https://synthetiseur.net/images/pt/korg-microkey37mk2.jpg", "note": "93%", "nb_avis": "8 avis", "specifications": "2015 • Clavier • 37 mini-touches sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkey37mk2/"},
-{"marque": "Korg", "modele": "ARP Odyssey Rev 3", "image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey3_1.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arpodyssey3/"},
-{"marque": "Korg", "modele": "ARP Odyssey Rev 2", "image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey2_1.jpg", "note": null, "nb_avis": null, "specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arpodyssey2/"},
-{"marque": "Korg", "modele": "ARP Odyssey Rev 1", "image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey1_1.jpg", "note": null, "nb_avis": null, "specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 filtres • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/arpodyssey1/"},
-{"marque": "Korg", "modele": "Electribe Sampler", "image_url": "https://synthetiseur.net/images/pt/korg-electribesampler.jpg", "note": "82%", "nb_avis": "9 avis", "specifications": "2015 • Desktop • Numérique • 4 oscillateurs • 1 enveloppe • 3 filtres • 1 lfo • 24 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse", "url": "https://synthetiseur.net/korg/electribesampler/"},
-{"marque": "Korg", "modele": "Electribe", "image_url": "https://synthetiseur.net/images/pt/korg-electribe.jpg", "note": "96%", "nb_avis": "15 avis", "specifications": "2015 • Desktop • Numérique • 4 oscillateurs • 24 voix de polyphonie • Multitimbral 16 parties • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/electribe/"},
-{"marque": "Korg", "modele": "Volca Sample", "image_url": "https://synthetiseur.net/images/pt/korg-volcasample_1.jpg", "note": "95%", "nb_avis": "4 avis", "specifications": "2014 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 8 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage", "url": "https://synthetiseur.net/korg/volcasample/"},
-{"marque": "Korg", "modele": "MS-20 Kit", "image_url": "https://synthetiseur.net/images/pt/korg-ms20kit.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2014 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ms20kit/"},
-{"marque": "Korg", "modele": "Triton Taktile 25/49", "image_url": "https://synthetiseur.net/images/pt/korg-tritontaktile_1.jpg", "note": "93%", "nb_avis": "14 avis", "specifications": "2014 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/tritontaktile/"},
-{"marque": "Korg", "modele": "Taktile 25/49", "image_url": "https://synthetiseur.net/images/pt/korg-taktile.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2014 • Clavier • Numérique • 0 oscillateur • 0 voix de polyphonie • Multitimbral 0 parties", "url": "https://synthetiseur.net/korg/taktile/"},
-{"marque": "Korg", "modele": "Volca Keys", "image_url": "https://synthetiseur.net/images/pt/korg-volcakeys_1.jpg", "note": "88%", "nb_avis": "26 avis", "specifications": "2013 • Desktop • Numérique • 3 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/volcakeys/"},
-{"marque": "Korg", "modele": "Volca Beats", "image_url": "https://synthetiseur.net/images/pt/korg-volcabeats_1.jpg", "note": "81%", "nb_avis": "21 avis", "specifications": "2013 • Desktop • Analogique, Numérique • 2 oscillateurs • 10 voix de polyphonie • Multitimbral 10 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/volcabeats/"},
-{"marque": "Korg", "modele": "Volca Bass", "image_url": "https://synthetiseur.net/images/pt/korg-volcabass_1.jpg", "note": "88%", "nb_avis": "22 avis", "specifications": "2013 • Desktop • Numérique • 3 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 3 voix de polyphonie • Multitimbral 3 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/volcabass/"},
-{"marque": "Korg", "modele": "Kross 61/88", "image_url": "https://synthetiseur.net/images/pt/korg-kross.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2013 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage", "url": "https://synthetiseur.net/korg/kross/"},
-{"marque": "Korg", "modele": "King", "image_url": "https://synthetiseur.net/images/pt/korg-kingkorg_1.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "2013 • Clavier • Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 24 voix de polyphonie • Multitimbral 2 parties • Synthèse: Modulation de Fréquence, Virtuel Analogique", "url": "https://synthetiseur.net/korg/kingkorg/"},
-{"marque": "Korg", "modele": "MS-20 Mini", "image_url": "https://synthetiseur.net/images/pt/korg-ms20mini_1.jpg", "note": "89%", "nb_avis": "25 avis", "specifications": "2013 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ms20mini/"},
-{"marque": "Korg", "modele": "microKEY 25", "image_url": "https://synthetiseur.net/images/pt/korg-microkey25.jpg", "note": "92%", "nb_avis": "12 avis", "specifications": "2012 • Clavier • 25 touches miniatures sensibles à la vélocité", "url": "https://synthetiseur.net/korg/microkey25/"},
-{"marque": "Korg", "modele": "Kronos X 61/73/88", "image_url": "https://synthetiseur.net/images/pt/korg-kronosx.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2012 • Clavier • Numérique • Multitimbral 16 parties • Synthèse: 9 types de synthèse", "url": "https://synthetiseur.net/korg/kronosx/"},
-{"marque": "Korg", "modele": "Monotron Duo", "image_url": "https://synthetiseur.net/images/pt/korg-monotronduo.jpg", "note": "80%", "nb_avis": "17 avis", "specifications": "2012 • Desktop • Analogique • 2 oscillateurs • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monotronduo/"},
-{"marque": "Korg", "modele": "Monotron Delay", "image_url": "https://synthetiseur.net/images/pt/korg-monotrondelay.jpg", "note": "90%", "nb_avis": "27 avis", "specifications": "2012 • Desktop • Analogique • 1 oscillateur • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monotrondelay/"},
-{"marque": "Korg", "modele": "Krome 61/73/88", "image_url": "https://synthetiseur.net/images/pt/korg-krome.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "2012 • Clavier • Numérique • 2 oscillateurs • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/krome/"},
-{"marque": "Korg", "modele": "Microkorg XL+", "image_url": "https://synthetiseur.net/images/pt/korg-microkorgxlplus_1.jpg", "note": "88%", "nb_avis": "12 avis", "specifications": "2012 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/microkorgxlplus/"},
-{"marque": "Korg", "modele": "nanoKEY 2", "image_url": "https://synthetiseur.net/images/pt/korg-nanokey2.jpg", "note": "80%", "nb_avis": "20 avis", "specifications": "2011 • Clavier • 25 touches sensibles à la vélocité (4 courbes de vélocité)", "url": "https://synthetiseur.net/korg/nanokey2/"},
-{"marque": "Korg", "modele": "Kronos", "image_url": "https://synthetiseur.net/images/pt/korg-kronos.jpg", "note": "88%", "nb_avis": "5 avis", "specifications": "2011 • Clavier • Numérique • 200 voix de polyphonie • Multitimbral 16 parties • Synthèse: 9 types de synthèse", "url": "https://synthetiseur.net/korg/kronos/"},
-{"marque": "Korg", "modele": "Monotribe", "image_url": "https://synthetiseur.net/images/pt/korg-monotribe_1.jpg", "note": "88%", "nb_avis": "5 avis", "specifications": "2011 • Desktop • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monotribe/"},
-{"marque": "Korg", "modele": "MicroStation", "image_url": "https://synthetiseur.net/images/pt/korg-microstation.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "2010 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/microstation/"},
-{"marque": "Korg", "modele": "PS60", "image_url": "https://synthetiseur.net/images/pt/korg-ps60.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "2010 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/ps60/"},
-{"marque": "Korg", "modele": "Monotron", "image_url": "https://synthetiseur.net/images/pt/korg-monotron.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "2010 • Desktop • Analogique • 1 oscillateur • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monotron/"},
-{"marque": "Korg", "modele": "microSampler", "image_url": "https://synthetiseur.net/images/pt/korg-microsampler_1.jpg", "note": "73%", "nb_avis": "3 avis", "specifications": "2009 • Clavier • Numérique • 1 oscillateur • 14 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage", "url": "https://synthetiseur.net/korg/microsampler/"},
-{"marque": "Korg", "modele": "Micro XL", "image_url": "https://synthetiseur.net/images/pt/korg-microkorgxl_1.jpg", "note": "80%", "nb_avis": "4 avis", "specifications": "2009 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique", "url": "https://synthetiseur.net/korg/microkorgxl/"},
-{"marque": "Korg", "modele": "M50 61/88", "image_url": "https://synthetiseur.net/images/pt/korg-m50_1.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "2008 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m50/"},
-{"marque": "Korg", "modele": "M3 61/73/88", "image_url": "https://synthetiseur.net/images/pt/korg-m3.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2007 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 4 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage", "url": "https://synthetiseur.net/korg/m3/"},
-{"marque": "Korg", "modele": "R3", "image_url": "https://synthetiseur.net/images/pt/korg-r3_1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "2007 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique, Soustractive", "url": "https://synthetiseur.net/korg/r3/"},
-{"marque": "Korg", "modele": "X50", "image_url": "https://synthetiseur.net/images/pt/korg-x50.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x50/"},
-{"marque": "Korg", "modele": "Micro X", "image_url": "https://synthetiseur.net/images/pt/korg-microx_1.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/microx/"},
-{"marque": "Korg", "modele": "Radias", "image_url": "https://synthetiseur.net/images/pt/korg-radias_1.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 8 voix de polyphonie • Multitimbral 4 parties • Synthèse: Synthèse par Formants, ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/radias/"},
-{"marque": "Korg", "modele": "TR 61/76/88", "image_url": "https://synthetiseur.net/images/pt/korg-tr.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "2005 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/tr/"},
-{"marque": "Korg", "modele": "OASYS", "image_url": "https://synthetiseur.net/images/pt/korg-oasys.jpg", "note": "85%", "nb_avis": "4 avis", "specifications": "2005 • Clavier • Numérique • 3 lfos • Multitimbral 16 parties • Synthèse: 9 types de synthèse", "url": "https://synthetiseur.net/korg/oasys/"},
-{"marque": "Korg", "modele": "Triton Extreme 61/76/88", "image_url": "https://synthetiseur.net/images/pt/korg-tritonextreme.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "2004 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique", "url": "https://synthetiseur.net/korg/tritonextreme/"},
-{"marque": "Korg", "modele": "MS2000BR", "image_url": "https://synthetiseur.net/images/pt/korg-ms2000br.jpg", "note": null, "nb_avis": null, "specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/ms2000br/"},
-{"marque": "Korg", "modele": "MS2000B", "image_url": "https://synthetiseur.net/images/pt/korg-ms2000b_1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2003 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/ms2000b/"},
-{"marque": "Korg", "modele": "Electribe R mkII", "image_url": "https://synthetiseur.net/images/pt/korg-electriber2.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 10 voix de polyphonie • Multitimbral 10 parties • Synthèse: ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/electriber2/"},
-{"marque": "Korg", "modele": "Electribe A mkII", "image_url": "https://synthetiseur.net/images/pt/korg-electribea2.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique", "url": "https://synthetiseur.net/korg/electribea2/"},
-{"marque": "Korg", "modele": "Electribe SX (ESX-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electribesx_1.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: Echantillonnage", "url": "https://synthetiseur.net/korg/electribesx/"},
-{"marque": "Korg", "modele": "Electribe MX (EMX-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electribemx_1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/electribemx/"},
-{"marque": "Korg", "modele": "Triton Studio 61/76/88", "image_url": "https://synthetiseur.net/images/pt/korg-tritonstudio.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique", "url": "https://synthetiseur.net/korg/tritonstudio/"},
-{"marque": "Korg", "modele": "Triton LE 61/76/88", "image_url": "https://synthetiseur.net/images/pt/korg-tritonle_1.jpg", "note": "86%", "nb_avis": "14 avis", "specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/tritonle/"},
-{"marque": "Korg", "modele": "PA60", "image_url": "https://synthetiseur.net/images/pt/korg-pa60.jpg", "note": null, "nb_avis": null, "specifications": "2002 • Clavier • Numérique • 62 voix de polyphonie • Synthèse: ROM", "url": "https://synthetiseur.net/korg/pa60/"},
-{"marque": "Korg", "modele": "MicroKORG", "image_url": "https://synthetiseur.net/images/pt/korg-microkorg_1.jpg", "note": "92%", "nb_avis": "41 avis", "specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/microkorg/"},
-{"marque": "Korg", "modele": "Karma", "image_url": "https://synthetiseur.net/images/pt/korg-karma_1.jpg", "note": "78%", "nb_avis": "10 avis", "specifications": "2001 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/karma/"},
-{"marque": "Korg", "modele": "Triton-Rack", "image_url": "https://synthetiseur.net/images/pt/korg-tritonrack.jpg", "note": "96%", "nb_avis": "5 avis", "specifications": "2000 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 60 voix de polyphonie • Multitimbral 16 parties • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/tritonrack/"},
-{"marque": "Korg", "modele": "PA80", "image_url": "https://synthetiseur.net/images/pt/korg-pa80.jpg", "note": "82%", "nb_avis": "10 avis", "specifications": "2000 • Clavier • Numérique • 62 voix de polyphonie • Synthèse: ROM", "url": "https://synthetiseur.net/korg/pa80/"},
-{"marque": "Korg", "modele": "MS2000R", "image_url": "https://synthetiseur.net/images/pt/korg-ms2000r_1.jpg", "note": "91%", "nb_avis": "9 avis", "specifications": "2000 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/ms2000r/"},
-{"marque": "Korg", "modele": "MS2000", "image_url": "https://synthetiseur.net/images/pt/korg-ms2000_1.jpg", "note": "78%", "nb_avis": "17 avis", "specifications": "2000 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/ms2000/"},
-{"marque": "Korg", "modele": "Electribe S (ES-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electribes_1.jpg", "note": "78%", "nb_avis": "11 avis", "specifications": "2000 • Desktop • Numérique • 2 oscillateurs • 12 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage, Soustractive", "url": "https://synthetiseur.net/korg/electribes/"},
-{"marque": "Korg", "modele": "Triton", "image_url": "https://synthetiseur.net/images/pt/korg-triton.jpg", "note": "84%", "nb_avis": "15 avis", "specifications": "1999 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique", "url": "https://synthetiseur.net/korg/triton/"},
-{"marque": "Korg", "modele": "NX5R", "image_url": "https://synthetiseur.net/images/pt/korg-nx5r.jpg", "note": "65%", "nb_avis": "4 avis", "specifications": "1999 • Module • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/nx5r/"},
-{"marque": "Korg", "modele": "N5EX", "image_url": "https://synthetiseur.net/images/pt/korg-n5ex.jpg", "note": "70%", "nb_avis": "2 avis", "specifications": "1999 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/n5ex/"},
-{"marque": "Korg", "modele": "Electribe R (ER-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electriber.jpg", "note": "74%", "nb_avis": "10 avis", "specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 11 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage, Soustractive", "url": "https://synthetiseur.net/korg/electriber/"},
-{"marque": "Korg", "modele": "Electribe M (EM-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electribem.jpg", "note": "75%", "nb_avis": "8 avis", "specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 12 voix de polyphonie • Multitimbral 12 parties • Synthèse: ROM, Echantillonnage, Soustractive", "url": "https://synthetiseur.net/korg/electribem/"},
-{"marque": "Korg", "modele": "Electribe A (EA-1)", "image_url": "https://synthetiseur.net/images/pt/korg-electribea.jpg", "note": "73%", "nb_avis": "9 avis", "specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive, Virtuel Analogique", "url": "https://synthetiseur.net/korg/electribea/"},
-{"marque": "Korg", "modele": "Trinity V3", "image_url": "https://synthetiseur.net/images/pt/korg-trinityv3.jpg", "note": "80%", "nb_avis": "3 avis", "specifications": "1998 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse", "url": "https://synthetiseur.net/korg/trinityv3/"},
-{"marque": "Korg", "modele": "TR-Rack", "image_url": "https://synthetiseur.net/images/pt/korg-trrack.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "1998 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: Modulation de Fréquence, ROM, Virtuel Analogique", "url": "https://synthetiseur.net/korg/trrack/"},
-{"marque": "Korg", "modele": "N1R", "image_url": "https://synthetiseur.net/images/pt/korg-n1r.jpg", "note": "53%", "nb_avis": "3 avis", "specifications": "1998 • Rack • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/n1r/"},
-{"marque": "Korg", "modele": "N5", "image_url": "https://synthetiseur.net/images/pt/korg-n5.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1997 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/n5/"},
-{"marque": "Korg", "modele": "Z1", "image_url": "https://synthetiseur.net/images/pt/korg-z1.jpg", "note": "95%", "nb_avis": "25 avis", "specifications": "1997 • Clavier • Numérique • 2 oscillateurs • 5 enveloppes • 2 filtres • 4 lfos • Multitimbral 6 parties • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/z1/"},
-{"marque": "Korg", "modele": "NS5R", "image_url": "https://synthetiseur.net/images/pt/korg-ns5r.jpg", "note": null, "nb_avis": null, "specifications": "1997 • Module • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/ns5r/"},
-{"marque": "Korg", "modele": "N1", "image_url": "https://synthetiseur.net/images/pt/korg-n1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1997 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/n1/"},
-{"marque": "Korg", "modele": "N364", "image_url": "https://synthetiseur.net/images/pt/korg-n364_1.jpg", "note": "90%", "nb_avis": "6 avis", "specifications": "1996 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/n364/"},
-{"marque": "Korg", "modele": "N264", "image_url": "https://synthetiseur.net/images/pt/korg-n264.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1996 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/n264/"},
-{"marque": "Korg", "modele": "X5D", "image_url": "https://synthetiseur.net/images/pt/korg-x5d_1.jpg", "note": "80%", "nb_avis": "7 avis", "specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x5d/"},
-{"marque": "Korg", "modele": "X5DR", "image_url": "https://synthetiseur.net/images/pt/korg-x5dr.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "1995 • Rack • Numérique • 2 oscillateurs • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x5dr/"},
-{"marque": "Korg", "modele": "Trinity", "image_url": "https://synthetiseur.net/images/pt/korg-trinity.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse", "url": "https://synthetiseur.net/korg/trinity/"},
-{"marque": "Korg", "modele": "Prophecy", "image_url": "https://synthetiseur.net/images/pt/korg-prophecy_1.jpg", "note": "91%", "nb_avis": "17 avis", "specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 2 filtres • 4 lfos • Monophonique • Monotimbral • Synthèse: 5 types de synthèse", "url": "https://synthetiseur.net/korg/prophecy/"},
-{"marque": "Korg", "modele": "X5", "image_url": "https://synthetiseur.net/images/pt/korg-x5.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1994 • Clavier • Numérique • 2 oscillateurs • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x5/"},
-{"marque": "Korg", "modele": "X2", "image_url": "https://synthetiseur.net/images/pt/korg-x2.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive", "url": "https://synthetiseur.net/korg/x2/"},
-{"marque": "Korg", "modele": "X3R", "image_url": "https://synthetiseur.net/images/pt/korg-x3r.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "1993 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x3r/"},
-{"marque": "Korg", "modele": "X3", "image_url": "https://synthetiseur.net/images/pt/korg-x3.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/x3/"},
-{"marque": "Korg", "modele": "Wavestation SR", "image_url": "https://synthetiseur.net/images/pt/korg-wavestationsr.jpg", "note": "95%", "nb_avis": "4 avis", "specifications": "1993 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestationsr/"},
-{"marque": "Korg", "modele": "Wavestation A/D", "image_url": "https://synthetiseur.net/images/pt/korg-wavestationad.jpg", "note": "98%", "nb_avis": "8 avis", "specifications": "1993 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestationad/"},
-{"marque": "Korg", "modele": "i3 (1993)", "image_url": "https://synthetiseur.net/images/pt/korg-i3.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 32 voix de polyphonie • Monotimbral • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/i3/"},
-{"marque": "Korg", "modele": "i2", "image_url": "https://synthetiseur.net/images/pt/korg-i2.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 32 voix de polyphonie • Monotimbral • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/i2/"},
-{"marque": "Korg", "modele": "05R/W", "image_url": "https://synthetiseur.net/images/pt/korg-05rw.jpg", "note": "90%", "nb_avis": "4 avis", "specifications": "1993 • Module • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/05rw/"},
-{"marque": "Korg", "modele": "Wavestation EX", "image_url": "https://synthetiseur.net/images/pt/korg-wavestationex.jpg", "note": "95%", "nb_avis": "4 avis", "specifications": "1991 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestationex/"},
-{"marque": "Korg", "modele": "01/W FD", "image_url": "https://synthetiseur.net/images/pt/korg-01wfd.jpg", "note": "77%", "nb_avis": "6 avis", "specifications": "1991 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/01wfd/"},
-{"marque": "Korg", "modele": "01/W", "image_url": "https://synthetiseur.net/images/pt/korg-01w.jpg", "note": "88%", "nb_avis": "5 avis", "specifications": "1991 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/01w/"},
-{"marque": "Korg", "modele": "01R/W", "image_url": "https://synthetiseur.net/images/pt/korg-01rw.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1991 • Module, Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/01rw/"},
-{"marque": "Korg", "modele": "Wavestation", "image_url": "https://synthetiseur.net/images/pt/korg-wavestation.jpg", "note": "84%", "nb_avis": "5 avis", "specifications": "1990 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle", "url": "https://synthetiseur.net/korg/wavestation/"},
-{"marque": "Korg", "modele": "T2", "image_url": "https://synthetiseur.net/images/pt/korg-t2.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/t2/"},
-{"marque": "Korg", "modele": "Z3 Guitar Synthesizer", "image_url": "https://synthetiseur.net/images/pt/korg-z3.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1989 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 lfo • 6 voix de polyphonie • Multitimbral 6 parties • Synthèse: Modulation de Fréquence", "url": "https://synthetiseur.net/korg/z3/"},
-{"marque": "Korg", "modele": "M1R EX", "image_url": "https://synthetiseur.net/images/pt/korg-m1rex_1.jpg", "note": null, "nb_avis": null, "specifications": "1989 • Rack • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m1rex/"},
-{"marque": "Korg", "modele": "T3", "image_url": "https://synthetiseur.net/images/pt/korg-t3.jpg", "note": "93%", "nb_avis": "3 avis", "specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: 4 types de synthèse", "url": "https://synthetiseur.net/korg/t3/"},
-{"marque": "Korg", "modele": "T1", "image_url": "https://synthetiseur.net/images/pt/korg-t1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 4 enveloppes • 1 filtre • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/t1/"},
-{"marque": "Korg", "modele": "M3R", "image_url": "https://synthetiseur.net/images/pt/korg-m3r.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 1 lfo • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m3r/"},
-{"marque": "Korg", "modele": "M1 EX", "image_url": "https://synthetiseur.net/images/pt/korg-m1ex_1.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Monotimbral • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m1ex/"},
-{"marque": "Korg", "modele": "DSM-1", "image_url": "https://synthetiseur.net/images/pt/korg-dsm1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1988 • Rack • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 16 voix de polyphonie • Multitimbral 4 parties • Synthèse: Additive, Echantillonnage", "url": "https://synthetiseur.net/korg/dsm1/"},
-{"marque": "Korg", "modele": "M1R", "image_url": "https://synthetiseur.net/images/pt/korg-m1r.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1988 • Rack • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m1r/"},
-{"marque": "Korg", "modele": "M1", "image_url": "https://synthetiseur.net/images/pt/korg-m1.jpg", "note": "88%", "nb_avis": "8 avis", "specifications": "1988 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Monotimbral • Synthèse: ROM", "url": "https://synthetiseur.net/korg/m1/"},
-{"marque": "Korg", "modele": "DRM-1", "image_url": "https://synthetiseur.net/images/pt/korg-drm1.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "1987 • Module, Rack • Numérique • 1 oscillateur • 1 enveloppe • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/drm1/"},
-{"marque": "Korg", "modele": "DDD-5", "image_url": "https://synthetiseur.net/images/pt/korg-ddd5.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "1987 • Desktop • Numérique • 12 voix de polyphonie • Multitimbral 12 parties", "url": "https://synthetiseur.net/korg/ddd5/"},
-{"marque": "Korg", "modele": "707", "image_url": "https://synthetiseur.net/images/pt/korg-707.jpg", "note": "84%", "nb_avis": "5 avis", "specifications": "1987 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 lfo • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: Modulation de Fréquence", "url": "https://synthetiseur.net/korg/707/"},
-{"marque": "Korg", "modele": "DVP-1", "image_url": "https://synthetiseur.net/images/pt/korg-dvp1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1986 • Rack • Numérique • 1 oscillateur • 2 enveloppes • 5 voix de polyphonie • Synthèse: Synthèse par Formants, ROM", "url": "https://synthetiseur.net/korg/dvp1/"},
-{"marque": "Korg", "modele": "DSS-1", "image_url": "https://synthetiseur.net/images/pt/korg-dss1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1986 • Clavier • Numérique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Additive, Echantillonnage", "url": "https://synthetiseur.net/korg/dss1/"},
-{"marque": "Korg", "modele": "DS-8", "image_url": "https://synthetiseur.net/images/pt/korg-ds8.jpg", "note": "67%", "nb_avis": "3 avis", "specifications": "1986 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 1 lfo • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: Modulation de Fréquence", "url": "https://synthetiseur.net/korg/ds8/"},
-{"marque": "Korg", "modele": "DDD-1", "image_url": "https://synthetiseur.net/images/pt/korg-ddd1.jpg", "note": "85%", "nb_avis": "4 avis", "specifications": "1986 • Desktop • Numérique • 18 voix de polyphonie", "url": "https://synthetiseur.net/korg/ddd1/"},
-{"marque": "Korg", "modele": "DDM-110", "image_url": "https://synthetiseur.net/images/pt/korg-ddm110.jpg", "note": null, "nb_avis": null, "specifications": "1985 • Desktop • Numérique • 8 voix de polyphonie • Synthèse: ROM", "url": "https://synthetiseur.net/korg/ddm110/"},
-{"marque": "Korg", "modele": "MR-16", "image_url": "https://synthetiseur.net/images/pt/korg-mr16.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "1985 • Desktop • Numérique • 1 oscillateur • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM", "url": "https://synthetiseur.net/korg/mr16/"},
-{"marque": "Korg", "modele": "DDM-220", "image_url": "https://synthetiseur.net/images/pt/korg-ddm220.jpg", "note": null, "nb_avis": null, "specifications": "1985 • Desktop • Numérique • 8 voix de polyphonie • Synthèse: ROM", "url": "https://synthetiseur.net/korg/ddm220/"},
-{"marque": "Korg", "modele": "Poly-800 II", "image_url": "https://synthetiseur.net/images/pt/korg-poly800ii.jpg", "note": "80%", "nb_avis": "3 avis", "specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/poly800ii/"},
-{"marque": "Korg", "modele": "EX-8000", "image_url": "https://synthetiseur.net/images/pt/korg-ex8000.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1985 • Rack • Analogique • 2 oscillateurs • 1 lfo • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/ex8000/"},
-{"marque": "Korg", "modele": "DW-8000", "image_url": "https://synthetiseur.net/images/pt/korg-dw8000_1.jpg", "note": "76%", "nb_avis": "5 avis", "specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 1 lfo • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/dw8000/"},
-{"marque": "Korg", "modele": "DW-6000", "image_url": "https://synthetiseur.net/images/pt/korg-dw6000_1.jpg", "note": "87%", "nb_avis": "3 avis", "specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes", "url": "https://synthetiseur.net/korg/dw6000/"},
-{"marque": "Korg", "modele": "EX-800", "image_url": "https://synthetiseur.net/images/pt/korg-ex800.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1984 • Desktop, Rack • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ex800/"},
-{"marque": "Korg", "modele": "Poly-800", "image_url": "https://synthetiseur.net/images/pt/korg-poly800_1.jpg", "note": "64%", "nb_avis": "5 avis", "specifications": "1983 • Clavier • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/poly800/"},
-{"marque": "Korg", "modele": "KPR-77", "image_url": "https://synthetiseur.net/images/pt/korg-kpr77.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1983 • Desktop • Analogique • 6 voix de polyphonie • Multitimbral 8 parties", "url": "https://synthetiseur.net/korg/kpr77/"},
-{"marque": "Korg", "modele": "X-911 Guitar Synthesizer", "image_url": "https://synthetiseur.net/images/pt/korg-x911.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1982 • Desktop • Analogique • 1 oscillateur • 3 enveloppes • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/x911/"},
-{"marque": "Korg", "modele": "Trident MkII", "image_url": "https://synthetiseur.net/images/pt/korg-trident2.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1982 • Clavier • Analogique • 4 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/trident2/"},
-{"marque": "Korg", "modele": "Poly-61M", "image_url": "https://synthetiseur.net/images/pt/korg-poly61m.jpg", "note": "70%", "nb_avis": "2 avis", "specifications": "1982 • Clavier • Analogique • 2 oscillateurs • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/poly61m/"},
-{"marque": "Korg", "modele": "Poly-61", "image_url": "https://synthetiseur.net/images/pt/korg-poly61.jpg", "note": "76%", "nb_avis": "5 avis", "specifications": "1982 • Clavier • Analogique, Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/poly61/"},
-{"marque": "Korg", "modele": "Polysix", "image_url": "https://synthetiseur.net/images/pt/korg-polysix_1.jpg", "note": "89%", "nb_avis": "7 avis", "specifications": "1981 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/polysix/"},
-{"marque": "Korg", "modele": "Mono/Poly", "image_url": "https://synthetiseur.net/images/pt/korg-monopoly_1.jpg", "note": "71%", "nb_avis": "7 avis", "specifications": "1981 • Clavier • Analogique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 4 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/monopoly/"},
-{"marque": "Korg", "modele": "LP-10 Electronic Piano", "image_url": "https://synthetiseur.net/images/pt/korg-lp10.jpg", "note": null, "nb_avis": null, "specifications": "1980 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 61 voix de polyphonie • Synthèse: Divide-Down", "url": "https://synthetiseur.net/korg/lp10/"},
-{"marque": "Korg", "modele": "Trident", "image_url": "https://synthetiseur.net/images/pt/korg-trident_1.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1980 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/trident/"},
-{"marque": "Korg", "modele": "PE-1000 Polyphonic Ensemble", "image_url": "https://synthetiseur.net/images/pt/korg-pe1000.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/pe1000/"},
-{"marque": "Korg", "modele": "Lambda", "image_url": "https://synthetiseur.net/images/pt/korg-lambda_1.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 48 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/lambda/"},
-{"marque": "Korg", "modele": "Sigma", "image_url": "https://synthetiseur.net/images/pt/korg-sigma.jpg", "note": "93%", "nb_avis": "3 avis", "specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/sigma/"},
-{"marque": "Korg", "modele": "MS-50", "image_url": "https://synthetiseur.net/images/pt/korg-ms50.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "1979 • Desktop • Analogique • 1 oscillateur • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ms50/"},
-{"marque": "Korg", "modele": "KR-55", "image_url": "https://synthetiseur.net/images/pt/korg-kr55.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1979 • Desktop • Analogique • 12 voix de polyphonie • Multitimbral 12 parties", "url": "https://synthetiseur.net/korg/kr55/"},
-{"marque": "Korg", "modele": "Delta", "image_url": "https://synthetiseur.net/images/pt/korg-delta.jpg", "note": "93%", "nb_avis": "3 avis", "specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/delta/"},
-{"marque": "Korg", "modele": "VC-10 Vocoder", "image_url": "https://synthetiseur.net/images/pt/korg-vc10.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1978 • Clavier • Analogique • 1 oscillateur • Monophonique • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/vc10/"},
-{"marque": "Korg", "modele": "SQ-10", "image_url": "https://synthetiseur.net/images/pt/korg-sq10.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1978 • Desktop • Analogique • 0 voix de polyphonie • Multitimbral 3 parties", "url": "https://synthetiseur.net/korg/sq10/"},
-{"marque": "Korg", "modele": "PS-3200", "image_url": "https://synthetiseur.net/images/pt/korg-ps3200.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1978 • Clavier, Module • Analogique • 2 oscillateurs • 1 enveloppe • 2 filtres • 2 lfos • 48 voix de polyphonie • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ps3200/"},
-{"marque": "Korg", "modele": "MS-20", "image_url": "https://synthetiseur.net/images/pt/korg-ms20.jpg", "note": "93%", "nb_avis": "11 avis", "specifications": "1978 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ms20/"},
-{"marque": "Korg", "modele": "MS-10", "image_url": "https://synthetiseur.net/images/pt/korg-ms10.jpg", "note": "93%", "nb_avis": "3 avis", "specifications": "1978 • Clavier • Analogique • 1 oscillateur • 1 filtre • 1 lfo • Monophonique • Multitimbral 0 parties • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ms10/"},
-{"marque": "Korg", "modele": "PS-3300", "image_url": "https://synthetiseur.net/images/pt/korg-ps3300.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1977 • Clavier, Module • Analogique • 3 oscillateurs • 3 enveloppes • 12 filtres • 6 lfos • 48 voix de polyphonie • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ps3300/"},
-{"marque": "Korg", "modele": "PS-3100", "image_url": "https://synthetiseur.net/images/pt/korg-ps3100_1.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "1977 • Clavier, Module • Analogique • 1 oscillateur • 3 enveloppes • 12 filtres • 6 lfos • 48 voix de polyphonie • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/ps3100/"},
-{"marque": "Korg", "modele": "M500 Micropreset", "image_url": "https://synthetiseur.net/images/pt/korg-m500_1.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "1977 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/m500/"},
-{"marque": "Korg", "modele": "PE-2000 Polyphonic Ensemble", "image_url": "https://synthetiseur.net/images/pt/korg-pe2000_1.jpg", "note": "80%", "nb_avis": "2 avis", "specifications": "1976 • Clavier • Analogique • 2 oscillateurs • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/pe2000/"},
-{"marque": "Korg", "modele": "770", "image_url": "https://synthetiseur.net/images/pt/korg-770_1.jpg", "note": "100%", "nb_avis": "2 avis", "specifications": "1976 • Clavier • Analogique • 2 oscillateurs • 2 lfos • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/770/"},
-{"marque": "Korg", "modele": "Synthe-Bass SB-100", "image_url": "https://synthetiseur.net/images/pt/korg-synthebass.jpg", "note": "80%", "nb_avis": "1 avis", "specifications": "1975 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/synthebass/"},
-{"marque": "Korg", "modele": "900PS Preset Synthesizer", "image_url": "https://synthetiseur.net/images/pt/korg-900ps.jpg", "note": "60%", "nb_avis": "1 avis", "specifications": "1975 • Clavier • Analogique • 2 oscillateurs • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/900ps/"},
-{"marque": "Korg", "modele": "Minikorg 700S", "image_url": "https://synthetiseur.net/images/pt/korg-minikorg700s.jpg", "note": "100%", "nb_avis": "1 avis", "specifications": "1974 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/minikorg700s/"},
-{"marque": "Korg", "modele": "Maxikorg 800 DV", "image_url": "https://synthetiseur.net/images/pt/korg-maxikorg_1.jpg", "note": "90%", "nb_avis": "2 avis", "specifications": "1974 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/maxikorg/"},
-{"marque": "Korg", "modele": "Minikorg 700", "image_url": "https://synthetiseur.net/images/pt/korg-minikorg700_1.jpg", "note": null, "nb_avis": null, "specifications": "1972 • Clavier • Analogique • 1 oscillateur • Monophonique • Monotimbral • Synthèse: Soustractive", "url": "https://synthetiseur.net/korg/minikorg700/"}
+	{
+		"marque": "Korg",
+		"modele": "Drumlogue",
+		"image_url": "https://synthetiseur.net/images/pt/korg-drumlogue.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2022 • Desktop • Analogique, Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 11 voix de polyphonie • Synthèse: ROM, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/drumlogue/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestate SE",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestatese_1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2021 • Clavier • Numérique • 4 oscillateurs • 3 enveloppes • 1 filtre • 3 lfos • 120 voix de polyphonie • Synthèse: Soustractive, Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestatese/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP 2600 M",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arp2600m_1.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2021 • Desktop, Clavier • Analogique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arp2600m/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Modwave",
+		"image_url": "https://synthetiseur.net/images/pt/korg-modwave_1.jpg",
+		"note": "86%",
+		"nb_avis": "16 avis",
+		"specifications": "2021 • Clavier • Numérique • 3 oscillateurs • 4 enveloppes • 1 filtre • 5 lfos • 32 voix de polyphonie • Synthèse: Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/modwave/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minikorg 700FS",
+		"image_url": "https://synthetiseur.net/images/pt/korg-minikorg700fs_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2021 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/minikorg700fs/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Sample 2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcasample2_1.jpg",
+		"note": "78%",
+		"nb_avis": "12 avis",
+		"specifications": "2020 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 8 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage",
+		"url": "https://synthetiseur.net/korg/volcasample2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "i3 (2020)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-i3_2020_1.jpg",
+		"note": "92%",
+		"nb_avis": "5 avis",
+		"specifications": "2020 • Clavier • Numérique • 2 oscillateurs • 64 voix de polyphonie • Synthèse: ROM, Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/i3_2020/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Nautilus 61/73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-nautilus_1.jpg",
+		"note": "80%",
+		"nb_avis": "11 avis",
+		"specifications": "2020 • Clavier • Numérique • 4 oscillateurs • 6 enveloppes • 2 filtres • 2 lfos • 200 voix de polyphonie • Multitimbral 16 parties • Synthèse: 11 types de synthèse",
+		"url": "https://synthetiseur.net/korg/nautilus/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "OpSix",
+		"image_url": "https://synthetiseur.net/images/pt/korg-opsix_1.jpg",
+		"note": "92%",
+		"nb_avis": "10 avis",
+		"specifications": "2020 • Clavier • Numérique • 6 oscillateurs • 6 enveloppes • 1 filtre • 3 lfos • 32 voix de polyphonie • Monotimbral • Synthèse: Modulation de Fréquence",
+		"url": "https://synthetiseur.net/korg/opsix/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestate",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestate_1.jpg",
+		"note": "95%",
+		"nb_avis": "32 avis",
+		"specifications": "2020 • Clavier • Numérique • 4 oscillateurs • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Synthèse: Soustractive, Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestate/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP 2600 FS",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arp2600.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "2020 • Desktop, Clavier • Analogique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arp2600/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "SV-2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-sv2.jpg",
+		"note": "97%",
+		"nb_avis": "13 avis",
+		"specifications": "2020 • Clavier • Numérique • 1 oscillateur • 128 voix de polyphonie • Multitimbral 2 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/sv2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Krome EX 61/73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kromeex_1.jpg",
+		"note": "92%",
+		"nb_avis": "10 avis",
+		"specifications": "2019 • Clavier • Numérique • 2 oscillateurs • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/kromeex/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "NTS-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-nts1_1.jpg",
+		"note": "88%",
+		"nb_avis": "31 avis",
+		"specifications": "2019 • Desktop • Numérique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/nts1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Modular",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcamodular_1.jpg",
+		"note": "89%",
+		"nb_avis": "14 avis",
+		"specifications": "2019 • Desktop • Analogique, Numérique • 1 oscillateur • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Monotimbral • Synthèse: Modulation de Fréquence, Soustractive, Wave Folding",
+		"url": "https://synthetiseur.net/korg/volcamodular/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Nubass",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcanubass_1.jpg",
+		"note": "75%",
+		"nb_avis": "4 avis",
+		"specifications": "2019 • Desktop • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral",
+		"url": "https://synthetiseur.net/korg/volcanubass/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minilogue XD Module",
+		"image_url": "https://synthetiseur.net/images/pt/korg-miniloguexdmodule_1.jpg",
+		"note": "94%",
+		"nb_avis": "7 avis",
+		"specifications": "2019 • Desktop • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Monotimbral • Synthèse: Distorsion, Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/miniloguexdmodule/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minilogue XD",
+		"image_url": "https://synthetiseur.net/images/pt/korg-miniloguexd_1.jpg",
+		"note": "96%",
+		"nb_avis": "29 avis",
+		"specifications": "2019 • Clavier • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Monotimbral • Synthèse: Distorsion, Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/miniloguexd/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "KR-55 Pro",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kr55pro_1.jpg",
+		"note": "70%",
+		"nb_avis": "6 avis",
+		"specifications": "2018 • Console (stand alone) • Numérique • 24 voix de polyphonie • Multitimbral 24 parties",
+		"url": "https://synthetiseur.net/korg/kr55pro/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Prologue 8/16",
+		"image_url": "https://synthetiseur.net/images/pt/korg-prologue_1.jpg",
+		"note": "93%",
+		"nb_avis": "3 avis",
+		"specifications": "2018 • Clavier • Analogique, Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 16 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/prologue/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP Odyssey Module Rev 3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arpodysseymodule3_1.jpg",
+		"note": "100%",
+		"nb_avis": "3 avis",
+		"specifications": "2017 • Desktop • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arpodysseymodule3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP Odyssey Module Rev 1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arpodysseymodule1_1.jpg",
+		"note": "96%",
+		"nb_avis": "5 avis",
+		"specifications": "2017 • Desktop • Analogique • 2 oscillateurs • 2 filtres • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arpodysseymodule1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Kronos LS",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kronosls.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "2017 • Clavier • Numérique • 4 oscillateurs • 6 enveloppes • 2 filtres • 2 lfos • 180 voix de polyphonie • Multitimbral 16 parties • Synthèse: 11 types de synthèse",
+		"url": "https://synthetiseur.net/korg/kronosls/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Grandstage 73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-grandstage_1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2017 • Clavier • Numérique • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/grandstage/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Kross 2 61/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kross2.jpg",
+		"note": "85%",
+		"nb_avis": "17 avis",
+		"specifications": "2017 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/kross2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Vox Continental 61/73",
+		"image_url": "https://synthetiseur.net/images/pt/korg-voxcontinental.jpg",
+		"note": "90%",
+		"nb_avis": "16 avis",
+		"specifications": "2017 • Clavier • Numérique • 2 oscillateurs • 4 enveloppes • 2 filtres • 4 lfos • 128 voix de polyphonie • Multitimbral 4 parties • Synthèse: Modélisation Physique, ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/voxcontinental/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY Air 61",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkeyair61.jpg",
+		"note": "100%",
+		"nb_avis": "5 avis",
+		"specifications": "2016 • Clavier • 61 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkeyair61/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY Air 37",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkeyair37.jpg",
+		"note": "100%",
+		"nb_avis": "3 avis",
+		"specifications": "2016 • Clavier • 37 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkeyair37/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "nanoKEY Studio",
+		"image_url": "https://synthetiseur.net/images/pt/korg-nanokeystudio.jpg",
+		"note": "78%",
+		"nb_avis": "12 avis",
+		"specifications": "2016 • Clavier • 25 touches avec dynamique tactile et rétro-éclairage",
+		"url": "https://synthetiseur.net/korg/nanokeystudio/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY Air 25",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkeyair25.jpg",
+		"note": "94%",
+		"nb_avis": "7 avis",
+		"specifications": "2016 • Clavier • 25 touches Natural Touch",
+		"url": "https://synthetiseur.net/korg/microkeyair25/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MicroKORG S",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkorgs_1.jpg",
+		"note": "84%",
+		"nb_avis": "11 avis",
+		"specifications": "2016 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/microkorgs/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Kick",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcakick_1.jpg",
+		"note": "93%",
+		"nb_avis": "14 avis",
+		"specifications": "2016 • Desktop • Analogique • 1 oscillateur • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/volcakick/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Odyssey Module",
+		"image_url": "https://synthetiseur.net/images/pt/korg-odyssey_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2016 • Desktop • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/odyssey/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Monologue",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monologue_1.jpg",
+		"note": "93%",
+		"nb_avis": "42 avis",
+		"specifications": "2016 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monologue/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca FM",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcafm.jpg",
+		"note": "85%",
+		"nb_avis": "19 avis",
+		"specifications": "2016 • Desktop, Clavier • Numérique • 6 oscillateurs • 6 enveloppes • 1 lfo • 3 voix de polyphonie • Monotimbral • Synthèse: Modulation de Fréquence",
+		"url": "https://synthetiseur.net/korg/volcafm/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minilogue",
+		"image_url": "https://synthetiseur.net/images/pt/korg-minilogue_1.jpg",
+		"note": "94%",
+		"nb_avis": "20 avis",
+		"specifications": "2016 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 4 voix de polyphonie • Multitimbral 4 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/minilogue/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY 61 MkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkey61mk2.jpg",
+		"note": "47%",
+		"nb_avis": "3 avis",
+		"specifications": "2015 • Clavier • 61 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkey61mk2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY 49 MkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkey49mk2.jpg",
+		"note": "85%",
+		"nb_avis": "8 avis",
+		"specifications": "2015 • Clavier • 49 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkey49mk2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY Air 49",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkeyair49.jpg",
+		"note": "86%",
+		"nb_avis": "7 avis",
+		"specifications": "2015 • Clavier • 49 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkeyair49/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY 37 MkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkey37mk2.jpg",
+		"note": "93%",
+		"nb_avis": "8 avis",
+		"specifications": "2015 • Clavier • 37 mini-touches sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkey37mk2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP Odyssey Rev 3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey3_1.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arpodyssey3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP Odyssey Rev 2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey2_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arpodyssey2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "ARP Odyssey Rev 1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-arpodyssey1_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2015 • Clavier • Analogique • 2 oscillateurs • 2 filtres • 1 lfo • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/arpodyssey1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe Sampler",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribesampler.jpg",
+		"note": "82%",
+		"nb_avis": "9 avis",
+		"specifications": "2015 • Desktop • Numérique • 4 oscillateurs • 1 enveloppe • 3 filtres • 1 lfo • 24 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse",
+		"url": "https://synthetiseur.net/korg/electribesampler/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribe.jpg",
+		"note": "96%",
+		"nb_avis": "15 avis",
+		"specifications": "2015 • Desktop • Numérique • 4 oscillateurs • 24 voix de polyphonie • Multitimbral 16 parties • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/electribe/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Sample",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcasample_1.jpg",
+		"note": "95%",
+		"nb_avis": "4 avis",
+		"specifications": "2014 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 8 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage",
+		"url": "https://synthetiseur.net/korg/volcasample/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS-20 Kit",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms20kit.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2014 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ms20kit/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton Taktile 25/49",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tritontaktile_1.jpg",
+		"note": "93%",
+		"nb_avis": "14 avis",
+		"specifications": "2014 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/tritontaktile/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Taktile 25/49",
+		"image_url": "https://synthetiseur.net/images/pt/korg-taktile.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2014 • Clavier • Numérique • 0 oscillateur • 0 voix de polyphonie • Multitimbral 0 parties",
+		"url": "https://synthetiseur.net/korg/taktile/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Keys",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcakeys_1.jpg",
+		"note": "88%",
+		"nb_avis": "26 avis",
+		"specifications": "2013 • Desktop • Numérique • 3 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/volcakeys/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Beats",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcabeats_1.jpg",
+		"note": "81%",
+		"nb_avis": "21 avis",
+		"specifications": "2013 • Desktop • Analogique, Numérique • 2 oscillateurs • 10 voix de polyphonie • Multitimbral 10 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/volcabeats/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Volca Bass",
+		"image_url": "https://synthetiseur.net/images/pt/korg-volcabass_1.jpg",
+		"note": "88%",
+		"nb_avis": "22 avis",
+		"specifications": "2013 • Desktop • Numérique • 3 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 3 voix de polyphonie • Multitimbral 3 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/volcabass/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Kross 61/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kross.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2013 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/kross/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "King",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kingkorg_1.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "2013 • Clavier • Numérique • 3 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 24 voix de polyphonie • Multitimbral 2 parties • Synthèse: Modulation de Fréquence, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/kingkorg/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS-20 Mini",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms20mini_1.jpg",
+		"note": "89%",
+		"nb_avis": "25 avis",
+		"specifications": "2013 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ms20mini/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microKEY 25",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkey25.jpg",
+		"note": "92%",
+		"nb_avis": "12 avis",
+		"specifications": "2012 • Clavier • 25 touches miniatures sensibles à la vélocité",
+		"url": "https://synthetiseur.net/korg/microkey25/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Kronos X 61/73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kronosx.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2012 • Clavier • Numérique • Multitimbral 16 parties • Synthèse: 9 types de synthèse",
+		"url": "https://synthetiseur.net/korg/kronosx/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Monotron Duo",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monotronduo.jpg",
+		"note": "80%",
+		"nb_avis": "17 avis",
+		"specifications": "2012 • Desktop • Analogique • 2 oscillateurs • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monotronduo/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Monotron Delay",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monotrondelay.jpg",
+		"note": "90%",
+		"nb_avis": "27 avis",
+		"specifications": "2012 • Desktop • Analogique • 1 oscillateur • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monotrondelay/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Krome 61/73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-krome.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "2012 • Clavier • Numérique • 2 oscillateurs • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/krome/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Microkorg XL+",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkorgxlplus_1.jpg",
+		"note": "88%",
+		"nb_avis": "12 avis",
+		"specifications": "2012 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/microkorgxlplus/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "nanoKEY 2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-nanokey2.jpg",
+		"note": "80%",
+		"nb_avis": "20 avis",
+		"specifications": "2011 • Clavier • 25 touches sensibles à la vélocité (4 courbes de vélocité)",
+		"url": "https://synthetiseur.net/korg/nanokey2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Kronos",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kronos.jpg",
+		"note": "88%",
+		"nb_avis": "5 avis",
+		"specifications": "2011 • Clavier • Numérique • 200 voix de polyphonie • Multitimbral 16 parties • Synthèse: 9 types de synthèse",
+		"url": "https://synthetiseur.net/korg/kronos/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Monotribe",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monotribe_1.jpg",
+		"note": "88%",
+		"nb_avis": "5 avis",
+		"specifications": "2011 • Desktop • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monotribe/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MicroStation",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microstation.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "2010 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/microstation/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PS60",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ps60.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "2010 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/ps60/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Monotron",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monotron.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "2010 • Desktop • Analogique • 1 oscillateur • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monotron/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "microSampler",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microsampler_1.jpg",
+		"note": "73%",
+		"nb_avis": "3 avis",
+		"specifications": "2009 • Clavier • Numérique • 1 oscillateur • 14 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/microsampler/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Micro XL",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkorgxl_1.jpg",
+		"note": "80%",
+		"nb_avis": "4 avis",
+		"specifications": "2009 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/microkorgxl/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M50 61/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m50_1.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "2008 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 80 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m50/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M3 61/73/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m3.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2007 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 4 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/m3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "R3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-r3_1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "2007 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 2 filtres • 2 lfos • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique, Soustractive",
+		"url": "https://synthetiseur.net/korg/r3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X50",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x50.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x50/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Micro X",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microx_1.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/microx/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Radias",
+		"image_url": "https://synthetiseur.net/images/pt/korg-radias_1.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "2006 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 8 voix de polyphonie • Multitimbral 4 parties • Synthèse: Synthèse par Formants, ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/radias/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "TR 61/76/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tr.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "2005 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/tr/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "OASYS",
+		"image_url": "https://synthetiseur.net/images/pt/korg-oasys.jpg",
+		"note": "85%",
+		"nb_avis": "4 avis",
+		"specifications": "2005 • Clavier • Numérique • 3 lfos • Multitimbral 16 parties • Synthèse: 9 types de synthèse",
+		"url": "https://synthetiseur.net/korg/oasys/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton Extreme 61/76/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tritonextreme.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "2004 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/tritonextreme/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS2000BR",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms2000br.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/ms2000br/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS2000B",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms2000b_1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2003 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/ms2000b/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe R mkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electriber2.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 10 voix de polyphonie • Multitimbral 10 parties • Synthèse: ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/electriber2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe A mkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribea2.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 2 voix de polyphonie • Multitimbral 2 parties • Synthèse: Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/electribea2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe SX (ESX-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribesx_1.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: Echantillonnage",
+		"url": "https://synthetiseur.net/korg/electribesx/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe MX (EMX-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribemx_1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "2003 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/electribemx/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton Studio 61/76/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tritonstudio.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 120 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/tritonstudio/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton LE 61/76/88",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tritonle_1.jpg",
+		"note": "86%",
+		"nb_avis": "14 avis",
+		"specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/tritonle/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PA60",
+		"image_url": "https://synthetiseur.net/images/pt/korg-pa60.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "2002 • Clavier • Numérique • 62 voix de polyphonie • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/pa60/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MicroKORG",
+		"image_url": "https://synthetiseur.net/images/pt/korg-microkorg_1.jpg",
+		"note": "92%",
+		"nb_avis": "41 avis",
+		"specifications": "2002 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/microkorg/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Karma",
+		"image_url": "https://synthetiseur.net/images/pt/korg-karma_1.jpg",
+		"note": "78%",
+		"nb_avis": "10 avis",
+		"specifications": "2001 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/karma/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton-Rack",
+		"image_url": "https://synthetiseur.net/images/pt/korg-tritonrack.jpg",
+		"note": "96%",
+		"nb_avis": "5 avis",
+		"specifications": "2000 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 60 voix de polyphonie • Multitimbral 16 parties • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/tritonrack/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PA80",
+		"image_url": "https://synthetiseur.net/images/pt/korg-pa80.jpg",
+		"note": "82%",
+		"nb_avis": "10 avis",
+		"specifications": "2000 • Clavier • Numérique • 62 voix de polyphonie • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/pa80/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS2000R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms2000r_1.jpg",
+		"note": "91%",
+		"nb_avis": "9 avis",
+		"specifications": "2000 • Desktop • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/ms2000r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS2000",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms2000_1.jpg",
+		"note": "78%",
+		"nb_avis": "17 avis",
+		"specifications": "2000 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 2 lfos • 4 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/ms2000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe S (ES-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribes_1.jpg",
+		"note": "78%",
+		"nb_avis": "11 avis",
+		"specifications": "2000 • Desktop • Numérique • 2 oscillateurs • 12 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage, Soustractive",
+		"url": "https://synthetiseur.net/korg/electribes/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Triton",
+		"image_url": "https://synthetiseur.net/images/pt/korg-triton.jpg",
+		"note": "84%",
+		"nb_avis": "15 avis",
+		"specifications": "1999 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 62 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM, Echantillonnage, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/triton/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "NX5R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-nx5r.jpg",
+		"note": "65%",
+		"nb_avis": "4 avis",
+		"specifications": "1999 • Module • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/nx5r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N5EX",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n5ex.jpg",
+		"note": "70%",
+		"nb_avis": "2 avis",
+		"specifications": "1999 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/n5ex/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe R (ER-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electriber.jpg",
+		"note": "74%",
+		"nb_avis": "10 avis",
+		"specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 filtre • 11 voix de polyphonie • Monotimbral • Synthèse: Echantillonnage, Soustractive",
+		"url": "https://synthetiseur.net/korg/electriber/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe M (EM-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribem.jpg",
+		"note": "75%",
+		"nb_avis": "8 avis",
+		"specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 12 voix de polyphonie • Multitimbral 12 parties • Synthèse: ROM, Echantillonnage, Soustractive",
+		"url": "https://synthetiseur.net/korg/electribem/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Electribe A (EA-1)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-electribea.jpg",
+		"note": "73%",
+		"nb_avis": "9 avis",
+		"specifications": "1999 • Desktop • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/electribea/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Trinity V3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-trinityv3.jpg",
+		"note": "80%",
+		"nb_avis": "3 avis",
+		"specifications": "1998 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse",
+		"url": "https://synthetiseur.net/korg/trinityv3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "TR-Rack",
+		"image_url": "https://synthetiseur.net/images/pt/korg-trrack.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "1998 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: Modulation de Fréquence, ROM, Virtuel Analogique",
+		"url": "https://synthetiseur.net/korg/trrack/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N1R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n1r.jpg",
+		"note": "53%",
+		"nb_avis": "3 avis",
+		"specifications": "1998 • Rack • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/n1r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N5",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n5.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1997 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/n5/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Z1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-z1.jpg",
+		"note": "95%",
+		"nb_avis": "25 avis",
+		"specifications": "1997 • Clavier • Numérique • 2 oscillateurs • 5 enveloppes • 2 filtres • 4 lfos • Multitimbral 6 parties • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/z1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "NS5R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ns5r.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1997 • Module • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/ns5r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1997 • Clavier • Numérique • 1 oscillateur • 3 enveloppes • 1 filtre • 3 lfos • 64 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/n1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N364",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n364_1.jpg",
+		"note": "90%",
+		"nb_avis": "6 avis",
+		"specifications": "1996 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/n364/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "N264",
+		"image_url": "https://synthetiseur.net/images/pt/korg-n264.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1996 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/n264/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X5D",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x5d_1.jpg",
+		"note": "80%",
+		"nb_avis": "7 avis",
+		"specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x5d/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X5DR",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x5dr.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "1995 • Rack • Numérique • 2 oscillateurs • 64 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x5dr/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Trinity",
+		"image_url": "https://synthetiseur.net/images/pt/korg-trinity.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: 5 types de synthèse",
+		"url": "https://synthetiseur.net/korg/trinity/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Prophecy",
+		"image_url": "https://synthetiseur.net/images/pt/korg-prophecy_1.jpg",
+		"note": "91%",
+		"nb_avis": "17 avis",
+		"specifications": "1995 • Clavier • Numérique • 2 oscillateurs • 2 filtres • 4 lfos • Monophonique • Monotimbral • Synthèse: 5 types de synthèse",
+		"url": "https://synthetiseur.net/korg/prophecy/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X5",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x5.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1994 • Clavier • Numérique • 2 oscillateurs • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x5/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x2.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Soustractive",
+		"url": "https://synthetiseur.net/korg/x2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X3R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x3r.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "1993 • Rack • Numérique • 2 oscillateurs • 2 enveloppes • 2 filtres • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x3r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x3.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/x3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestation SR",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestationsr.jpg",
+		"note": "95%",
+		"nb_avis": "4 avis",
+		"specifications": "1993 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestationsr/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestation A/D",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestationad.jpg",
+		"note": "98%",
+		"nb_avis": "8 avis",
+		"specifications": "1993 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestationad/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "i3 (1993)",
+		"image_url": "https://synthetiseur.net/images/pt/korg-i3.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 32 voix de polyphonie • Monotimbral • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/i3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "i2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-i2.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1993 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 32 voix de polyphonie • Monotimbral • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/i2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "05R/W",
+		"image_url": "https://synthetiseur.net/images/pt/korg-05rw.jpg",
+		"note": "90%",
+		"nb_avis": "4 avis",
+		"specifications": "1993 • Module • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/05rw/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestation EX",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestationex.jpg",
+		"note": "95%",
+		"nb_avis": "4 avis",
+		"specifications": "1991 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestationex/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "01/W FD",
+		"image_url": "https://synthetiseur.net/images/pt/korg-01wfd.jpg",
+		"note": "77%",
+		"nb_avis": "6 avis",
+		"specifications": "1991 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/01wfd/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "01/W",
+		"image_url": "https://synthetiseur.net/images/pt/korg-01w.jpg",
+		"note": "88%",
+		"nb_avis": "5 avis",
+		"specifications": "1991 • Clavier • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 32 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/01w/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "01R/W",
+		"image_url": "https://synthetiseur.net/images/pt/korg-01rw.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1991 • Module, Rack • Numérique • 2 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/01rw/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Wavestation",
+		"image_url": "https://synthetiseur.net/images/pt/korg-wavestation.jpg",
+		"note": "84%",
+		"nb_avis": "5 avis",
+		"specifications": "1990 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM, Synthèse Vectorielle",
+		"url": "https://synthetiseur.net/korg/wavestation/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "T2",
+		"image_url": "https://synthetiseur.net/images/pt/korg-t2.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/t2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Z3 Guitar Synthetiser",
+		"image_url": "https://synthetiseur.net/images/pt/korg-z3.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1989 • Rack • Numérique • 4 oscillateurs • 2 enveloppes • 1 lfo • 6 voix de polyphonie • Multitimbral 6 parties • Synthèse: Modulation de Fréquence",
+		"url": "https://synthetiseur.net/korg/z3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M1R EX",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m1rex_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1989 • Rack • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m1rex/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "T3",
+		"image_url": "https://synthetiseur.net/images/pt/korg-t3.jpg",
+		"note": "93%",
+		"nb_avis": "3 avis",
+		"specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: 4 types de synthèse",
+		"url": "https://synthetiseur.net/korg/t3/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "T1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-t1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 4 enveloppes • 1 filtre • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/t1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M3R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m3r.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 1 lfo • 32 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m3r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M1 EX",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m1ex_1.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1989 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Monotimbral • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m1ex/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DSM-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-dsm1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1988 • Rack • Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 16 voix de polyphonie • Multitimbral 4 parties • Synthèse: Additive, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/dsm1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M1R",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m1r.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1988 • Rack • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m1r/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m1.jpg",
+		"note": "88%",
+		"nb_avis": "8 avis",
+		"specifications": "1988 • Clavier • Numérique • 2 oscillateurs • 2 lfos • 16 voix de polyphonie • Monotimbral • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/m1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DRM-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-drm1.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "1987 • Module, Rack • Numérique • 1 oscillateur • 1 enveloppe • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/drm1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DDD-5",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ddd5.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "1987 • Desktop • Numérique • 12 voix de polyphonie • Multitimbral 12 parties",
+		"url": "https://synthetiseur.net/korg/ddd5/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "707",
+		"image_url": "https://synthetiseur.net/images/pt/korg-707.jpg",
+		"note": "84%",
+		"nb_avis": "5 avis",
+		"specifications": "1987 • Clavier • Numérique • 4 oscillateurs • 2 enveloppes • 1 lfo • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: Modulation de Fréquence",
+		"url": "https://synthetiseur.net/korg/707/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DVP-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-dvp1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1986 • Rack • Numérique • 1 oscillateur • 2 enveloppes • 5 voix de polyphonie • Synthèse: Synthèse par Formants, ROM",
+		"url": "https://synthetiseur.net/korg/dvp1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DSS-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-dss1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1986 • Clavier • Numérique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Additive, Echantillonnage",
+		"url": "https://synthetiseur.net/korg/dss1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DS-8",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ds8.jpg",
+		"note": "67%",
+		"nb_avis": "3 avis",
+		"specifications": "1986 • Clavier • Numérique • 2 oscillateurs • 3 enveloppes • 1 lfo • 8 voix de polyphonie • Multitimbral 8 parties • Synthèse: Modulation de Fréquence",
+		"url": "https://synthetiseur.net/korg/ds8/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DDD-1",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ddd1.jpg",
+		"note": "85%",
+		"nb_avis": "4 avis",
+		"specifications": "1986 • Desktop • Numérique • 18 voix de polyphonie",
+		"url": "https://synthetiseur.net/korg/ddd1/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DDM-110",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ddm110.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1985 • Desktop • Numérique • 8 voix de polyphonie • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/ddm110/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MR-16",
+		"image_url": "https://synthetiseur.net/images/pt/korg-mr16.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "1985 • Desktop • Numérique • 1 oscillateur • 16 voix de polyphonie • Multitimbral 16 parties • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/mr16/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DDM-220",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ddm220.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1985 • Desktop • Numérique • 8 voix de polyphonie • Synthèse: ROM",
+		"url": "https://synthetiseur.net/korg/ddm220/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Poly-800 II",
+		"image_url": "https://synthetiseur.net/images/pt/korg-poly800ii.jpg",
+		"note": "80%",
+		"nb_avis": "3 avis",
+		"specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/poly800ii/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "EX-8000",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ex8000.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1985 • Rack • Analogique • 2 oscillateurs • 1 lfo • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/ex8000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DW-8000",
+		"image_url": "https://synthetiseur.net/images/pt/korg-dw8000_1.jpg",
+		"note": "76%",
+		"nb_avis": "5 avis",
+		"specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 1 lfo • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/dw8000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "DW-6000",
+		"image_url": "https://synthetiseur.net/images/pt/korg-dw6000_1.jpg",
+		"note": "87%",
+		"nb_avis": "3 avis",
+		"specifications": "1985 • Clavier • Analogique • 2 oscillateurs • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive, Tables d'Ondes",
+		"url": "https://synthetiseur.net/korg/dw6000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "EX-800",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ex800.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1984 • Desktop, Rack • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ex800/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Poly-800",
+		"image_url": "https://synthetiseur.net/images/pt/korg-poly800_1.jpg",
+		"note": "64%",
+		"nb_avis": "5 avis",
+		"specifications": "1983 • Clavier • Analogique • 2 oscillateurs • 8 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/poly800/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "KPR-77",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kpr77.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1983 • Desktop • Analogique • 6 voix de polyphonie • Multitimbral 8 parties",
+		"url": "https://synthetiseur.net/korg/kpr77/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "X-911 Guitar Synthetiser",
+		"image_url": "https://synthetiseur.net/images/pt/korg-x911.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1982 • Desktop • Analogique • 1 oscillateur • 3 enveloppes • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/x911/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Trident MkII",
+		"image_url": "https://synthetiseur.net/images/pt/korg-trident2.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1982 • Clavier • Analogique • 4 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/trident2/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Poly-61M",
+		"image_url": "https://synthetiseur.net/images/pt/korg-poly61m.jpg",
+		"note": "70%",
+		"nb_avis": "2 avis",
+		"specifications": "1982 • Clavier • Analogique • 2 oscillateurs • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/poly61m/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Poly-61",
+		"image_url": "https://synthetiseur.net/images/pt/korg-poly61.jpg",
+		"note": "76%",
+		"nb_avis": "5 avis",
+		"specifications": "1982 • Clavier • Analogique, Numérique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/poly61/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Polysix",
+		"image_url": "https://synthetiseur.net/images/pt/korg-polysix_1.jpg",
+		"note": "89%",
+		"nb_avis": "7 avis",
+		"specifications": "1981 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 1 lfo • 6 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/polysix/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Mono/Poly",
+		"image_url": "https://synthetiseur.net/images/pt/korg-monopoly_1.jpg",
+		"note": "71%",
+		"nb_avis": "7 avis",
+		"specifications": "1981 • Clavier • Analogique • 4 oscillateurs • 2 enveloppes • 1 filtre • 2 lfos • 4 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/monopoly/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "LP-10 Electronic Piano",
+		"image_url": "https://synthetiseur.net/images/pt/korg-lp10.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1980 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 61 voix de polyphonie • Synthèse: Divide-Down",
+		"url": "https://synthetiseur.net/korg/lp10/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Trident",
+		"image_url": "https://synthetiseur.net/images/pt/korg-trident_1.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1980 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • 8 voix de polyphonie • Multitimbral 2 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/trident/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PE-1000 Polyphonic Ensemble",
+		"image_url": "https://synthetiseur.net/images/pt/korg-pe1000.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/pe1000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Lambda",
+		"image_url": "https://synthetiseur.net/images/pt/korg-lambda_1.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 48 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/lambda/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Sigma",
+		"image_url": "https://synthetiseur.net/images/pt/korg-sigma.jpg",
+		"note": "93%",
+		"nb_avis": "3 avis",
+		"specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/sigma/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS-50",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms50.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "1979 • Desktop • Analogique • 1 oscillateur • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ms50/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "KR-55",
+		"image_url": "https://synthetiseur.net/images/pt/korg-kr55.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1979 • Desktop • Analogique • 12 voix de polyphonie • Multitimbral 12 parties",
+		"url": "https://synthetiseur.net/korg/kr55/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Delta",
+		"image_url": "https://synthetiseur.net/images/pt/korg-delta.jpg",
+		"note": "93%",
+		"nb_avis": "3 avis",
+		"specifications": "1979 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 1 filtre • 1 lfo • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/delta/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "VC-10 Vocoder",
+		"image_url": "https://synthetiseur.net/images/pt/korg-vc10.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1978 • Clavier • Analogique • 1 oscillateur • Monophonique • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/vc10/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "SQ-10",
+		"image_url": "https://synthetiseur.net/images/pt/korg-sq10.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1978 • Desktop • Analogique • 0 voix de polyphonie • Multitimbral 3 parties",
+		"url": "https://synthetiseur.net/korg/sq10/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PS-3200",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ps3200.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1978 • Clavier, Module • Analogique • 2 oscillateurs • 1 enveloppe • 2 filtres • 2 lfos • 48 voix de polyphonie • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ps3200/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS-20",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms20.jpg",
+		"note": "93%",
+		"nb_avis": "11 avis",
+		"specifications": "1978 • Clavier • Analogique • 2 oscillateurs • 2 enveloppes • 2 filtres • 1 lfo • Monophonique • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ms20/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "MS-10",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ms10.jpg",
+		"note": "93%",
+		"nb_avis": "3 avis",
+		"specifications": "1978 • Clavier • Analogique • 1 oscillateur • 1 filtre • 1 lfo • Monophonique • Multitimbral 0 parties • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ms10/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PS-3300",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ps3300.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1977 • Clavier, Module • Analogique • 3 oscillateurs • 3 enveloppes • 12 filtres • 6 lfos • 48 voix de polyphonie • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ps3300/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PS-3100",
+		"image_url": "https://synthetiseur.net/images/pt/korg-ps3100_1.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "1977 • Clavier, Module • Analogique • 1 oscillateur • 3 enveloppes • 12 filtres • 6 lfos • 48 voix de polyphonie • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/ps3100/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "M500 Micropreset",
+		"image_url": "https://synthetiseur.net/images/pt/korg-m500_1.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "1977 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • 1 lfo • Monophonique • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/m500/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "PE-2000 Polyphonic Ensemble",
+		"image_url": "https://synthetiseur.net/images/pt/korg-pe2000_1.jpg",
+		"note": "80%",
+		"nb_avis": "2 avis",
+		"specifications": "1976 • Clavier • Analogique • 2 oscillateurs • 3 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/pe2000/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "770",
+		"image_url": "https://synthetiseur.net/images/pt/korg-770_1.jpg",
+		"note": "100%",
+		"nb_avis": "2 avis",
+		"specifications": "1976 • Clavier • Analogique • 2 oscillateurs • 2 lfos • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/770/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Synthe-Bass SB-100",
+		"image_url": "https://synthetiseur.net/images/pt/korg-synthebass.jpg",
+		"note": "80%",
+		"nb_avis": "1 avis",
+		"specifications": "1975 • Clavier • Analogique • 1 oscillateur • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/synthebass/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "900PS Preset Synthetiser",
+		"image_url": "https://synthetiseur.net/images/pt/korg-900ps.jpg",
+		"note": "60%",
+		"nb_avis": "1 avis",
+		"specifications": "1975 • Clavier • Analogique • 2 oscillateurs • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/900ps/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minikorg 700S",
+		"image_url": "https://synthetiseur.net/images/pt/korg-minikorg700s.jpg",
+		"note": "100%",
+		"nb_avis": "1 avis",
+		"specifications": "1974 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/minikorg700s/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Maxikorg 800 DV",
+		"image_url": "https://synthetiseur.net/images/pt/korg-maxikorg_1.jpg",
+		"note": "90%",
+		"nb_avis": "2 avis",
+		"specifications": "1974 • Clavier • Analogique • 2 oscillateurs • 1 enveloppe • 1 filtre • 2 lfos • 2 voix de polyphonie • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/maxikorg/"
+	},
+	{
+		"marque": "Korg",
+		"modele": "Minikorg 700",
+		"image_url": "https://synthetiseur.net/images/pt/korg-minikorg700_1.jpg",
+		"note": null,
+		"nb_avis": null,
+		"specifications": "1972 • Clavier • Analogique • 1 oscillateur • Monophonique • Monotimbral • Synthèse: Soustractive",
+		"url": "https://synthetiseur.net/korg/minikorg700/"
+	}
 ]

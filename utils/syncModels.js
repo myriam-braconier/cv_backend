@@ -26,7 +26,7 @@ async function syncModels() {
         });
 
         // Synchronisation des modèles avec la base de données
-        await sequelize.sync({ force: true });
+        await sequelize.sync({ force: false });
         console.log("Models synchronized successfully");
     } catch (error) {
         console.error("Error synchronizing models:", error);

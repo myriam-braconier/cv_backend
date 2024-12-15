@@ -1,21 +1,32 @@
 // syncModels.js
 import { sequelize } from "./sequelize.js";
 
-import User from "../models/user.js";
-import Role from "../models/role.js";
-import Synthetiser from "../models/synthetiser.js";
-import Post from "../models/post.js";
+import userModel from "../models/user.js";
+import roleModel from "../models/role.js";
+import synthetiserModel from "../models/synthetiser.js";
+import postModel from "../models/post.js";
+import profileModel from "../models/Profile.js"; 
 
 async function syncModels() {
     try {
         // Initialisation des modèles
-        User.init(sequelize);
-        Role.init(sequelize);
-        Post.init(sequelize);
-        Synthetiser.init(sequelize);
+        const models = {
+            User: userModel(sequelize),
+            Role: roleModel(sequelize),
+            Post: postModel(sequelize),
+            Synthetiser: synthetiserModel(sequelize),
+            Profile: profileModel(sequelize) 
+        };
+
+        // Définition des associations
+        Object.values(models).forEach(model => {
+            if (typeof model.associate === 'function') {
+                model.associate(models);
+            }
+        });
 
         // Synchronisation des modèles avec la base de données
-        await sequelize.sync({ force: false }); // Utilisez { force: true } pour recréer les tables (attention aux données existantes)
+        await sequelize.sync({ force: true });
         console.log("Models synchronized successfully");
     } catch (error) {
         console.error("Error synchronizing models:", error);

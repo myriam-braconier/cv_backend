@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
-// import cors from 'cors'; // Ajout de CORS pour gérer les requêtes cross-origin
+import cors from 'cors'; // Ajout de CORS pour gérer les requêtes cross-origin
 
 // Importer les routes
 import authRoutes from "./routes/auth.js";
@@ -15,10 +15,21 @@ import postRoutes from "./routes/posts.js";
 dotenv.config();
 
 const app = express();
+
+
+// Configuration des options  CORS
+const corsOptions = {
+    origin: 'http://localhost:3000', // Remplacez par l'URL de votre frontend si nécessaire
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes autorisées
+    allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
+  };
+
+
 const port = process.env.PORT || 4000;
 
 // Middleware
-// app.use(cors()); // Activer CORS
+// Activer CORS avec les options spécifiées
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Pour parser les requêtes URL-encoded
 

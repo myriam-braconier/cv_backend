@@ -4,8 +4,6 @@ import config from '../config/config.js';
 
 const sequelize = new Sequelize(config.development);
 
-
-
 // Test the connection 
 async function testConnection() {   
 try {     
@@ -19,4 +17,4 @@ try {
 }
 testConnection();
   
-export { sequelize, testConnection };
+export default sequelize;

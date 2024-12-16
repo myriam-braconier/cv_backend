@@ -32,7 +32,7 @@ module.exports = {
       },
       has_instrument: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false
       },
       password: {

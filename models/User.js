@@ -1,5 +1,4 @@
 import { Model, DataTypes } from "sequelize";
-import bcrypt from 'bcrypt';
 
 export default function(sequelize) {
   class User extends Model {
@@ -19,10 +18,11 @@ export default function(sequelize) {
       userName: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
-          notEmpty: true,
-        },
+          notNull: {
+            msg: 'Un nom d\'utilisateur est requis'
+          }
+        }
       },
       firstName: {
         type: DataTypes.STRING,
@@ -50,7 +50,7 @@ export default function(sequelize) {
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [6, 100], // Longueur minimale et maximale du mot de passe
+          len: [9], // Longueur minimale et maximale du mot de passe
         },
       },
     },
@@ -59,11 +59,11 @@ export default function(sequelize) {
       modelName: "User",
       tableName: "users",
       timestamps: true,
-      hooks: {
-        beforeCreate: (user) => {
-          user.password = bcrypt.hashSync(user.password, 9);
-        },
-      },
+      // hooks: {
+      //   beforeCreate: (user) => {
+      //     user.password = bcrypt.hashSync(user.password, 9);
+      //   },
+      // },
     }
   );
 

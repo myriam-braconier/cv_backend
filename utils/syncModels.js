@@ -1,10 +1,10 @@
 // syncModels.js
 import { sequelize } from "./sequelize.js";
 
-import userModel from "../models/user.js";
-import roleModel from "../models/role.js";
-import synthetiserModel from "../models/synthetiser.js";
-import postModel from "../models/post.js";
+import userModel from "../models/User.js";
+import roleModel from "../models/Role.js";
+import synthetiserModel from "../models/Synthetiser.js";
+import postModel from "../models/Post.js";
 import profileModel from "../models/Profile.js"; 
 
 async function syncModels() {

@@ -1,76 +1,150 @@
 import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import UserModel from "../models/User.js"; // Assurez-vous que ce chemin est correct
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'; // Ajout de l'import JWT
+import dotenv from 'dotenv'; // Pour accéder aux variables d'environnement
+import { User } from "../models/User.js";
+import { Op } from "sequelize";
 
-import sequelize from "../utils/sequelize.js"; // Assurez-vous que ce chemin est correct
-const User = UserModel(sequelize);
+
+
+
+// Configuration de dotenv
+dotenv.config();
+
 
 const router = express.Router();
 
-// Route pour l'inscription (création d'un nouvel utilisateur)
 router.post("/register", async (req, res) => {
-//    console.log("Full request body:", req.body);
-//     console.log("Content-Type:", req.get('Content-Type'));
+   console.log('Requête reçue sur /register:', {
+       ...req.body,
+       password: '[MASQUÉ]'
+   });
 
-    // if (!req.body || typeof req.body !== 'object') {
-    //     return res.status(400).json({ error: 'Invalid request body' });
-    //   }
+   const { username, email, password } = req.body;
 
-	const userName = req.body.userName;
-	const password = req.body.password;
-	// console.log("Received data:", { userName, password });
+   try {
+       // Validation des données
+       if (!email || !password || !username) {
+           console.log('Validation échouée - champs manquants');
+           return res.status(400).json({
+               message: "Tous les champs sont requis.",
+               details: {
+                   email: !email,
+                   password: !password,
+                   username: !username
+               }
+           });
+       }
 
-    if (!userName || !password) {
-        return res.status(400).json({ error: 'Username and password are required' });
-      }
+       // Vérifier si l'email ou le username existe déjà
+       const existingUser = await User.findOne({
+           where: {
+               [Op.or]: [
+                   { email: email },
+                   { username: username }
+               ]
+           }
+       });
 
-	try {
-		// Hacher le mot de passe
-		const hashedPassword = await bcrypt.hash(password, 9);
+       if (existingUser) {
+           console.log('Utilisateur existant trouvé:', {
+               email: existingUser.email === email,
+               username: existingUser.username === username
+           });
+           return res.status(409).json({
+               message: existingUser.email === email 
+                   ? "Cet email est déjà utilisé." 
+                   : "Ce nom d'utilisateur est déjà pris."
+           });
+       }
 
-		// Créer un nouvel utilisateur
-		const newUser = await User.create({
-			userName,
-			password: hashedPassword,
-		});
-		res
-			.status(201)
-			.json({ message: "User created successfully", userId: newUser.id });
-	} catch (error) {
-		// console.error("Hashing error:", error);
-		res.status(500).json({ error: "Internal server error" });
-	}
+       // Hash du mot de passe
+       const hashedPassword = await bcrypt.hash(password, 10);
+
+       // Création de l'utilisateur
+       const newUser = await User.create({
+           username,
+           email,
+           password: hashedPassword
+       });
+
+       console.log('Nouvel utilisateur créé:', {
+           id: newUser.id,
+           username: newUser.username
+       });
+
+       // Envoyer la réponse de succès
+       res.status(201).json({
+           message: "Utilisateur créé avec succès",
+           userId: newUser.id,
+           username: newUser.username
+       });
+
+   } catch (error) {
+       console.error('Erreur lors de la création de l\'utilisateur:', error);
+       
+       // Gérer les erreurs spécifiques de Sequelize
+       if (error.name === 'SequelizeValidationError') {
+           return res.status(400).json({
+               message: "Données invalides",
+               details: error.errors.map(err => ({
+                   field: err.path,
+                   message: err.message
+               }))
+           });
+       }
+
+       // Erreur générique
+       res.status(500).json({
+           message: "Erreur interne du serveur lors de la création de l'utilisateur."
+       });
+   }
 });
 
-// Route pour la connexion (authentification)
+
+// route de connexion
+// La route sera accessible via /auth/login
 router.post("/login", async (req, res) => {
-	const { username, password } = req.body;
+	console.log('Route /login atteinte');
+	console.log('Corps de la requête reçue:', req.body); // Log la requête reçue
+	console.log('Tentative de connexion pour:', req.body.email);
+	const { email, password } = req.body;
 
 	try {
-		// Trouver l'utilisateur par son nom d'utilisateur
-		const user = await User.findOne({ where: { username } });
+		if (!email || !password) {
+			console.log('Validation échouée - champs manquants');
+			return res.status(400).json({
+				message: "Email et mot de passe sont requis.",
+			});
+		}
 
+		const user = await User.findOne({ where: { email } });
+		console.log('Utilisateur trouvé:', user ? 'Oui' : 'Non'); // Log si l'utilisateur est trouvé
 		if (!user) {
-			return res.status(401).json({ error: "Invalid username or password" });
+			return res.status(404).json({ message: "Utilisateur non trouvé." });
 		}
 
-		// Vérifier le mot de passe
 		const isPasswordValid = await bcrypt.compare(password, user.password);
-
 		if (!isPasswordValid) {
-			return res.status(401).json({ error: "Invalid username or password" });
+			return res.status(401).json({ message: "Mot de passe incorrect." });
 		}
 
-		// Générer un token JWT
 		const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
 			expiresIn: "1h",
 		});
 
-		res.json({ token });
+		res.status(200).json({
+			message: "Connexion réussie",
+			token,
+			userId: user.id,
+			username: user.username,
+            email: user.email
+		});
 	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: "Failed to log in" });
+		console.error("Erreur lors de la connexion:", error);
+		res.status(500).json({
+			message: "Erreur interne du serveur lors de la connexion.",
+		});
 	}
 });
 

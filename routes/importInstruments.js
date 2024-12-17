@@ -1,9 +1,12 @@
 import express from "express";
-const router = express.Router();
 import { promises as fs } from "node:fs";
-// Utiliser les promesses pour la lecture des fichiers
 import path from "path";
-import Synthetiser from "../models/Synthetiser";
+import { fileURLToPath } from 'url';
+import Synthetiser from "../models/Synthetiser.js";
+
+const router = express.Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
 
 // Fonction pour importer des données depuis des fichiers JSON dans le dossier data
 router.post("/import", async (req, res) => {
@@ -29,4 +32,4 @@ router.post("/import", async (req, res) => {
 	}
 });
 
-module.exports = router;
+export default router;

@@ -1,11 +1,11 @@
 import express from 'express';
 const router = express.Router();
-import postController from '../controllers/postController.js';
+import { getAllPosts, createPost } from '../controllers/postController.js';
 
 // Route pour obtenir tous les synthétiseurs
-router.get('/', postController.getAllPosts);
+router.get('/', getAllPosts);
 
 // Route pour créer un nouveau synthétiseur
-router.post('/', postController.createPost);
+router.post('/', createPost);
 
 export default router; 

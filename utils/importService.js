@@ -1,27 +1,79 @@
-import { promises as fs } from 'node:fs';// Utiliser les promesses pour la lecture des fichiers
+import { promises as fs } from 'node:fs';
 import path from "path";
-import Synthetiser from "../models/Synthetiser.js"; // Assurez-vous que le chemin est correct
+import { fileURLToPath } from 'url';
+import db from "../models/index.js";
 
-// Fonction pour importer des données depuis des fichiers JSON dans la base de données
-const importJsonData = async () => {
-	const files = ["korgSynth.json", "rolandSynth.json", "kawaiSynth.json"];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-	try {
-		for (const file of files) {
-			const filePath = path.join(__dirname, "../data", file); // Chemin complet vers le fichier
+export const importJsonData = async () => {
+  const files = ["korgSynth.json", "rolandSynth.json", "kawaiSynth.json"];
+ 
+  try {
+    console.log('🚀 Début de l\'importation des données');
+    let totalImported = 0;
 
-			// Lire le contenu du fichier JSON
-			const data = await fs.readFile(filePath, "utf8");
-			const jsonData = JSON.parse(data); // Analyser le contenu JSON
+    for (const file of files) {
+      const filePath = path.join(__dirname, "../data", file);
+      console.log(`📂 Traitement du fichier: ${file}`);
+      console.log(`📍 Chemin complet: ${filePath}`);
+      
+      try {
+        await fs.access(filePath);
+        console.log(`✅ Fichier trouvé: ${file}`);
+      } catch (error) {
+        console.error(`❌ Fichier non trouvé: ${file}`);
+        continue;
+      }
 
-			// Insérer les données dans la base de données
-			await Synthetiser.bulkCreate(jsonData);
-		}
-		return { message: "Data imported successfully" };
-	} catch (error) {
-		console.error(error);
-		throw new Error("Failed to import data");
-	}
+      const data = await fs.readFile(filePath, "utf8");
+      console.log(`📄 Données lues depuis ${file}`);
+      
+      let jsonData = JSON.parse(data);
+      console.log(`📊 Nombre d'entrées dans ${file}: ${jsonData.length}`);
+
+      if (!Array.isArray(jsonData)) {
+        jsonData = [jsonData];
+      }
+
+      try {
+        const created = await db.Synthetiser.bulkCreate(jsonData, {
+          validate: true
+        });
+        console.log(`✨ ${created.length} synthétiseurs importés depuis ${file}`);
+        totalImported += created.length;
+      } catch (error) {
+        console.error(`❌ Erreur lors de l'import de ${file}:`, error.message);
+      }
+    }
+
+    const finalCount = await db.Synthetiser.count();
+    console.log(`\n📝 Bilan de l'importation:`);
+    console.log(`- Total importé: ${totalImported}`);
+    console.log(`- Total en base: ${finalCount}`);
+
+    return {
+      success: true,
+      totalImported,
+      finalCount
+    };
+
+  } catch (error) {
+    console.error('❌ Erreur générale:', error);
+    throw error;
+  }
 };
 
-export { importJsonData };
+// Si le fichier est exécuté directement
+if (import.meta.url === `file://${process.argv[1]}`) {
+  console.log("🎯 Exécution directe du script d'importation");
+  importJsonData()
+    .then(() => {
+      console.log("✅ Importation terminée");
+      process.exit(0);
+    })
+    .catch(error => {
+      console.error("❌ Échec de l'importation:", error);
+      process.exit(1);
+    });
+}

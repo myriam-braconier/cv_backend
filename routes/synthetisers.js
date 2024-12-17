@@ -1,17 +1,24 @@
 import express from 'express';
-import * as synthetiserController from '../controllers/synthetiserController.js'; // import toutes les exportations nommées
+import { importData, getAllSynthetisers, createSynthetiser } from '../controllers/synthetiserController.js';
+import { authenticateToken } from '../middleware/authMiddleware.js';
+
 
 const router = express.Router();
 
 
+
+
+// Ne pas inclure /api/synthetisers ici car c'est déjà dans app.js
+router.use(authenticateToken);
+
 // Route pour importer les données JSON depuis des fichiers dans le dossier data
-router.post('/import', synthetiserController.importData);
+router.post('/import', importData);
 
 
 // Route pour obtenir tous les synthétiseurs
-router.get('/', synthetiserController.getAllSynthetisers);
+router.get('/', getAllSynthetisers);
 
 // Route pour créer un nouveau synthétiseur
-router.post('/', synthetiserController.createSynthetiser);
+router.post('/', createSynthetiser);
 
 export default router; 

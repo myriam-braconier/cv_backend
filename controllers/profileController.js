@@ -21,5 +21,3 @@ export const createProfile = async (req, res) => {
     }
 };
 
-// Exporter les fonctions avec un export par défaut
-export default { getAllProfiles, createProfile};

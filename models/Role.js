@@ -1,16 +1,16 @@
 import { Model, DataTypes } from "sequelize";
 
-export default function(sequelize) {
-  class Role extends Model {
-    static associate(models) {
-      Role.belongsToMany(models.User, { 
-        through: 'UserRoles',
-        foreignKey: 'roleId',
-        otherKey: 'userId'
-      });
-    }
+class Role extends Model {
+  static associate(models) {
+    Role.belongsToMany(models.User, {
+      through: 'UserRoles',
+      foreignKey: 'roleId',
+      otherKey: 'userId'
+    });
   }
+}
 
+export const initRole = (sequelize) => {
   Role.init(
     {
       name: {
@@ -26,11 +26,11 @@ export default function(sequelize) {
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
       },
       permission: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
         defaultValue: {},
       },
     },
@@ -41,6 +41,7 @@ export default function(sequelize) {
       timestamps: true,
     }
   );
-
   return Role;
-}
+};
+
+export default Role;

@@ -19,5 +19,3 @@ export const createUser = async (req, res) => {
         res.status(400).json({ error: 'Failed to create user' });
     }
 };
-
-export default { getAllUsers, createUser}; // Export par défaut sous forme d'objet

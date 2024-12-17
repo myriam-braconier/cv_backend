@@ -1,44 +1,48 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from "sequelize";
 
-export default function(sequelize) {
-  class UserRole extends Model {
-    static associate(models) {
-      // Définir les associations ici si nécessaire
-      
-    UserRole.belongsTo(models.User);
-    UserRole.belongsTo(models.Role);
-    }
-  }
-
-  UserRole.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Users',
-        key: 'id'
-      }
-    },
-    roleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Roles',
-        key: 'id'
-      }
-    }
-  }, {
-    sequelize,
-    modelName: 'UserRole',
-    tableName: 'UserRoles',
-    timestamps: true, // Si vous voulez inclure createdAt et updatedAt
-    indexes: [
-      {
-        unique: true,
-        fields: ['userId', 'roleId']
-      }
-    ]
-  });
-
-  return UserRole;
+export class Role extends Model {
+ static associate(models) {
+   Role.belongsToMany(models.User, {
+     through: 'UserRoles',
+     foreignKey: 'roleId',
+     otherKey: 'userId'
+   });
+ }
 }
+
+export const initRole = (sequelize) => {
+ Role.init(
+   {
+     name: {
+       type: DataTypes.STRING,
+       allowNull: false,
+       unique: {
+         name: "unique_role_name",
+       },
+       validate: {
+         notNull: { msg: "Le nom du rôle est requis" },
+         notEmpty: { msg: "Le nom du rôle ne peut pas être vide" },
+       },
+     },
+     description: {
+       type: DataTypes.TEXT,
+       allowNull: true,
+     },
+     permission: {
+       type: DataTypes.JSON,
+       allowNull: false,
+       defaultValue: {},
+     },
+   },
+   {
+     sequelize,
+     modelName: "Role",
+     tableName: "roles",
+     timestamps: true,
+   }
+ );
+
+ return Role;
+};
+
+export default Role;

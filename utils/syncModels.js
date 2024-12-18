@@ -4,6 +4,7 @@ import { initRole } from "../models/Role.js";
 import { initSynthetiser } from "../models/Synthetiser.js";
 import { initPost } from "../models/Post.js";
 import { initProfile } from "../models/Profile.js";
+import { initPermission } from "../models/Permission.js";
 
 const syncModels = async () => {
    try {
@@ -13,7 +14,8 @@ const syncModels = async () => {
            Role: initRole(sequelize),
            Post: initPost(sequelize),
            Synthetiser: initSynthetiser(sequelize),
-           Profile: initProfile(sequelize)
+           Profile: initProfile(sequelize),
+           Permission: initPermission(sequelize)
        };
 
        // Définition des associations
@@ -24,7 +26,7 @@ const syncModels = async () => {
        });
 
        // Synchronisation avec la base de données
-       await sequelize.sync({ force: true });
+       await sequelize.sync({ alter: true });
        console.log("Models synchronized successfully");
    } catch (error) {
        console.error("Error synchronizing models:", error);

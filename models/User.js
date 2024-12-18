@@ -1,56 +1,53 @@
-import { Model, DataTypes } from 'sequelize';
+export const initModel = (sequelize, DataTypes) => {
+	const user = sequelize.define(
+		"user", {
+			id: {
+				type: DataTypes.INTEGER,
+				primaryKey: true,
+				autoIncrement: true,
+			},
+			username: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			first_name: {
+				type: DataTypes.STRING,
+				allowNull: true,
+			},
+			last_name: {
+				type: DataTypes.STRING,
+				allowNull: true,
+			},
+			email: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true,
+			},
+			password: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			has_instrument: {
+				type: DataTypes.BOOLEAN,
+			},
+			age: {
+				type: DataTypes.INTEGER,
+			}
+		}, {
+			tableName: "users",
+			timestamps: true,
+		}
+	);
 
-export class User extends Model {
- static associate(models) {
-   User.hasMany(models.Post, { foreignKey: 'userId' });
-   User.hasOne(models.Profile, { foreignKey: 'userId' });
-   User.belongsToMany(models.Role, {
-     through: 'UserRoles',
-     foreignKey: 'userId',
-     otherKey: 'roleId'
-   });
- }
-}
+	user.associate = (models) => {
+		user.belongsToMany(models.role, {
+			through: "UserRoles", // Nom de la table de jonction
+			foreignKey: "UserId",
+			otherKey: "RoleId",
+		});
+	};
 
-
-export const initUser = (sequelize) => {
- User.init({
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  first_name: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  last_name: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  has_instrument: {
-    type: DataTypes.BOOLEAN
-  },
-  age: {
-    type: DataTypes.INTEGER
-  }
-
- }, {
-   sequelize,
-   modelName: 'User',
-   tableName: 'users',
-   timestamps: true
- });
-
- return User;
+	return user;
 };
 
-export default User;
+export default initModel;

@@ -1,18 +1,13 @@
-import { Model, DataTypes } from "sequelize";
-
-class Role extends Model {
-  static associate(models) {
-    Role.belongsToMany(models.User, {
-      through: 'UserRoles',
-      foreignKey: 'roleId',
-      otherKey: 'userId'
-    });
-  }
-}
-
-export const initRole = (sequelize) => {
-  Role.init(
+ export const initModel = (sequelize, DataTypes) => {
+      const role = sequelize.define(
+        "role",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,24 +19,44 @@ export const initRole = (sequelize) => {
           notEmpty: { msg: "Le nom du rôle ne peut pas être vide" },
         },
       },
+
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+
       permission: {
         type: DataTypes.JSON,
         allowNull: true,
         defaultValue: {},
       },
+
     },
     {
-      sequelize,
-      modelName: "Role",
       tableName: "roles",
       timestamps: true,
     }
   );
-  return Role;
+
+  role.associate = (models) => {
+    // Association avec Permission
+    role.belongsToMany(models.permission, {
+      through: 'RolePermission',
+      as: 'permissions',  // Important pour générer les méthodes setPermissions et getPermissions
+      foreignKey: 'roleId',
+      otherKey: 'permissionId'
+    });
+
+    // Association avec User 
+    role.belongsToMany(models.user, {
+      through: 'UserRoles',
+      as: 'users',
+      foreignKey: 'roleId',
+      otherKey: 'userId'
+    });
+  }
+
+  return role;
 };
 
-export default Role;
+export default initModel;

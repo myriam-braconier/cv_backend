@@ -1,6 +1,5 @@
 import { importJsonData } from "../utils/importService.js";
 import db from "../models/index.js";
-const { Synthetiser } = db;  // Ajout de cette ligne pour extraire le modèle
 
 // Fonction pour importer des données JSON dans la base de données
 export const importData = async (req, res) => {
@@ -16,7 +15,7 @@ export const importData = async (req, res) => {
 // Fonction pour obtenir tous les synthétiseurs
 export const getAllSynthetisers = async (req, res) => {
     try {
-        const synths = await db.Synthetiser.findAll();
+        const synths = await db.synthetiser.findAll();
         // Ajouter les roles à la réponse
         res.json({
             data: synths,
@@ -35,7 +34,7 @@ export const getAllSynthetisers = async (req, res) => {
 // Fonction pour créer un nouveau synthétiseur
 export const createSynthetiser = async (req, res) => {
    try {
-       const newSynth = await db.Synthetiser.create(req.body);
+       const newSynth = await db.synthetiser.create(req.body);
        res.status(201).json(newSynth);
    } catch (error) {
        console.error('Create error:', error);

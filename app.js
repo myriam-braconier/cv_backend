@@ -10,6 +10,7 @@ import userRoutes from "./routes/users.js";
 import roleRoutes from "./routes/roles.js";
 import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
+import adminRoutes from './routes/admin.js'
 
 // Configuration
 dotenv.config();
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
 });
 
 // Routes - Déplacées avant le middleware 404
+app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use("/api/synthetisers", synthetiserRoutes); // Ajout du préfixe /api
 app.use("/api/users", userRoutes);               // Ajout du préfixe /api

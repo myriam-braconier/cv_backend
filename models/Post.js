@@ -1,24 +1,6 @@
-import { Model, DataTypes } from "sequelize";
-
-export class Post extends Model {
- static associate(models) {
-   Post.belongsTo(models.User, {
-     foreignKey: {
-       name: "userId",
-       allowNull: true,
-     },
-   });
-   Post.belongsTo(models.Synthetiser, {
-     foreignKey: {
-       name: "synthetiserId",
-       allowNull: true,
-     },
-   });
- }
-}
-
-export const initPost = (sequelize) => {
- Post.init(
+export const initModel = (sequelize, DataTypes) => {
+  const post = sequelize.define(
+		"post", 
    {
      commentaire: {
        type: DataTypes.STRING,
@@ -50,14 +32,28 @@ export const initPost = (sequelize) => {
      },
    },
    {
-     sequelize,
-     modelName: "Post",
      tableName: "posts",
      timestamps: true,
    }
  );
 
- return Post;
+ post.associate = (models) => {
+ 
+  post.belongsTo(models.user, {
+    foreignKey: {
+      name: "userId",
+      allowNull: true,
+    },
+  });
+
+  post.belongsTo(models.synthetiser, {
+    foreignKey: {
+      name: "synthetiserId",
+      allowNull: true,
+    },
+  }); 
+};
+ return post;
 };
 
-export default Post;
+export default initModel;

@@ -1,14 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-
-export class Synthetiser extends Model {
- static associate(models) {
-   // Synthetiser.belongsTo(models.User, { foreignKey: 'userId' });
- }
-}
-
-export const initSynthetiser = (sequelize) => {
- Synthetiser.init(
-   {
+export const initModel = (sequelize, DataTypes) => {
+const synthetiser = sequelize.define('synthetiser', {
      marque: {
        type: DataTypes.STRING,
        allowNull: false,
@@ -70,14 +61,12 @@ export const initSynthetiser = (sequelize) => {
      },
    },
    {
-     sequelize,
-     modelName: "Synthetiser",
      tableName: "synthetisers",
      timestamps: true,
    }
  );
 
- return Synthetiser;
+ return synthetiser;
 };
 
-export default Synthetiser;
+export default initModel;

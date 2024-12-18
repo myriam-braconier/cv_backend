@@ -1,13 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-
-export class Profile extends Model {
- static associate(models) {
-   Profile.belongsTo(models.User, { foreignKey: 'userId' });
- }
-}
-
-export const initProfile = (sequelize) => {
- Profile.init({
+export const initModel = (sequelize, DataTypes) =>  {
+ const profile = sequelize.define("profile", {
    bio: {
      type: DataTypes.TEXT,
      allowNull: true
@@ -25,13 +17,16 @@ export const initProfile = (sequelize) => {
      allowNull: true
    }
  }, {
-   sequelize,
-   modelName: 'Profile',
+ 
    tableName: 'profiles', 
    timestamps: true
- });
+ }
+);
 
- return Profile;
+profile.associate = (models) => {
+  profile.belongsTo(models.user, { foreignKey: 'userId' });
+};
+ return profile;
 };
 
-export default Profile;
+export default initModel;

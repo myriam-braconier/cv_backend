@@ -1,69 +1,83 @@
+// models/index.js
+import { Sequelize } from "sequelize";
 import { fileURLToPath } from "url";
-import fs from "fs";
+import { dirname } from 'path';
+import { readdirSync } from 'fs';
 import path from "path";
-import Sequelize from "sequelize";
 import dotenv from "dotenv";
 import config from "../config/config.js";
-import { initPermission } from "./Permission.js";
-import { initPost } from "./Post.js";
-import { initProfile } from "./Profile.js";
-import { initRole } from "./Role.js";
-import { initSynthetiser } from "./Synthetiser.js";
-import { initUser } from "./User.js";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const basename = path.basename(__filename);
+const __dirname = dirname(__filename);
 const env = process.env.NODE_ENV || "development";
-
 dotenv.config();
 
 const db = {};
-let sequelize;
 
-if (config[env].use_env_variable) {
-    sequelize = new Sequelize(
-        process.env[config[env].use_env_variable],
-        config[env]
+const sequelize = new Sequelize(
+    config[env].database,
+    config[env].username,
+    config[env].password,
+    config[env]
+);
+
+// Chargement des modèles
+const modelFiles = readdirSync(__dirname)
+    .filter(file => 
+        file.indexOf('.') !== 0 && 
+        file !== 'index.js' && 
+        file.slice(-3) === '.js'
     );
-} else {
-    sequelize = new Sequelize(
-        config[env].database,
-        config[env].username,
-        config[env].password,
-        config[env]
-    );
+
+// Import et initialisation des modèles avec gestion des erreurs
+for (const file of modelFiles) {
+    try {
+        console.log(`\nTraitement du fichier: ${file}`);
+        const modelPath = `file://${path.join(__dirname, file)}`;
+        const model = await import(modelPath);
+        
+        console.log('Module importé:', model);
+        
+        if (typeof model.initModel !== 'function') {
+            console.error(`⚠️ Le fichier ${file} n'a pas de fonction initModel`);
+            continue;
+        }
+
+        const modelInstance = model.initModel(sequelize, Sequelize.DataTypes);
+        
+        if (!modelInstance || !modelInstance.name) {
+            console.error(`⚠️ Le modèle dans ${file} n'a pas retourné une instance valide`);
+            console.log('Instance reçue:', modelInstance);
+            continue;
+        }
+
+        db[modelInstance.name] = modelInstance;
+        console.log(`✓ Modèle ${modelInstance.name} chargé avec succès`);
+
+    } catch (error) {
+        console.error(`❌ Erreur lors du chargement de ${file}:`, error);
+    }
 }
 
-// Initialiser les modèles
-db.Permission = initPermission(sequelize);
-db.Post = initPost(sequelize);
-db.Profile = initProfile(sequelize);
-db.Role = initRole(sequelize);
-db.Synthetiser = initSynthetiser(sequelize);
-db.User = initUser(sequelize);
-
-// Établir les associations
-Object.values(db).forEach((model) => {
-    if (model.associate) {
-        model.associate(db);
+// Associations
+Object.keys(db).forEach(modelName => {
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
     }
 });
-
-// Ajouter sequelize à db
+// ajout de sequelize à db
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// Synchroniser la base de données
-const syncDatabase = async () => {
-    try {
-        await sequelize.sync();
-        console.log("Database synchronized successfully");
-    } catch (error) {
-        console.error("Error synchronizing database:", error);
-    }
+// Export de l'objet db complet et des modèles individuels
+export const models = {
+    sequelize,
+    user: db.user,
+    role: db.role,
+    permission: db.permission,
+    userRole: db.userRole,
+    synthetisers: db.synthetiser,
+    
 };
-
-syncDatabase();
 
 export default db;

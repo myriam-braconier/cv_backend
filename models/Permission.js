@@ -1,16 +1,10 @@
-import { Model, DataTypes } from 'sequelize';
-
-export class Permission extends Model {
- static associate(models) {
-   // Définir les associations ici
- }
-}
-
-export const initPermission = (sequelize) => {
- Permission.init({
+  export const initModel = (sequelize, DataTypes) =>  {
+    const permission = sequelize.define(
+      "permission",{
    name: {
      type: DataTypes.STRING,
      allowNull: false,
+     defaultValue: 'default_permission_name'
    },
    description: {
      type: DataTypes.STRING,
@@ -21,7 +15,16 @@ export const initPermission = (sequelize) => {
    modelName: 'Permission',
  });
 
- return Permission;
+ permission.associate = (models) => {
+  permission.belongsToMany(models.role, {
+      through: 'RolePermission',
+      as: 'roles',  // Important pour générer les méthodes
+      foreignKey: 'permissionId',
+      otherKey: 'roleId'
+  });
 };
 
-export default Permission;
+ return permission;
+};
+
+export default initModel;

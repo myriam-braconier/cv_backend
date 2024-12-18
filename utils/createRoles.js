@@ -1,69 +1,66 @@
-import { Sequelize } from "sequelize";
-import config from "../config/config.js";
-import { Role, initRole } from "../models/Role.js";
-
-const env = process.env.NODE_ENV || "development";
-const dbConfig = config[env];
-
-const sequelize = new Sequelize(
-	dbConfig.database,
-	dbConfig.username,
-	dbConfig.password,
-	{
-		host: dbConfig.host,
-		dialect: dbConfig.dialect,
-	}
-);
-
-// Initialiser le modèle Role
-initRole(sequelize);
-
-const roles = [
-	{
-		name: "admin",
-		description: "Administrateur avec tous les droits",
-	},
-	{
-		name: "user",
-		description: "Utilisateur standard",
-	},
-	{
-		name: "moderator",
-		description: "Modérateur avec des droits étendus",
-	},
-	{
-		name: "owner",
-		description: "Propriétaire",
-	},
-	{
-		name: "creator",
-		description: "Créateur",
-	},
-];
+// utils/createRolesSimple.js
+import db from '../models/index.js';
 
 const createRoles = async () => {
-	try {
-		await sequelize.authenticate();
-		console.log("Connexion à la base de données établie avec succès.");
+    try {
+        // Test de connexion
+        console.log('1. Test de la connexion à la base de données...');
+        await db.sequelize.authenticate();
+        console.log('✓ Connexion réussie\n');
 
-		await sequelize.sync();
+        // Vérification du modèle Role
+        console.log('2. Vérification du modèle Role...');
+        if (!db.Role) {
+            throw new Error('Modèle Role non trouvé dans db !');
+        }
+        console.log('✓ Modèle Role trouvé\n');
 
-		const createdRoles = await Role.bulkCreate(roles, {
-			validate: true,
-			ignoreDuplicates: true,
-			updateOnDuplicate: ["description"],
-		});
+        // Définition des rôles
+        const roles = [
+            { name: 'user', description: 'Utilisateur standard' },
+            { name: 'admin', description: 'Administrateur' },
+            { name: 'moderator', description: 'Modérateur' },
+            { name: 'creator', description: 'Créateur' },
+            { name: 'owner_instr', description: 'Musicien' }
+        ];
 
-		console.log(
-			"Rôles créés ou mis à jour avec succès:",
-			createdRoles.map((role) => role.name)
-		);
-	} catch (error) {
-		console.error("Erreur lors de la création des rôles:", error);
-	} finally {
-		await sequelize.close();
-	}
+        // Création des rôles un par un
+        console.log('3. Création des rôles...');
+        for (const roleData of roles) {
+            console.log(`\nTentative de création du rôle: ${roleData.name}`);
+            try {
+                const [role, created] = await db.Role.findOrCreate({
+                    where: { name: roleData.name },
+                    defaults: roleData
+                });
+
+                if (created) {
+                    console.log(`✓ Rôle ${roleData.name} créé avec succès (ID: ${role.id})`);
+                } else {
+                    console.log(`→ Rôle ${roleData.name} existe déjà (ID: ${role.id})`);
+                }
+            } catch (roleError) {
+                console.error(`✗ Erreur lors de la création du rôle ${roleData.name}:`, roleError);
+            }
+        }
+
+        // Vérification finale
+        console.log('\n4. Vérification des rôles créés...');
+        const existingRoles = await db.Role.findAll();
+        console.log('Rôles dans la base de données:');
+        existingRoles.forEach(role => {
+            console.log(`- ${role.name} (ID: ${role.id})`);
+        });
+
+    } catch (error) {
+        console.error('\nErreur générale:', error);
+    } finally {
+        console.log('\nFermeture de la connexion...');
+        await db.sequelize.close();
+        process.exit();
+    }
 };
 
-// Exécution immédiate
+// Exécution
+console.log('=== Début du script de création des rôles ===\n');
 createRoles();

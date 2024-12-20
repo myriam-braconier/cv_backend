@@ -79,8 +79,10 @@ export const models = {
     user: db.user,
     role: db.role,
     permission: db.permission,
-    userRole: db.userRole,
-    synthetisers: db.synthetiser,
+    post: db.post,
+    synthetiser: db.synthetiser,
+    auctionPrice: db.auctionPrice,
+    profile: db.profile
     
 };
 

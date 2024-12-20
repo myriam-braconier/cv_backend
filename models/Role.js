@@ -1,6 +1,6 @@
  export const initModel = (sequelize, DataTypes) => {
-      const role = sequelize.define(
-        "role",
+      const Role = sequelize.define(
+        "Role",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -38,9 +38,9 @@
     }
   );
 
-  role.associate = (models) => {
+  Role.associate = (models) => {
     // Association avec Permission
-    role.belongsToMany(models.permission, {
+    Role.belongsToMany(models.Permission, {
       through: 'RolePermission',
       as: 'permissions',  // Important pour générer les méthodes setPermissions et getPermissions
       foreignKey: 'roleId',
@@ -48,14 +48,16 @@
     });
 
     // Association avec User 
-    role.hasMany(models.user, {
+    if (models.User) {
+    Role.hasMany(models.User, {
       as: 'users', // alias pour les requêtes
       foreignKey: 'roleId',
       as: 'users'
     });
   }
+  }
 
-  return role;
+  return Role;
 };
 
 export default initModel;

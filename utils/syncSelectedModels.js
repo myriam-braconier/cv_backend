@@ -11,24 +11,32 @@ const syncSelectedModels = async () => {
         try {
             // Synchroniser dans l'ordre des dépendances
             console.log("\n1. Synchronisation de la table Roles...");
-            await db.role.sync({ force:true });
+            await db.Role.sync({ alter:true });
             console.log("✓ Table Roles synchronisée");
 
             console.log("\n2. Synchronisation de la table Permissions...");
-            await db.permission.sync({ alter: true });
+            await db.Permission.sync({ alter: true });
             console.log("✓ Table Permissions synchronisée");
 
             console.log("\n3. Synchronisation de la table Users...");
-            await db.user.sync({ alter: true });
+            await db.User.sync({ alter: true });
             console.log("✓ Table Users synchronisée");
 
             console.log("\n4. Synchronisation de la table Posts...");
-            await db.post.sync({ alter: true });
+            await db.Post.sync({ alter: true });
             console.log("✓ Table Posts synchronisée");
 
             console.log("\n5. Synchronisation de la table Synthetisers...");
-            await db.synthetiser.sync({ alter: true });
+            await db.Synthetiser.sync({ alter: true });
             console.log("✓ Table Synthetisers synchronisée");
+
+            console.log("\n5. Synchronisation de la table profiles...");
+            await db.Profile.sync({ alter: true });
+            console.log("✓ Table profiles synchronisée");
+
+            console.log("\n5. Synchronisation de la table auctionPrices...");
+            await db.AuctionPrice.sync({ alter: true });
+            console.log("✓ Table auctionprice synchronisée");
 
             // Forcer la mise à jour des contraintes
             await db.sequelize.sync({ alter: true });

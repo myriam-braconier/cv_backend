@@ -31,6 +31,15 @@ const corsOptions = {
    allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
+// Configurer les headers
+app.use((req, res, next) => {
+   res.header('Access-Control-Allow-Credentials', 'true');
+   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+   next();
+});
+
 // Middleware global
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -65,7 +74,9 @@ app.use((req, res, next) => {
 // Routes - Déplacées avant le middleware 404
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
-app.use("/api/synthetisers", synthetiserRoutes); // Ajout du préfixe /api
+app.use("/api/synthetisers", synthetiserRoutes); 
+app.use("/api/synthetisers/:id", synthetiserRoutes);
+app.use("/api/synthetisers/:id/posts", synthetiserRoutes);
 app.use("/api/users", userRoutes);               // Ajout du préfixe /api
 app.use("/api/roles", roleRoutes);               // Ajout du préfixe /api
 app.use("/api/profiles", profileRoutes);         // Ajout du préfixe /api

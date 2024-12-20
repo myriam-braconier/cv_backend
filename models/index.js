@@ -38,12 +38,15 @@ for (const file of modelFiles) {
         
         console.log('Module importé:', model);
         
-        if (typeof model.initModel !== 'function') {
-            console.error(`⚠️ Le fichier ${file} n'a pas de fonction initModel`);
+        // Vérifie si le modèle a un export par défaut
+        const initFunction = model.default || model.initModel;
+        
+        if (typeof initFunction !== 'function') {
+            console.error(`⚠️ Le fichier ${file} n'a pas de fonction d'initialisation valide`);
             continue;
         }
 
-        const modelInstance = model.initModel(sequelize, Sequelize.DataTypes);
+        const modelInstance = initFunction(sequelize, Sequelize.DataTypes);
         
         if (!modelInstance || !modelInstance.name) {
             console.error(`⚠️ Le modèle dans ${file} n'a pas retourné une instance valide`);
@@ -58,6 +61,7 @@ for (const file of modelFiles) {
         console.error(`❌ Erreur lors du chargement de ${file}:`, error);
     }
 }
+
 
 // Associations
 Object.keys(db).forEach(modelName => {

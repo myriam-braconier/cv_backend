@@ -32,7 +32,15 @@ export const initModel = (sequelize, DataTypes) => {
 			},
 			age: {
 				type: DataTypes.INTEGER,
-			}
+			},
+			roleId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+				  model: 'roles',
+				  key: 'id'
+				}
+			  }
 		}, {
 			tableName: "users",
 			timestamps: true,
@@ -40,12 +48,26 @@ export const initModel = (sequelize, DataTypes) => {
 	);
 
 	user.associate = (models) => {
-		user.belongsToMany(models.role, {
-			through: "UserRoles", // Nom de la table de jonction
-			foreignKey: "UserId",
-			otherKey: "RoleId",
+
+		user.belongsTo(models.role, {
+            foreignKey: {
+                name: "roleId",
+				as: "role",  // Important : utilisez "role" au singulier
+                allowNull: false
+            },
+			as: 'role', // Définition de l'alias
+            onDelete: 'RESTRICT',
+            onUpdate: 'CASCADE'
+        });
+
+		user.hasMany(models.post, {
+			as: 'posts',  // Important pour générer les méthodes
+			foreignKey: 'userId',
 		});
 	};
+
+
+	
 
 	return user;
 };

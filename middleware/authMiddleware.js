@@ -1,12 +1,12 @@
+// middleware/authMiddleware.js
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-// Configuration des variables d'environnement
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
-// Middleware d'authentification
-export function authenticateToken (req, res, next) {
+// Correction : exporter la fonction comme export nommé
+export const authenticateToken = (req, res, next) => {
    const authHeader = req.headers['authorization'];
    const token = authHeader && authHeader.split(' ')[1];
 
@@ -28,5 +28,4 @@ export function authenticateToken (req, res, next) {
    }
 };
 
-// Export nommé du secret JWT pour réutilisation
 export const secret = jwtSecret;

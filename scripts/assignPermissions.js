@@ -46,7 +46,7 @@ const assignPermissionsToRoles = async () => {
         // 4. Attribution pour le rôle CREATOR
         const creatorRole = await db.role.findOne({ where: { name: 'creator' } });
         if (creatorRole) {
-            const creatorPermissions = await db.Permission.findAll({
+            const creatorPermissions = await db.permission.findAll({
                 where: {
                     name: [
                         'synths:read',

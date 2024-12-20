@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import config from "../config/config.js";
-import { Role, initRole } from "../models/Role.js";
-import { Permission, initPermission } from "../models/Permission.js";
+import { Role, initRole } from "../models/role.js";
+import { Permission, initPermission } from "../models/permission.js";
 import { PERMISSIONS } from "./permissions.js";
 
 const env = process.env.NODE_ENV || "development";

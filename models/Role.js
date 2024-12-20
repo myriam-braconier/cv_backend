@@ -48,11 +48,10 @@
     });
 
     // Association avec User 
-    role.belongsToMany(models.user, {
-      through: 'UserRoles',
-      as: 'users',
+    role.hasMany(models.user, {
+      as: 'users', // alias pour les requêtes
       foreignKey: 'roleId',
-      otherKey: 'userId'
+      as: 'users'
     });
   }
 

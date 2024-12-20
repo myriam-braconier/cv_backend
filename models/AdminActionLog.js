@@ -1,6 +1,6 @@
 export const initModel = (sequelize, DataTypes) => {
-  const adminActionLog = sequelize.define(
-		"adminActionLog",
+  const AdminActionLog = sequelize.define(
+		"AdminActionLog",
     {
       adminId: {
         type: sequelize.Sequelize.INTEGER,
@@ -24,13 +24,16 @@ export const initModel = (sequelize, DataTypes) => {
     }
   );
 
-  adminActionLog.associate = (models) =>  {
-    adminActionLog.belongsTo(models.user, {
+  AdminActionLog.associate = (models) =>  {
+
+    if (models.User) {
+    AdminActionLog.belongsTo(models.User, {
       as: 'admin',
       foreignKey: 'adminId'
     });
+  }
 }
-  return adminActionLog;
+  return AdminActionLog;
 };
 
 export default initModel;

@@ -1,6 +1,6 @@
   export const initModel = (sequelize, DataTypes) =>  {
-    const permission = sequelize.define(
-      "permission",{
+    const Permission = sequelize.define(
+      "Permission",{
    name: {
      type: DataTypes.STRING,
      allowNull: false,
@@ -12,11 +12,11 @@
    },
  }, {
    sequelize,
-   modelName: 'Permission',
+   tableName: 'Permissions',
  });
 
- permission.associate = (models) => {
-  permission.belongsToMany(models.role, {
+ Permission.associate = (models) => {
+  Permission.belongsToMany(models.Role, {
       through: 'RolePermission',
       as: 'role',  // Important pour générer les méthodes
       foreignKey: 'permissionId',
@@ -24,7 +24,7 @@
   });
 };
 
- return permission;
+ return Permission;
 };
 
 export default initModel;

@@ -1,5 +1,5 @@
 export const initModel = (sequelize, DataTypes) =>  {
- const profile = sequelize.define("profile", {
+ const Profile = sequelize.define("Profile", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,10 +28,13 @@ export const initModel = (sequelize, DataTypes) =>  {
  }
 );
 
-profile.associate = (models) => {
-  profile.belongsTo(models.user, { foreignKey: 'userId' });
+Profile.associate = (models) => {
+
+  if(models.User) {
+  Profile.belongsTo(models.User, { foreignKey: 'userId' });
+  }
 };
- return profile;
+ return Profile;
 };
 
 export default initModel;

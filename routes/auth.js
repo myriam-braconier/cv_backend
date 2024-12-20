@@ -15,13 +15,13 @@ const router = express.Router();
 // Route /me  pour utiliser Sequelize
 router.get('/me', authenticateToken, async (req, res) => {
     try {
-        const user = await db.user.findOne({
+        const user = await db.User.findOne({
             where: { id: req.user.userId },
-            include: [{
-                model: db.role,
+            include: {
+                model: db.Role,
                 as: 'role',
                 attributes: ['name']
-            }],
+            },
             attributes: ['id', 'email', 'username'] // Exclure le password
         });
         
@@ -48,12 +48,12 @@ router.post("/register", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
  
-        const result = await db.sequelize.transaction(async (t) => {
+        const result = await db.Sequelize.transaction(async (t) => {
             console.log('1. Début de la transaction');
             
             // 1. Créer l'utilisateur
             console.log('2. Création de l\'utilisateur');
-            const newUser = await db.user.create({
+            const newUser = await db.User.create({
                 username,
                 email,
                 password: hashedPassword
@@ -62,7 +62,7 @@ router.post("/register", async (req, res) => {
  
             // 2. Trouver ou créer le rôle user
             console.log('4. Recherche/création du rôle user');
-            const [userRole] = await db.role.findOrCreate({
+            const [userRole] = await db.Role.findOrCreate({
                 where: { name: 'user' },
                 defaults: {
                     name: 'user',
@@ -119,10 +119,10 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        const user = await db.user.findOne({ 
+        const user = await db.User.findOne({ 
             where: { email },
             include: [{
-                model: db.role,
+                model: db.Role,
                 as: 'role'
             }]
         });

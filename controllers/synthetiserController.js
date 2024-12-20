@@ -6,7 +6,7 @@ export const updatePrice = async (req, res) => {
 	const { auctionPrice } = req.body;
 
 	try {
-		const existingSynth = await db.synthetiser.findByPk(id);
+		const existingSynth = await db.Synthetiser.findByPk(id);
 
 		if (!existingSynth) {
 			return res.status(404).json({
@@ -56,10 +56,10 @@ export const importData = async (req, res) => {
 export const getAllSynthetisers = async (req, res) => {
 	try {
 		// Obtenir tous les synthétiseurs avec leurs posts
-		const synths = await db.synthetiser.findAll({
+		const synths = await db.Synthetiser.findAll({
 			include: [
 				{
-					model: db.post,
+					model: db.Post,
 					as: "posts",
 				},
 			],
@@ -96,7 +96,7 @@ export const getAllSynthetisers = async (req, res) => {
 // Fonction pour créer un nouveau synthétiseur
 export const createSynthetiser = async (req, res) => {
 	try {
-		const newSynth = await db.synthetiser.create(req.body);
+		const newSynth = await db.Synthetiser.create(req.body);
 		res.status(201).json(newSynth);
 	} catch (error) {
 		console.error("Create error:", error);
@@ -112,7 +112,7 @@ export const updateMainSynthetiserInfo = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		const existingSynth = await db.synthetiser.findByPk(id);
+		const existingSynth = await db.Synthetiser.findByPk(id);
 
 		if (!existingSynth) {
 			return res.status(404).json({
@@ -136,7 +136,7 @@ export const updateMainSynthetiserInfo = async (req, res) => {
 		await existingSynth.update(updateData);
 
 		// Récupération du synthétiseur mis à jour
-		const updatedSynth = await db.synthetiser.findByPk(id);
+		const updatedSynth = await db.Synthetiser.findByPk(id);
 
 		res.json({
 			data: updatedSynth,
@@ -157,10 +157,10 @@ export const getSynthetiser = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		const synthetiser = await db.synthetiser.findByPk(id, {
+		const synthetiser = await db.Synthetiser.findByPk(id, {
 			include: [
 				{
-					model: db.post,
+					model: db.Post,
 					as: "posts",
 				},
 			],
@@ -193,7 +193,7 @@ export const addPost = async (req, res) => {
 
 	try {
 		// Vérifier si le synthétiseur existe
-		const synthetiser = await db.synthetiser.findByPk(id);
+		const synthetiser = await db.Synthetiser.findByPk(id);
 
 		if (!synthetiser) {
 			return res.status(404).json({
@@ -211,7 +211,7 @@ export const addPost = async (req, res) => {
 		}
 
 		// Créer le post
-		const newPost = await db.post.create({
+		const newPost = await db.Post.create({
 			content,
 			synthetiserId: id,
 		});

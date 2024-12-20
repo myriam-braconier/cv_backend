@@ -4,9 +4,9 @@ import db from "../models/index.js";
 // Fonction pour obtenir tous les utilisateurs
 export const getAllUsers = async (req, res) => {
     try {
-        const users = await db.user.findAll({
+        const users = await db.User.findAll({
             include: [{
-              model: db.role,
+              model: db.Role,
               as: 'role' // Utilisation du même alias
             }]
     });
@@ -19,7 +19,7 @@ export const getAllUsers = async (req, res) => {
 // Fonction pour créer un nouvel utilisateur
 export const createUser = async (req, res) => {
     try {
-        const newUser = await db.user.create(req.body);
+        const newUser = await db.User.create(req.body);
         res.status(201).json(newUser);
     } catch (error) {
         res.status(400).json({ error: 'Failed to create user' });

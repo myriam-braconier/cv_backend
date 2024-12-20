@@ -76,13 +76,13 @@ db.Sequelize = Sequelize;
 // Export de l'objet db complet et des modèles individuels
 export const models = {
     sequelize,
-    user: db.user,
-    role: db.role,
-    permission: db.permission,
-    post: db.post,
-    synthetiser: db.synthetiser,
-    auctionPrice: db.auctionPrice,
-    profile: db.profile
+    user: db.User,
+    role: db.Role,
+    permission: db.Permission,
+    post: db.Post,
+    synthetiser: db.Synthetiser,
+    auctionPrice: db.AuctionPrice,
+    profile: db.Profile
     
 };
 

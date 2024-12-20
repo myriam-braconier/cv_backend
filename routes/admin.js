@@ -10,7 +10,7 @@ router.post('/make-admin/:userId', isAdmin, async (req, res) => {
     const { userId } = req.params;
     const adminUser = req.user;
 
-    await db.sequelize.transaction(async (t) => {
+    await db.Sequelize.transaction(async (t) => {
       // Vérifier si l'utilisateur cible existe
       const targetUser = await db.User.findByPk(userId);
       if (!targetUser) {

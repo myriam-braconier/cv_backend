@@ -9,7 +9,7 @@ export const register = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const result = await db.sequelize.transaction(async (t) => {
+        const result = await db.Sequelize.transaction(async (t) => {
             // Vérifier si l'utilisateur existe déjà
             const existingUser = await db.user.findOne({
                 where: {
@@ -19,7 +19,7 @@ export const register = async (req, res) => {
                     ]
                 },
                 include: [{
-                    model: db.role,
+                    model: db.Role,
                     as: 'role'
                 }]
             });
@@ -29,7 +29,7 @@ export const register = async (req, res) => {
             }
 
             // Trouver le rôle user
-            const userRole = await db.role.findOne({
+            const userRole = await db.Role.findOne({
                 where: { name: 'user' },
                 transaction: t
             });
@@ -39,7 +39,7 @@ export const register = async (req, res) => {
             }
 
             // Créer l'utilisateur avec le rôle
-            const newUser = await db.user.create({
+            const newUser = await db.User.create({
                 username,
                 email,
                 password: hashedPassword,
@@ -78,10 +78,10 @@ export const login = async (req, res) => {
             });
         }
 
-        const user = await db.user.findOne({ 
+        const user = await db.User.findOne({ 
             where: { email },
             include: [{
-                model: db.role,
+                model: db.Role,
                 as: 'role'
             }]
         });

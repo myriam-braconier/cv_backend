@@ -1,5 +1,10 @@
 export const initModel = (sequelize, DataTypes) =>  {
  const profile = sequelize.define("profile", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+},
    bio: {
      type: DataTypes.TEXT,
      allowNull: true

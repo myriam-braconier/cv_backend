@@ -59,12 +59,29 @@ const synthetiser = sequelize.define('synthetiser', {
          min: 0,
        },
      },
+     postId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'post',
+        key: 'id'
+      }
+      }
    },
    {
      tableName: "synthetisers",
      timestamps: true,
    }
  );
+
+
+  synthetiser.associate = (models) => {
+    synthetiser.hasMany(models.post, {
+        foreignKey: 'synthetiserId',
+        as: 'posts'  // permet d'utiliser synthetiser.getPosts()
+    });
+};
+
 
  return synthetiser;
 };

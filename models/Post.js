@@ -2,6 +2,11 @@ export const initModel = (sequelize, DataTypes) => {
   const post = sequelize.define(
 		"post", 
    {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+  },
      commentaire: {
        type: DataTypes.STRING,
        allowNull: true,
@@ -30,6 +35,23 @@ export const initModel = (sequelize, DataTypes) => {
        type: DataTypes.ENUM("brouillon", "publié", "archivé"),
        defaultValue: "brouillon",
      },
+     userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+      },
+      synthetiserId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+				  model: 'synthetiser',
+				  key: 'id'
+				}
+			  }
+
    },
    {
      tableName: "posts",
@@ -43,6 +65,7 @@ export const initModel = (sequelize, DataTypes) => {
     foreignKey: {
       name: "userId",
       allowNull: true,
+      as: 'author' // permet d'utiliser post.getAuthor ()
     },
   });
 
@@ -50,9 +73,18 @@ export const initModel = (sequelize, DataTypes) => {
     foreignKey: {
       name: "synthetiserId",
       allowNull: true,
+      references: {
+        model: 'synthetisers', // Correction du nom de la table
+        key: 'id'
+    },
+      as: 'synthetiser'  // permet d'utiliser post.getSynthetiser()
     },
   }); 
+
+
 };
+
+
  return post;
 };
 

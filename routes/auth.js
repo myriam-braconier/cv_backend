@@ -3,13 +3,43 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { Op } from "sequelize";
 import db from "../models/index.js";
+import { authenticateToken } from '../middleware/authMiddleware.js'; 
+
 
 // Configuration de dotenv
 dotenv.config();
 
 const router = express.Router();
+
+// Route /me  pour utiliser Sequelize
+router.get('/me', authenticateToken, async (req, res) => {
+    try {
+        const user = await db.user.findOne({
+            where: { id: req.user.userId },
+            include: [{
+                model: db.role,
+                as: 'role',
+                attributes: ['name']
+            }],
+            attributes: ['id', 'email', 'username'] // Exclure le password
+        });
+        
+        if (!user) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
+        res.json({
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            role: user.role ? user.role.name : null
+        });
+    } catch (err) {
+        console.error('Error in /auth/me:', err);
+        res.status(500).json({ message: 'Erreur serveur' });
+    }
+});
 
 // Route d'enregistrement 
 router.post("/register", async (req, res) => {
@@ -93,7 +123,7 @@ router.post("/login", async (req, res) => {
             where: { email },
             include: [{
                 model: db.role,
-                as: 'roles'
+                as: 'role'
             }]
         });
         
@@ -110,7 +140,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ 
             userId: user.id,
-            roles: user.roles.map(role => role.name)
+            role: user.role ? user.role.name : null
         }, process.env.JWT_SECRET, {
             expiresIn: "1h"
         });
@@ -121,7 +151,7 @@ router.post("/login", async (req, res) => {
             userId: user.id,
             username: user.username,
             email: user.email,
-            roles: user.roles.map(role => role.name)
+            role: user.role ? user.role.name : null
         });
     } catch (error) {
         console.error("Erreur lors de la connexion:", error);
@@ -130,5 +160,7 @@ router.post("/login", async (req, res) => {
         });
     }
 });
+
+
 
 export default router;

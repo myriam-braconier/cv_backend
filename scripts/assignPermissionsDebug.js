@@ -37,7 +37,7 @@ const checkAndAssignPermissions = async () => {
             }
 
             // Trouver les permissions pour ce rôle
-            const rolePermissions = await db.Permission.findAll({
+            const rolePermissions = await db.permission.findAll({
                 where: { name: permissionNames }
             });
 

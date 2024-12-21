@@ -39,17 +39,21 @@ export const initModel = (sequelize, DataTypes) => {
 	);
   
 	AuctionPrice.associate = (models) => {
+
+		if (models.User) {
 	  AuctionPrice.belongsTo(models.User, {
 		foreignKey: "userId",
 		as: "bidder"
 	  });
+	}
   
+	if (models.Synthetiser) {
 	  AuctionPrice.belongsTo(models.Synthetiser, {
 		foreignKey: "synthetiserId",
 		as: "synthetiser"
 	  });
 	};
-  
+}
 	return AuctionPrice;
   };
   

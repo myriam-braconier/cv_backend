@@ -9,6 +9,18 @@ const syncSelectedModels = async () => {
         await db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
 
         try {
+
+
+        // Ajout des commandes SQL spécifiques pour mettre à jour la table Synthetiser
+        console.log("Application des modifications à la table Synthetisers...");
+        await db.sequelize.query(`
+            ALTER TABLE synthetisers 
+            ADD COLUMN IF NOT EXISTS userId INTEGER,
+            ADD COLUMN IF NOT EXISTS isOwner BOOLEAN DEFAULT false,
+            ADD FOREIGN KEY (userId) REFERENCES users(id)
+        `);
+        console.log("✓ Table Synthetisers mise à jour");
+
             // Synchroniser dans l'ordre des dépendances
             console.log("\n1. Synchronisation de la table Roles...");
             await db.Role.sync({ alter:true });
@@ -26,9 +38,7 @@ const syncSelectedModels = async () => {
             await db.Post.sync({ alter: true });
             console.log("✓ Table Posts synchronisée");
 
-            console.log("\n5. Synchronisation de la table Synthetisers...");
-            await db.Synthetiser.sync({ alter: true });
-            console.log("✓ Table Synthetisers synchronisée");
+  
 
             console.log("\n5. Synchronisation de la table profiles...");
             await db.Profile.sync({ alter: true });

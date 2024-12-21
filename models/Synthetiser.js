@@ -53,11 +53,15 @@ export const initModel = (sequelize, DataTypes) => {
         },
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
         validate: {
           min: 0,
         },
+        get() {
+          const value = this.getDataValue('price');
+          return value === null ? null : parseFloat(value);
+        }
       },
       auctionPrice: {
         type: DataTypes.INTEGER,

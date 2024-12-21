@@ -54,43 +54,70 @@ export const importData = async (req, res) => {
 
 // Fonction pour obtenir tous les synthétiseurs
 export const getAllSynthetisers = async (req, res) => {
-	try {
-		// Obtenir tous les synthétiseurs avec leurs posts
-		const synths = await db.Synthetiser.findAll({
-			include: [
-				{
-					model: db.Post,
-					as: "posts",
-				},
-			],
-			raw: false,
-			nest: true,
-		});
+    try {
+        console.log('Début de la récupération des synthétiseurs');
 
-		// Assurons-nous que les données sont bien structurées
-		const formattedSynths = synths.map((synth) => {
-			const plainSynth = synth.get({ plain: true });
-			return {
-				...plainSynth,
-				posts: plainSynth.posts || [],
-				postCount: plainSynth.posts ? plainSynth.posts.length : 0,
-			};
-		});
+        // Vérifier que le modèle Post existe
+        if (!db.Post) {
+            console.error('Modèle Post non trouvé dans db:', Object.keys(db));
+            throw new Error('Modèle Post non configuré');
+        }
 
-		console.log("Synthétiseurs avec nombre de posts:", formattedSynths);
+        // Récupération des synthétiseurs avec leurs posts
+        const synths = await db.Synthetiser.findAll({
+            include: [
+                {
+                    model: db.Post,
+                    as: "posts",
+                    required: false // Pour faire un LEFT JOIN
+                }
+            ],
+            raw: false,
+            nest: true,
+        });
 
-		res.json({
-			data: formattedSynths,
-			roles: ["user"],
-			message: "Synthétiseurs récupérés avec succès",
-		});
-	} catch (error) {
-		console.error("Erreur:", error);
-		res.status(500).json({
-			error: "Failed to retrieve synthetisers",
-			details: error.message,
-		});
-	}
+        console.log('Synthétiseurs récupérés, nombre:', synths.length);
+
+        // Formatage des données avec gestion d'erreur
+        const formattedSynths = synths.map((synth) => {
+            try {
+                const plainSynth = synth.get({ plain: true });
+                return {
+                    ...plainSynth,
+                    posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
+                    postCount: Array.isArray(plainSynth.posts) ? plainSynth.posts.length : 0
+                };
+            } catch (error) {
+                console.error('Erreur lors du formatage du synthétiseur:', error);
+                return {
+                    ...synth,
+                    posts: [],
+                    postCount: 0
+                };
+            }
+        });
+
+        console.log('Données formatées avec succès');
+
+        res.json({
+            data: formattedSynths,
+            roles: ["user"],
+            message: "Synthétiseurs récupérés avec succès"
+        });
+
+    } catch (error) {
+        console.error("Erreur détaillée:", {
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+        });
+
+        res.status(500).json({
+            error: "Erreur lors de la récupération des synthétiseurs",
+            details: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
+    }
 };
 
 // Fonction pour créer un nouveau synthétiseur

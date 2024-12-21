@@ -12,8 +12,7 @@ const __dirname = dirname(__filename);
 const env = process.env.NODE_ENV || "development";
 dotenv.config();
 
-const db = {};
-
+// Création de l'instance Sequelize
 const sequelize = new Sequelize(
     config[env].database,
     config[env].username,
@@ -21,24 +20,27 @@ const sequelize = new Sequelize(
     config[env]
 );
 
+// Initialisation de l'objet db
+const db = {
+    sequelize,    // Important pour les transactions
+    Sequelize,    // Important pour les opérateurs
+};
+
 // Chargement des modèles
 const modelFiles = readdirSync(__dirname)
-    .filter(file => 
-        file.indexOf('.') !== 0 && 
-        file !== 'index.js' && 
+    .filter(file =>
+        file.indexOf('.') !== 0 &&
+        file !== 'index.js' &&
         file.slice(-3) === '.js'
     );
 
-// Import et initialisation des modèles avec gestion des erreurs
+// Import et initialisation des modèles
 for (const file of modelFiles) {
     try {
         console.log(`\nTraitement du fichier: ${file}`);
         const modelPath = `file://${path.join(__dirname, file)}`;
         const model = await import(modelPath);
         
-        console.log('Module importé:', model);
-        
-        // Vérifie si le modèle a un export par défaut
         const initFunction = model.default || model.initModel;
         
         if (typeof initFunction !== 'function') {
@@ -54,14 +56,14 @@ for (const file of modelFiles) {
             continue;
         }
 
-        db[modelInstance.name] = modelInstance;
-        console.log(`✓ Modèle ${modelInstance.name} chargé avec succès`);
-
+        // Stockage du modèle dans db avec la première lettre en majuscule
+        const modelName = modelInstance.name.charAt(0).toUpperCase() + modelInstance.name.slice(1);
+        db[modelName] = modelInstance;
+        console.log(`✓ Modèle ${modelName} chargé avec succès`);
     } catch (error) {
         console.error(`❌ Erreur lors du chargement de ${file}:`, error);
     }
 }
-
 
 // Associations
 Object.keys(db).forEach(modelName => {
@@ -69,21 +71,18 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-// ajout de sequelize à db
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
-// Export de l'objet db complet et des modèles individuels
+// Export de l'objet db
+export default db;
+
+// Export des modèles individuels si nécessaire
 export const models = {
     sequelize,
-    user: db.User,
-    role: db.Role,
-    permission: db.Permission,
-    post: db.Post,
-    synthetiser: db.Synthetiser,
-    auctionPrice: db.AuctionPrice,
-    profile: db.Profile
-    
+    User: db.User,
+    Role: db.Role,
+    Permission: db.Permission,
+    Post: db.Post,
+    Synthetiser: db.Synthetiser,
+    AuctionPrice: db.AuctionPrice,
+    Profile: db.Profile
 };
-
-export default db;

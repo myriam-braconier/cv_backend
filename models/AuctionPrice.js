@@ -1,59 +1,64 @@
 export const initModel = (sequelize, DataTypes) => {
 	const AuctionPrice = sequelize.define(
-	  "AuctionPrice",
-	  {
-		id: {
-		  type: DataTypes.INTEGER,
-		  primaryKey: true,
-		  autoIncrement: true,
+		"AuctionPrice",
+		{
+			id: {
+				type: DataTypes.INTEGER,
+				primaryKey: true,
+				autoIncrement: true,
+			},
+			proposal_price: {
+				type: DataTypes.DECIMAL(10, 2),
+				allowNull: false,
+			},
+			status: {
+				type: DataTypes.ENUM("active", "won", "outbid", "cancelled"),
+				defaultValue: "active",
+			},
+			synthetiserId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+					model: 'synthetisers',
+					key: 'id',
+				  },
+			},
+			userId: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+				references: {
+					model: "users",
+					key: "id",
+				},
+			},
 		},
-		proposal_price: {
-		  type: DataTypes.DECIMAL(10, 2), // NUMBER n'existe pas, utilisez DECIMAL
-		  allowNull: true,
-		},
-		status: {
-		  type: DataTypes.ENUM('active', 'won', 'outbid', 'cancelled'),
-		  defaultValue: 'active'
-		},
-		synthetiserId: {
-		  type: DataTypes.INTEGER,
-		  allowNull: false,
-		  references: {
-			model: "synthetisers", // Correction du nom de la table
-			key: "id",
-		  },
-		},
-		userId: { // Ajout explicite du champ userId
-		  type: DataTypes.INTEGER,
-		  allowNull: true,
-		  references: {
-			model: "users",
-			key: "id",
-		  },
+		{
+			tableName: "auction_prices",
+			timestamps: true,
 		}
-	  },
-	  {
-		tableName: "auctionPrices", 
-		timestamps: true,
-	  }
 	);
-  
-	AuctionPrice.associate = (models) => {
 
+	AuctionPrice.associate = (models) => {
 		if (models.User) {
-	  AuctionPrice.belongsTo(models.User, {
-		foreignKey: "userId",
-		as: "bidder"
-	  });
-	}
-  
-	if (models.Synthetiser) {
-	  AuctionPrice.belongsTo(models.Synthetiser, {
-		foreignKey: "synthetiserId",
-		as: "synthetiser"
-	  });
+			AuctionPrice.belongsTo(models.User, {
+				foreignKey: "userId",
+				as: "user",
+				onDelete: "SET NULL",
+				onUpdate: "CASCADE",
+			});
+		}
+
+		if (models.Synthetiser) {
+			AuctionPrice.belongsTo(models.Synthetiser, {
+				foreignKey: "synthetiserId",
+				as: "synthetiser",
+				onDelete: "NO ACTION",
+				onUpdate: "CASCADE",
+			});
+		}
 	};
-}
+
 	return AuctionPrice;
-  };
-  
+};
+
+export default initModel;

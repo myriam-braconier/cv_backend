@@ -54,70 +54,78 @@ export const importData = async (req, res) => {
 
 // Fonction pour obtenir tous les synthétiseurs
 export const getAllSynthetisers = async (req, res) => {
-    try {
-        console.log('Début de la récupération des synthétiseurs');
+	try {
+		console.log("Début de la récupération des synthétiseurs");
 
-        // Vérifier que le modèle Post existe
-        if (!db.Post) {
-            console.error('Modèle Post non trouvé dans db:', Object.keys(db));
-            throw new Error('Modèle Post non configuré');
-        }
+		// Vérifier que le modèle Post existe
+		if (!db.Post) {
+			console.error("Modèle Post non trouvé dans db:", Object.keys(db));
+			throw new Error("Modèle Post non configuré");
+		}
 
-        // Récupération des synthétiseurs avec leurs posts
-        const synths = await db.Synthetiser.findAll({
-            include: [
-                {
-                    model: db.Post,
-                    as: "posts",
-                    required: false // Pour faire un LEFT JOIN
-                }
-            ],
-            raw: false,
-            nest: true,
-        });
+		// Récupération des synthétiseurs avec leurs posts
+		const synths = await db.Synthetiser.findAll({
+			include: [
+				{
+					model: db.Post,
+					as: "posts",
+					required: false, // Pour faire un LEFT JOIN
+				},
+			],
+			raw: false,
+			nest: true,
+			include: [{
+                model: db.AuctionPrice,
+                as: 'auctionPrices',  // Comme défini dans les associations
+                attributes: ['id', 'proposal_price', 'status'], // Les champs que vous voulez
+                order: [['createdAt', 'DESC']], // Pour avoir les plus récentes d'abord
+            }],
+            order: [['createdAt', 'DESC']], // Ordre des synthétiseurs
+		});
 
-        console.log('Synthétiseurs récupérés, nombre:', synths.length);
+		console.log("Synthétiseurs récupérés, nombre:", synths.length);
 
-        // Formatage des données avec gestion d'erreur
-        const formattedSynths = synths.map((synth) => {
-            try {
-                const plainSynth = synth.get({ plain: true });
-                return {
-                    ...plainSynth,
-                    posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
-                    postCount: Array.isArray(plainSynth.posts) ? plainSynth.posts.length : 0
-                };
-            } catch (error) {
-                console.error('Erreur lors du formatage du synthétiseur:', error);
-                return {
-                    ...synth,
-                    posts: [],
-                    postCount: 0
-                };
-            }
-        });
+		// Formatage des données avec gestion d'erreur
+		const formattedSynths = synths.map((synth) => {
+			try {
+				const plainSynth = synth.get({ plain: true });
+				return {
+					...plainSynth,
+					posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
+					postCount: Array.isArray(plainSynth.posts)
+						? plainSynth.posts.length
+						: 0,
+				};
+			} catch (error) {
+				console.error("Erreur lors du formatage du synthétiseur:", error);
+				return {
+					...synth,
+					posts: [],
+					postCount: 0,
+				};
+			}
+		});
 
-        console.log('Données formatées avec succès');
+		console.log("Données formatées avec succès");
 
-        res.json({
-            data: formattedSynths,
-            roles: ["user"],
-            message: "Synthétiseurs récupérés avec succès"
-        });
+		res.json({
+			data: formattedSynths,
+			roles: ["user"],
+			message: "Synthétiseurs récupérés avec succès",
+		});
+	} catch (error) {
+		console.error("Erreur détaillée:", {
+			message: error.message,
+			stack: error.stack,
+			name: error.name,
+		});
 
-    } catch (error) {
-        console.error("Erreur détaillée:", {
-            message: error.message,
-            stack: error.stack,
-            name: error.name
-        });
-
-        res.status(500).json({
-            error: "Erreur lors de la récupération des synthétiseurs",
-            details: error.message,
-            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-        });
-    }
+		res.status(500).json({
+			error: "Erreur lors de la récupération des synthétiseurs",
+			details: error.message,
+			stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+		});
+	}
 };
 
 // Fonction pour créer un nouveau synthétiseur
@@ -182,36 +190,45 @@ export const updateMainSynthetiserInfo = async (req, res) => {
 // Fonction pour obtenir un synthétiseur spécifique
 export const getSynthetiser = async (req, res) => {
 	const { id } = req.params;
-
+  
 	try {
-		const synthetiser = await db.Synthetiser.findByPk(id, {
-			include: [
-				{
-					model: db.Post,
-					as: "posts",
-				},
-			],
+	  const synthetiser = await db.Synthetiser.findByPk(id, {
+		include: [
+		  {
+			model: db.Post,
+			as: "posts",
+			attributes: ['id', 'titre', 'commentaire', 'contenu', 'type_contenu'],
+		  },
+		  {
+			model: db.AuctionPrice,
+			as: 'auctionPrices',
+			attributes: ['id', 'proposal_price', 'status', 'createdAt'],
+			order: [['createdAt', 'DESC']]
+		  }
+		]
+	  });
+  
+	  if (!synthetiser) {
+		return res.status(404).json({
+		  error: "Synthétiseur non trouvé",
+		  details: `Aucun synthétiseur trouvé avec l'ID ${id}`
 		});
-
-		if (!synthetiser) {
-			return res.status(404).json({
-				error: "Synthétiseur non trouvé",
-				details: `Aucun synthétiseur trouvé avec l'ID ${id}`,
-			});
-		}
-
-		res.json({
-			data: synthetiser,
-			message: "Synthétiseur récupéré avec succès",
-		});
+	  }
+  
+	  return res.status(200).json({
+		data: synthetiser,
+		message: "Synthétiseur récupéré avec succès"
+	  });
+  
 	} catch (error) {
-		console.error("Get synthetiser error:", error);
-		res.status(500).json({
-			error: "Échec de la récupération du synthétiseur",
-			details: error.message,
-		});
+	  console.error("Get synthetiser error:", error);
+	  return res.status(500).json({
+		error: "Échec de la récupération du synthétiseur",
+		details: error.message
+	  });
 	}
-};
+  };
+  
 
 // Fonction pour ajouter un post à un synthétiseur
 export const addPost = async (req, res) => {
@@ -251,6 +268,72 @@ export const addPost = async (req, res) => {
 		console.error("Add post error:", error);
 		res.status(400).json({
 			error: "Échec de l'ajout du post",
+			details: error.message,
+		});
+	}
+};
+//Fonction pour mettre à jour un seulsynthetiseur
+export const updateSynthetiserInfo = async (req, res) => {
+	const { id } = req.params;
+	try {
+		// Récupération du synthétiseur
+		const existingSynth = await db.Synthetiser.findByPk(id);
+		if (!existingSynth) {
+			return res.status(404).json({
+				error: "Synthétiseur non trouvé",
+				details: `Aucun synthétiseur trouvé avec l'ID ${id}`,
+			});
+		}
+
+		// req.user est maintenant disponible grâce au middleware
+		const currentUser = req.user;
+		console.log("Utilisateur courant:", currentUser);
+
+		// Filtrage des champs autorisés
+		const allowedFields = [
+			"marque",
+			"modele",
+			"specifications",
+			"image_url",
+			"price",
+			"auctionPrice",
+			"note",
+			"nb_avis",
+		];
+
+		// Création de l'objet de mise à jour avec uniquement les champs autorisés
+		const updateData = {};
+		for (const field of allowedFields) {
+			if (req.body[field] !== undefined) {
+				updateData[field] = req.body[field];
+			}
+		}
+
+		// Passer l'utilisateur dans les options
+		await existingSynth.update(updateData, {
+			user: currentUser,
+		});
+
+		// Récupération du synthétiseur mis à jour
+		const updatedSynth = await db.Synthetiser.findByPk(id);
+
+		res.json({
+			data: updatedSynth,
+			message: "Synthétiseur mis à jour avec succès",
+		});
+	} catch (error) {
+		console.error("Erreur lors de la mise à jour:", error);
+
+		// Gestion spécifique des erreurs de permission
+		if (error.message === "Seul le propriétaire peut modifier le prix") {
+			return res.status(403).json({
+				error: "Permission refusée",
+				details: error.message,
+			});
+		}
+
+		res.status(500).json({
+			error: "Erreur lors de la mise à jour du synthétiseur",
 			details: error.message,
 		});
 	}

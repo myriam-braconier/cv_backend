@@ -47,7 +47,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				references: {
-					model: "synthetiser",
+				table: "synthetisers",
 					key: "id",
 				},
 			},
@@ -71,7 +71,12 @@ export const initModel = (sequelize, DataTypes) => {
 		if (models.Synthetiser) {
             Post.belongsTo(models.Synthetiser, {
                 foreignKey: "synthetiserId",
-                as: "synthetiser"
+                as: "synthetisers",
+				references: {
+					model: "synthetisers", // Majuscule
+					key: "id",
+				},
+
             });
         }
 	};

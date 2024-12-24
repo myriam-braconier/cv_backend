@@ -1,4 +1,3 @@
-// middleware/authMiddleware.js
 import jwt from 'jsonwebtoken';
 
 
@@ -29,11 +28,25 @@ export const authenticateToken = (req, res, next) => { // export nommé donc on 
            error: "Token invalide ou expiré." 
        });
    }
-
-
-   
-
-
 };
+const checkPricePermission = async (req, res, next) => {
+    try {
+        const user = req.user; 
+        const role = await user.getRole();
+        
+        if (role.role_name === 'admin' || role.role_name === 'owner_instr') {
+            next();
+        } else {
+            res.status(403).json({ 
+                message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix" 
+            });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la vérification des permissions" });
+    }
+};
+
+
+
 
 export const secret = jwtSecret;

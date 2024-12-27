@@ -62,12 +62,19 @@ export const initModel = (sequelize, DataTypes) => {
 					const value = this.getDataValue("price");
 					return value === null ? null : parseFloat(value);
 				},
+				set(value) {
+					if (typeof value === 'object' && value.value) {
+					  this.setDataValue('price', value.value);
+					} else {
+					  this.setDataValue('price', value);
+					}
+				  }
 			},
 			auctionPriceId: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "auction_prices", // Majuscule
+					model: "auction_prices", 
 					key: "id",
 				},
 			},
@@ -75,7 +82,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "users", // Majuscule
+					model: "users", 
 					key: "id",
 				},
 			},
@@ -83,7 +90,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "posts", // Majuscule
+					model: "posts", 
 					key: "id",
 				},
 			},

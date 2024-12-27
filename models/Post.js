@@ -47,7 +47,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				references: {
-				table: "synthetisers",
+					model: "synthetisers",
 					key: "id",
 				},
 			},
@@ -59,26 +59,23 @@ export const initModel = (sequelize, DataTypes) => {
 	);
 
 	Post.associate = (models) => {
-
-
-	       if (models.User) {
-            Post.belongsTo(models.User, {
-                foreignKey: "userId",
-                as: "author"  // Singulier car c'est une relation belongsTo
-            });
-        }
+		if (models.User) {
+			Post.belongsTo(models.User, {
+				foreignKey: "userId",
+				as: "author", // Singulier car c'est une relation belongsTo
+				onDelete: "CASCADE",
+				onUpdate: "CASCADE",
+			});
+		}
 
 		if (models.Synthetiser) {
-            Post.belongsTo(models.Synthetiser, {
-                foreignKey: "synthetiserId",
-                as: "synthetisers",
-				references: {
-					model: "synthetisers", // Majuscule
-					key: "id",
-				},
-
-            });
-        }
+			Post.belongsTo(models.Synthetiser, {
+				foreignKey: "synthetiserId",
+				as: "synthetisers",
+				onDelete: "CASCADE",
+				onUpdate: "CASCADE",
+			});
+		}
 	};
 
 	return Post;

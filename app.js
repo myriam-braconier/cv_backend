@@ -59,7 +59,7 @@ import roleRoutes from "./routes/roles.js";
 import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
 import adminRoutes from "./routes/admin.js";
-import auctionRoutes from './routes/auctions.js';
+import auctionRoutes from "./routes/auctions.js"
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -89,7 +89,7 @@ app.use("/api/users", userRoutes); // Ajout du préfixe /api
 app.use("/api/roles", roleRoutes); // Ajout du préfixe /api
 app.use("/api/profiles", profileRoutes); // Ajout du préfixe /api
 app.use("/api/posts", postRoutes); // Ajout du préfixe /api
-app.use('/api', auctionRoutes);
+app.use('/api/auctions', auctionRoutes);
 
 // Route protégée d'exemple
 app.get("/protected", authenticateToken, (req, res) => {

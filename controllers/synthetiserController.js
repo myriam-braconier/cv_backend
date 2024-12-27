@@ -1,45 +1,6 @@
 import { importJsonData } from "../utils/importService.js";
 import db from "../models/index.js";
 
-export const updatePrice = async (req, res) => {
-	const { id } = req.params;
-	const { auctionPrice } = req.body;
-
-	try {
-		const existingSynth = await db.Synthetiser.findByPk(id);
-
-		if (!existingSynth) {
-			return res.status(404).json({
-				error: "Synthétiseur non trouvé",
-			});
-		}
-
-		// Mise à jour avec l'utilisateur dans les options
-		await existingSynth.update(
-			{ auctionPrice },
-			{
-				user: req.user, // L'utilisateur authentifié doit être disponible dans req.user
-			}
-		);
-
-		res.json({
-			data: existingSynth,
-			message: "Prix mis à jour avec succès",
-		});
-	} catch (error) {
-		if (error.message === "Seul le propriétaire peut modifier le prix") {
-			return res.status(403).json({
-				error: "Non autorisé",
-				message: error.message,
-			});
-		}
-
-		res.status(500).json({
-			error: "Erreur lors de la mise à jour du prix",
-			message: error.message,
-		});
-	}
-};
 
 // Fonction pour importer des données JSON dans la base de données
 export const importData = async (req, res) => {
@@ -51,7 +12,6 @@ export const importData = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
-
 // Fonction pour obtenir tous les synthétiseurs
 export const getAllSynthetisers = async (req, res) => {
 	try {
@@ -142,51 +102,6 @@ export const createSynthetiser = async (req, res) => {
 	}
 };
 
-// Fonction pour mettre à jour les informations principales d'un synthétiseur
-export const updateMainSynthetiserInfo = async (req, res) => {
-	const { id } = req.params;
-
-	try {
-		const existingSynth = await db.Synthetiser.findByPk(id);
-
-		if (!existingSynth) {
-			return res.status(404).json({
-				error: "Synthétiseur non trouvé",
-				details: `Aucun synthétiseur trouvé avec l'ID ${id}`,
-			});
-		}
-
-		// Extraction uniquement des champs autorisés
-		const { marque, modele, specifications, image_url } = req.body;
-
-		// Création de l'objet de mise à jour
-		const updateData = {};
-		if (marque !== undefined) updateData.marque = marque;
-		if (modele !== undefined) updateData.modele = modele;
-		if (specifications !== undefined)
-			updateData.specifications = specifications;
-		if (image_url !== undefined) updateData.image_url = image_url;
-
-		// Mise à jour du synthétiseur
-		await existingSynth.update(updateData);
-
-		// Récupération du synthétiseur mis à jour
-		const updatedSynth = await db.Synthetiser.findByPk(id);
-
-		res.json({
-			data: updatedSynth,
-			message:
-				"Informations principales du synthétiseur mises à jour avec succès",
-		});
-	} catch (error) {
-		console.error("Update error:", error);
-		res.status(400).json({
-			error: "Échec de la mise à jour du synthétiseur",
-			details: error.message,
-		});
-	}
-};
-
 // Fonction pour obtenir un synthétiseur spécifique
 export const getSynthetiser = async (req, res) => {
 	const { id } = req.params;
@@ -228,7 +143,113 @@ export const getSynthetiser = async (req, res) => {
 	  });
 	}
   };
+
+// Fonction pour mettre à jour un synthétiseur
+export const updateSynthetiserInfo = async (req, res) => {
+	const { id } = req.params;
+	
+	try {
+	  const existingSynth = await db.Synthetiser.findByPk(id);
+	  if (!existingSynth) {
+		return res.status(404).json({
+		  error: "Synthétiseur non trouvé",
+		  details: `Aucun synthétiseur trouvé avec l'ID ${id}`
+		});
+	  }
   
+	  // Filtrage des champs autorisés
+	  const allowedFields = [
+		"marque",
+		"modele",
+		"specifications",
+		"image_url",
+		"price"
+	  ];
+  
+	  // Création de l'objet de mise à jour
+	  const updateData = {};
+	  for (const field of allowedFields) {
+		if (req.body[field] !== undefined) {
+		  updateData[field] = req.body[field];
+		}
+	  }
+  
+	  // Mise à jour du synthétiseur
+	  await existingSynth.update(updateData);
+  
+	  // Gestion des prix d'enchère
+	  if (req.body.auctionPrices && req.body.auctionPrices.length > 0) {
+		await db.AuctionPrice.create({
+		  synthetiserId: id,
+		  proposal_price: req.body.price.value,
+		  status: 'pending'
+		});
+	  }
+	  
+	  // Récupération du synthétiseur mis à jour avec ses enchères
+	  const updatedSynth = await db.Synthetiser.findByPk(id, {
+		include: [{
+		  model: db.AuctionPrice,
+		  as: 'auctionPrices',
+		  attributes: ['id', 'proposal_price', 'status', 'createdAt'],
+		  order: [['createdAt', 'DESC']]
+		}]
+	  });
+  
+	  res.json({
+		data: updatedSynth,
+		message: "Synthétiseur mis à jour avec succès"
+	  });
+	} catch (error) {
+	  console.error("Erreur lors de la mise à jour:", error);
+	  res.status(500).json({
+		error: "Erreur lors de la mise à jour du synthétiseur",
+		details: error.message
+	  });
+	}
+  };
+  
+
+// Fonction pour ajouter une enchère
+export const addAuction = async (req, res) => {
+	const { id } = req.params;
+	const { proposal_price, userId } = req.body;
+  
+	try {
+	  const synthetiser = await db.Synthetiser.findByPk(id);
+	  if (!synthetiser) {
+		return res.status(404).json({
+		  error: "Synthétiseur non trouvé"
+		});
+	  }
+  
+	  if (!proposal_price) {
+		return res.status(400).json({
+		  error: "Le montant de l'enchère est requis"
+		});
+	  }
+  
+	  const newAuction = await db.AuctionPrice.create({
+		proposal_price,
+		status: "active",
+		synthetiserId: id,
+		userId,
+		createAt: new Date().toISOString(),
+		updateAt: new Date().toISOString()
+	  });
+  
+	  res.status(201).json({
+		data: newAuction,
+		message: "Enchère ajoutée avec succès"
+	  });
+	} catch (error) {
+	  console.error("Erreur d'ajout d'enchère:", error);
+	  res.status(400).json({
+		error: "Échec de l'ajout de l'enchère",
+		details: error.message
+	  });
+	}
+  };
 
 // Fonction pour ajouter un post à un synthétiseur
 export const addPost = async (req, res) => {
@@ -272,69 +293,83 @@ export const addPost = async (req, res) => {
 		});
 	}
 };
-//Fonction pour mettre à jour un seulsynthetiseur
-export const updateSynthetiserInfo = async (req, res) => {
+
+export const updatePrice = async (req, res) => {
 	const { id } = req.params;
+	const { auctionPrice } = req.body;
+
 	try {
-		// Récupération du synthétiseur
 		const existingSynth = await db.Synthetiser.findByPk(id);
+
 		if (!existingSynth) {
 			return res.status(404).json({
 				error: "Synthétiseur non trouvé",
-				details: `Aucun synthétiseur trouvé avec l'ID ${id}`,
 			});
 		}
 
-		// req.user est maintenant disponible grâce au middleware
-		const currentUser = req.user;
-		console.log("Utilisateur courant:", currentUser);
-
-		// Filtrage des champs autorisés
-		const allowedFields = [
-			"marque",
-			"modele",
-			"specifications",
-			"image_url",
-			"price",
-			"auctionPrice",
-			"note",
-			"nb_avis",
-		];
-
-		// Création de l'objet de mise à jour avec uniquement les champs autorisés
-		const updateData = {};
-		for (const field of allowedFields) {
-			if (req.body[field] !== undefined) {
-				updateData[field] = req.body[field];
+		// Mise à jour avec l'utilisateur dans les options
+		await existingSynth.update(
+			{ auctionPrice },
+			{
+				user: req.user, // L'utilisateur authentifié doit être disponible dans req.user
 			}
-		}
-
-		// Passer l'utilisateur dans les options
-		await existingSynth.update(updateData, {
-			user: currentUser,
-		});
-
-		// Récupération du synthétiseur mis à jour
-		const updatedSynth = await db.Synthetiser.findByPk(id);
+		);
 
 		res.json({
-			data: updatedSynth,
-			message: "Synthétiseur mis à jour avec succès",
+			data: existingSynth,
+			message: "Prix mis à jour avec succès",
 		});
 	} catch (error) {
-		console.error("Erreur lors de la mise à jour:", error);
-
-		// Gestion spécifique des erreurs de permission
 		if (error.message === "Seul le propriétaire peut modifier le prix") {
 			return res.status(403).json({
-				error: "Permission refusée",
-				details: error.message,
+				error: "Non autorisé",
+				message: error.message,
 			});
 		}
 
 		res.status(500).json({
-			error: "Erreur lors de la mise à jour du synthétiseur",
-			details: error.message,
+			error: "Erreur lors de la mise à jour du prix",
+			message: error.message,
 		});
 	}
 };
+
+export const getLatestAuctionBySynthId = async (req, res) => {
+	try {
+	 const synthetiserId = parseInt(req.params.id, 10); // Conversion en nombre
+   
+	 if (!synthetiserId || isNaN(synthetiserId)) {
+	   return res.status(400).json({ 
+		 message: "ID du synthétiseur invalide" 
+	   });
+	 }
+   
+	  const latestAuction = await AuctionPrice.findOne({
+		where: { 
+		  synthetiserId: synthetiserId,
+		  status: 'active'
+		},
+		order: [
+		  ['proposal_price', 'DESC'],
+		  ['createdAt', 'DESC']
+		],
+	  });
+   
+	  if (!latestAuction) {
+		return res.status(404).json({ 
+		  message: "Aucune enchère trouvée pour ce synthétiseur" 
+		});
+	  }
+   
+	  res.json(latestAuction);
+   
+	} catch (error) {
+	  console.error('Erreur lors de la récupération de l\'enchère:', error);
+	  res.status(500).json({ 
+		message: "Erreur serveur lors de la récupération de l'enchère" 
+	  });
+	}
+   };
+   
+ 
+   export default { getLatestAuctionBySynthId };

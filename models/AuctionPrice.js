@@ -19,7 +19,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				references: {
-					model: 'synthetisers',
+					model: 'synthetisers', // nom exacte de la table
 					key: 'id',
 				  },
 			},
@@ -52,7 +52,7 @@ export const initModel = (sequelize, DataTypes) => {
 			AuctionPrice.belongsTo(models.Synthetiser, {
 				foreignKey: "synthetiserId",
 				as: "synthetiser",
-				onDelete: "NO ACTION",
+				onDelete: "CASCADE",
 				onUpdate: "CASCADE",
 			});
 		}

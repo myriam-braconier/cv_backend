@@ -7,5 +7,5 @@ import { authenticateToken } from '../middleware/authMiddleware.js';  // Import 
 
 router.post('/:synthId', authenticateToken, createAuction);
 
-router.put('/synthetisers/:id/auctions',     authenticateToken, getLatestAuctionBySynthId);
+router.put('/:id/auctions',     authenticateToken, getLatestAuctionBySynthId);
 export default router;

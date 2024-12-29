@@ -1,6 +1,6 @@
 export const initModel = (sequelize, DataTypes) => {
 	const Synthetiser = sequelize.define(
-		"Synthetiser", // Majuscule pour le nom du modèle
+		"Synthetiser",
 		{
 			marque: {
 				type: DataTypes.STRING,
@@ -52,29 +52,24 @@ export const initModel = (sequelize, DataTypes) => {
 					}
 				},
 			},
+			// Stockage du prix sous forme de JSON dans une colonne TEXT
 			price: {
-				type: DataTypes.DECIMAL(10, 2),
+				type: DataTypes.TEXT,
 				allowNull: true,
-				validate: {
-					min: 0,
-				},
 				get() {
-					const value = this.getDataValue("price");
-					return value === null ? null : parseFloat(value);
+					const rawValue = this.getDataValue("price");
+					return rawValue ? JSON.parse(rawValue) : null;
 				},
 				set(value) {
-					if (typeof value === 'object' && value.value) {
-					  this.setDataValue('price', value.value);
-					} else {
-					  this.setDataValue('price', value);
-					}
-				  }
+					this.setDataValue("price", value ? JSON.stringify(value) : null);
+				},
 			},
+
 			auctionPriceId: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "auction_prices", 
+					model: "auction_prices",
 					key: "id",
 				},
 			},
@@ -82,7 +77,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "users", 
+					model: "users",
 					key: "id",
 				},
 			},
@@ -90,7 +85,7 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				references: {
-					model: "posts", 
+					model: "posts",
 					key: "id",
 				},
 			},
@@ -99,28 +94,36 @@ export const initModel = (sequelize, DataTypes) => {
 			tableName: "synthetisers",
 			timestamps: true,
 			hooks: {
-
 				beforeUpdate: async (synthetiser, options) => {
 					try {
-						if (options?.fields?.includes("price") || synthetiser.changed("price") ||
-							options?.fields?.includes("auctionPrice") || synthetiser.changed("auctionPrice")) {
-							
+						if (
+							options?.fields?.includes("price") ||
+							synthetiser.changed("price") ||
+							options?.fields?.includes("auctionPrice") ||
+							synthetiser.changed("auctionPrice")
+						) {
 							if (!options?.user) {
-								console.log("Pas d'utilisateur spécifié, mise à jour autorisée");
+								console.log(
+									"Pas d'utilisateur spécifié, mise à jour autorisée"
+								);
 								return;
 							}
-				
+
 							if (!synthetiser.userId) {
-								console.log("Pas de propriétaire défini, mise à jour autorisée");
+								console.log(
+									"Pas de propriétaire défini, mise à jour autorisée"
+								);
 								return;
 							}
-				
-							const owner = await sequelize.models.User.findByPk(synthetiser.userId);
+
+							const owner = await sequelize.models.User.findByPk(
+								synthetiser.userId
+							);
 							if (!owner) {
 								console.log("Propriétaire non trouvé, mise à jour autorisée");
 								return;
 							}
-				
+
 							if (options.user.id !== owner.id) {
 								throw new Error("Seul le propriétaire peut modifier le prix");
 							}
@@ -129,9 +132,7 @@ export const initModel = (sequelize, DataTypes) => {
 						console.error("Erreur dans beforeUpdate:", error);
 						throw error;
 					}
-				}
-				
-
+				},
 			},
 		}
 	);
@@ -139,34 +140,28 @@ export const initModel = (sequelize, DataTypes) => {
 	Synthetiser.associate = (models) => {
 		console.log("Modèles disponibles:", Object.keys(models));
 
-
-
-		 // Relation avec User
-		 if (models.User) {
+		if (models.User) {
 			Synthetiser.belongsTo(models.User, {
 				foreignKey: "userId",
-				as: "owner"
+				as: "owner",
 			});
 		}
 
-		// Relation avec AuctionPrice
 		if (models.AuctionPrice) {
 			Synthetiser.hasMany(models.AuctionPrice, {
 				foreignKey: "synthetiserId",
 				as: "auctionPrices",
+				onDelete: "CASCADE",
 			});
 		}
 
-
-		// Relation avec Post
 		if (models.Post) {
 			Synthetiser.hasMany(models.Post, {
 				foreignKey: "synthetiserId",
 				as: "posts",
+				onDelete: "CASCADE",
 			});
 		}
-
-
 	};
 
 	return Synthetiser;

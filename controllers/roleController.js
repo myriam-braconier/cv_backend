@@ -1,7 +1,7 @@
 import db from "../models/index.js";
 
 
-// Fonction pour obtenir tous les synthétiseurs
+// Fonction pour obtenir tous les roles
 export const getAllRoles = async (req, res) => {
     try {
         const roles = await db.Role.findAll();
@@ -11,7 +11,7 @@ export const getAllRoles = async (req, res) => {
     }
 };
 
-// Fonction pour créer un nouveau synthétiseur
+// Fonction pour créer un nouveau role
 export const createRole = async (req, res) => {
     try {
         const newRole = await db.Role.create(req.body);

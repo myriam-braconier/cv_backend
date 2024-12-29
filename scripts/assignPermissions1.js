@@ -24,8 +24,6 @@ const assignPermissionsToRoles = async () => {
                 where: {
                     name: [
                         'synths:read', 
-                        'synths:create', 
-                        'synths:update',
                         'users:read',
                         'users:update'
                     ]
@@ -50,9 +48,7 @@ const assignPermissionsToRoles = async () => {
                 where: {
                     name: [
                         'synths:read',
-                        'synths:create',
                         'synths:update',
-                        'synths:delete'
                     ]
                 }
             });
@@ -62,8 +58,16 @@ const assignPermissionsToRoles = async () => {
 
         // 5. Attribution pour le rôle OWNER_INSTr (toutes les permissions comme admin)
         const ownerRole = await db.Role.findOne({ where: { name: 'owner_instr' } });
+
         if (ownerRole) {
-            const ownerPermissions = await db.Permission.findAll();
+             const creatorPermissions = await db.Permission.findAll({
+                where: {
+                    name: [
+                        'synths:read',
+                        'synths:update',
+                    ]
+                }
+            });
             await ownerRole.setPermissions(ownerPermissions);
             console.log('✓ Permissions attribuées au rôle owner');
         }
@@ -74,6 +78,10 @@ const assignPermissionsToRoles = async () => {
         throw error;
     }
 };
+
+
+
+
 
 // Exécution du script
 if (import.meta.url === `file://${process.argv[1]}`) {

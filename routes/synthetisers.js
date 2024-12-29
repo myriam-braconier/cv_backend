@@ -4,8 +4,9 @@ import {
 	importData,
 	getAllSynthetisers,
 	createSynthetiser,
+	deleteSynthetiser,
 	getSynthetiser,
-	updateSynthetiserInfo,
+	updateSynthetiser,
 	addPost,
 	addAuction,
 } from "../controllers/synthetiserController.js";
@@ -22,15 +23,17 @@ router.get("/:id", authenticateToken, getSynthetiser);
 // routes de création
 router.post("/import", authenticateToken, importData);
 router.post("/", authenticateToken, createSynthetiser);
+// routes de destruction
+router.delete("/:id", authenticateToken, deleteSynthetiser);
 // Route pour ajouter un post
 router.post("/:id/posts", authenticateToken, addPost);
 
 // Route pour mettre à jour un synthétiseur
-router.put("/:id",  authenticateToken, updateSynthetiserInfo);
+router.put("/:id",  authenticateToken, updateSynthetiser);
 
 // sous-routes
-// les routes d'enchères comme sous-routes
-router.put("/:id/auctions", authenticateToken, addAuction); 
+//route pour encherir
+router.post("/:id/auctions", authenticateToken, addAuction); 
 
 
 export default router;

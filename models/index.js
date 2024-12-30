@@ -7,6 +7,8 @@ import path from "path";
 import dotenv from "dotenv";
 import config from "../config/config.js";
 
+import mysql2 from 'mysql2';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -28,14 +30,14 @@ const sequelizeConfig = {
 
 
 
-// Initialize Sequelize with SSL configuration for production
+// Initialize Sequelize with SSL configuration for production en ES6
 const sequelize = new Sequelize(
   process.env.DATABASE_URL || 
   `mysql://${sequelizeConfig.username}:${sequelizeConfig.password}@${sequelizeConfig.host}:${sequelizeConfig.port}/${sequelizeConfig.database}`,
   {
       ...sequelizeConfig,
-      dialect: 'mysql2', // Changer mysql en mysql2
-      dialectModule: require('mysql2'), // Ajouter le module mysql2
+      dialect: 'mysql2',
+      dialectModule: mysql2,
       logging: env === "development" ? console.log : false,
       dialectOptions: {
           ssl: {
@@ -44,7 +46,7 @@ const sequelize = new Sequelize(
           }
       },
       pool: {
-          max: 2, // Réduire la taille du pool pour l'environnement serverless
+          max: 2,
           min: 0,
           idle: 0,
           acquire: 3000,

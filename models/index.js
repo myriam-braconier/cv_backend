@@ -12,6 +12,10 @@ const __dirname = dirname(__filename);
 const env = process.env.NODE_ENV || "development";
 dotenv.config();
 
+
+
+
+
 // Création de l'instance Sequelize
 const sequelize = new Sequelize(
     config[env].database,

@@ -15,13 +15,9 @@ app.get('/api', (req, res) => {
     res.json({ message: 'API fonctionne' });
 });
 
+
 // Export pour Vercel
-export default async function handler(req, res) {
-    try {
-        await db.sequelize.authenticate();
-        return app(req, res);
-    } catch (error) {
-        console.error('Database connection failed:', error);
-        return res.status(500).json({ error: 'Database connection failed' });
-    }
+export default function handler(req, res) {
+    return app(req, res);
 }
+

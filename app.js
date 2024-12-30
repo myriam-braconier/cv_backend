@@ -13,10 +13,11 @@ const app = express();
 // Configuration CORS
 app.use(
 	cors({
-		origin: process.env.FRONTEND_URL || 'https://concrete-frontend.vercel.app',// L'URL de votre frontend Next.js
+		origin: [
+			 'https://concrete-frontend.vercel.app',
+			 'http://localhost:4000'
+		],
 		credentials: true,
-		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
 

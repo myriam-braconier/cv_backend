@@ -16,6 +16,7 @@ dotenv.config();
 
 // Determine environment and handle Vercel specific configuration
 const env = process.env.NODE_ENV || "development";
+
 const sequelizeConfig = {
   ...config[env],
   dialectModule: await import('mysql2'), // Important for Vercel deployment
@@ -30,27 +31,25 @@ const sequelizeConfig = {
 
 
 
-// Initialize Sequelize with SSL configuration for production en ES6
+// Configuration Sequelize optimisée pour Vercel et AWS RDS
 const sequelize = new Sequelize(
   process.env.DATABASE_URL || 
-  `mysql://${sequelizeConfig.username}:${sequelizeConfig.password}@${sequelizeConfig.host}:${sequelizeConfig.port}/${sequelizeConfig.database}`,
+  `mysql://${config[env].username}:${config[env].password}@${config[env].host}:${config[env].port}/${config[env].database}`,
   {
-      ...sequelizeConfig,
       dialect: 'mysql2',
       dialectModule: mysql2,
       logging: env === "development" ? console.log : false,
       dialectOptions: {
           ssl: {
-              require: true,
+              require: env === 'production',
               rejectUnauthorized: false
           }
       },
       pool: {
           max: 2,
           min: 0,
-          idle: 0,
-          acquire: 3000,
-          evict: 30000
+          acquire: 30000,
+          idle: 10000
       }
   }
 );
@@ -63,78 +62,47 @@ const db = {
 };
 
 // Chargement des modèles
-const modelFiles = readdirSync(__dirname)
-    .filter(file =>
-        file.indexOf('.') !== 0 &&
-        file !== 'index.js' &&
-        file.slice(-3) === '.js'
-    );
-
-// Import et initialisation des modèles
-for (const file of modelFiles) {
-    try {
 
 
-        if (env === "development") {
-            console.log(`Loading model from file: ${file}`);
+// Chargement des modèles de manière asynchrone
+for (const file of readdirSync(__dirname).filter(file => 
+  file.indexOf('.') !== 0 && 
+  file !== 'index.js' && 
+  file.slice(-3) === '.js'
+)) {
+  try {
+      const modelPath = new URL(file, import.meta.url).href;
+      const model = await import(modelPath);
+      const initFunction = model.default || model.initModel;
+      
+      if (typeof initFunction === 'function') {
+          const modelInstance = initFunction(sequelize, Sequelize.DataTypes);
+          if (modelInstance?.name) {
+              const modelName = modelInstance.name.charAt(0).toUpperCase() + 
+                              modelInstance.name.slice(1);
+              db[modelName] = modelInstance;
           }
-
-
-        const modelPath = `file://${path.join(__dirname, file)}`;
-        const model = await import(modelPath);
-        
-        const initFunction = model.default || model.initModel;
-        
-        if (typeof initFunction !== 'function') {
-            console.error(`⚠️ Le fichier ${file} n'a pas de fonction d'initialisation valide`);
-            continue;
-        }
-
-        const modelInstance = initFunction(sequelize, Sequelize.DataTypes);
-        
-        if (!modelInstance || !modelInstance.name) {
-            console.error(`⚠️ Le modèle dans ${file} n'a pas retourné une instance valide`);
-            console.log('Instance reçue:', modelInstance);
-            continue;
-        }
-
-        // Stockage du modèle dans db avec la première lettre en majuscule
-        const modelName = modelInstance.name.charAt(0).toUpperCase() + modelInstance.name.slice(1);
-        db[modelName] = modelInstance;
-
-        if (env === "development") {
-            console.log(`Successfully loaded model: ${modelName}`);
-          }
-
-
-
-    } catch (error) {
-        console.error(`❌ Erreur lors du chargement de ${file}:`, error);
-        if (env === "production") {
-            throw error;
-          }
-    }
+      }
+  } catch (error) {
+      if (env === "production") throw error;
+      console.error(`Error loading model ${file}:`, error);
+  }
 }
 
 // Associations
-Object.keys(db).forEach(modelName => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
+Object.values(db).forEach(model => {
+  if (model.associate) model.associate(db);
 });
 
 
 
 // Verify database connection
-try {
-    await sequelize.authenticate();
-    if (env === "development") {
-      console.log('Database connection established successfully.');
-    }
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-    throw error; // Critical error, should stop deployment
-  }
+// Vérification de la connexion
+await sequelize.authenticate()
+    .catch(error => {
+        console.error('Database connection failed:', error);
+        throw error;
+    });
 
 
 

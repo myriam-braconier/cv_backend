@@ -40,15 +40,16 @@ const sequelize = new Sequelize(
       dialectModule: mysql2,
       logging: env === "development" ? console.log : false,
       dialectOptions: {
-          ssl: {
-              require: env === 'production',
-              rejectUnauthorized: false
-          }
+        connectTimeout: 60000,
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
       },
       pool: {
           max: 2,
           min: 0,
-          acquire: 30000,
+          acquire: 60000,
           idle: 10000
       }
   }

@@ -9,20 +9,50 @@ import config from "../config/config.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const env = process.env.NODE_ENV || "development";
+
 dotenv.config();
 
+// Determine environment and handle Vercel specific configuration
+const env = process.env.NODE_ENV || "development";
+const sequelizeConfig = {
+  ...config[env],
+  dialectModule: await import('mysql2'), // Important for Vercel deployment
+  dialectOptions: {
+    ...config[env].dialectOptions,
+    ssl: env === "production" ? {
+      require: true,
+      rejectUnauthorized: false
+    } : false
+  }
+};
 
 
 
-
-// Création de l'instance Sequelize
+// Initialize Sequelize with SSL configuration for production
 const sequelize = new Sequelize(
-    config[env].database,
-    config[env].username,
-    config[env].password,
-    config[env]
+  process.env.DATABASE_URL || 
+  `mysql://${sequelizeConfig.username}:${sequelizeConfig.password}@${sequelizeConfig.host}:${sequelizeConfig.port}/${sequelizeConfig.database}`,
+  {
+      ...sequelizeConfig,
+      dialect: 'mysql2', // Changer mysql en mysql2
+      dialectModule: require('mysql2'), // Ajouter le module mysql2
+      logging: env === "development" ? console.log : false,
+      dialectOptions: {
+          ssl: {
+              require: true,
+              rejectUnauthorized: false
+          }
+      },
+      pool: {
+          max: 2, // Réduire la taille du pool pour l'environnement serverless
+          min: 0,
+          idle: 0,
+          acquire: 3000,
+          evict: 30000
+      }
+  }
 );
+
 
 // Initialisation de l'objet db
 const db = {
@@ -41,7 +71,13 @@ const modelFiles = readdirSync(__dirname)
 // Import et initialisation des modèles
 for (const file of modelFiles) {
     try {
-        console.log(`\nTraitement du fichier: ${file}`);
+
+
+        if (env === "development") {
+            console.log(`Loading model from file: ${file}`);
+          }
+
+
         const modelPath = `file://${path.join(__dirname, file)}`;
         const model = await import(modelPath);
         
@@ -63,9 +99,18 @@ for (const file of modelFiles) {
         // Stockage du modèle dans db avec la première lettre en majuscule
         const modelName = modelInstance.name.charAt(0).toUpperCase() + modelInstance.name.slice(1);
         db[modelName] = modelInstance;
-        console.log(`✓ Modèle ${modelName} chargé avec succès`);
+
+        if (env === "development") {
+            console.log(`Successfully loaded model: ${modelName}`);
+          }
+
+
+
     } catch (error) {
         console.error(`❌ Erreur lors du chargement de ${file}:`, error);
+        if (env === "production") {
+            throw error;
+          }
     }
 }
 
@@ -75,6 +120,22 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
+
+
+
+// Verify database connection
+try {
+    await sequelize.authenticate();
+    if (env === "development") {
+      console.log('Database connection established successfully.');
+    }
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+    throw error; // Critical error, should stop deployment
+  }
+
+
+
 
 // Export de l'objet db
 export default db;

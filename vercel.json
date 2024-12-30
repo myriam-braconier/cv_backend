@@ -1,9 +1,6 @@
 {
     "name": "Concrete Vibes",
     "version": "2",
-    "engines": {
-      "node": ">=14.0.0"
-    },
     "scripts": {
       "start": "node api/index.js",
       "build": "npm install"

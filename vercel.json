@@ -1,10 +1,13 @@
 {
-    "version": 2,
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "api/index.js"
-      }
-    ]
+    "name": "Concrete Vibes",
+    "version": "1.0.0",
+    "engines": {
+      "node": ">=14.0.0"
+    },
+    "scripts": {
+      "start": "node api/index.js",
+      "build": "npm install"
+    }
   }
+  
   

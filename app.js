@@ -51,6 +51,16 @@ app.use((req, res, next) => {
 	next();
 });
 
+// Handler pour favicon
+app.get('/favicon.ico', (req, res) => {
+    res.status(204).send();
+});
+
+app.get('/favicon.png', (req, res) => {
+    res.status(204).send();
+});
+
+
 // Importer les routes
 import authRoutes from "./routes/auth.js";
 import synthetiserRoutes from "./routes/synthetisers.js";

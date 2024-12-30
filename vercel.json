@@ -1,6 +1,15 @@
 {
-    "outputDirectory": ".",
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/api/index.js" }
+    "version": 2,
+    "builds": [
+      {
+        "src": "app.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "app.js"
+      }
     ]
   }

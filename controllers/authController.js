@@ -117,8 +117,9 @@ export const login = async (req, res) => {
     console.log('Route /login atteinte');
     console.log('Corps de la requête reçue:', req.body);
     console.log('Tentative de connexion pour:', req.body.email);
+    
     const { email, password } = req.body;
-
+    
     try {
         if (!email || !password) {
             console.log('Validation échouée - champs manquants');
@@ -127,16 +128,16 @@ export const login = async (req, res) => {
             });
         }
 
-        const user = await db.User.findOne({ 
+        const user = await db.User.findOne({
             where: { email },
             include: [{
                 model: db.Role,
                 as: 'role'
             }]
         });
-        
+       
         console.log('Utilisateur trouvé:', user ? 'Oui' : 'Non');
-        
+       
         if (!user) {
             return res.status(404).json({ message: "Utilisateur non trouvé." });
         }
@@ -146,12 +147,24 @@ export const login = async (req, res) => {
             return res.status(401).json({ message: "Mot de passe incorrect." });
         }
 
-        const token = jwt.sign({ 
+        const token = jwt.sign({
             userId: user.id,
             roleId: user.roleId,
             role: user.role ? user.role.name : null
-        }, process.env.JWT_SECRET, // ✅ Utiliser la même clé secrète partout
+        }, 
+        process.env.JWT_SECRET,
         { expiresIn: '24h' });
+
+        // Configuration du cookie sécurisé
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // true en production
+            sameSite: 'none',
+            maxAge: 24 * 60 * 60 * 1000, // 24 heures en millisecondes
+            path: '/'
+        });
+
+        console.log('Cookie token défini avec succès');
 
         res.status(200).json({
             message: "Connexion réussie",
@@ -161,6 +174,7 @@ export const login = async (req, res) => {
             email: user.email,
             role: user.role ? user.role.name : null
         });
+
     } catch (error) {
         console.error("Erreur lors de la connexion:", error);
         res.status(500).json({

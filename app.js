@@ -1,5 +1,6 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import cookieParser from 'cookie-parser';
 import dotenv from "dotenv";
 import cors from "cors";
 // Configuration
@@ -22,8 +23,8 @@ app.use(
 
 // Middleware global
 
+app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Middleware d'authentification
 export const authenticateToken = (req, res, next) => {

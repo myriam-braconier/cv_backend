@@ -12,7 +12,7 @@ const app = express();
 // Configuration CORS
 app.use(
 	cors({
-		origin: "https://concrete-frontend.vercel.app", // L'URL de votre frontend Next.js
+		origin: process.env.FRONTEND_URL || 'https://concrete-frontend.vercel.app',// L'URL de votre frontend Next.js
 		credentials: true,
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 		allowedHeaders: ["Content-Type", "Authorization"],

@@ -1,5 +1,6 @@
 import express from 'express';
 import db from '../models/index.js';
+import app from '../app.js';
 
 const app = express();
 app.use(express.json());

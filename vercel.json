@@ -1,4 +1,16 @@
 {
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app.js"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -22,16 +34,5 @@
       ]
     }
   ],
-  "builds": [
-    {
-      "src": "app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/app.js"
-    }
-  ]
+  "installCommand": "npm install"
 }

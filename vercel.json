@@ -1,10 +1,6 @@
 {
     "name": "Concrete Vibes",
     "version": "2",
-    "scripts": {
-      "start": "node api/index.js",
-      "build": "npm install"
-    },
     "rewrites": [
         {
           "source": "/(.*)",

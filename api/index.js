@@ -1,6 +1,7 @@
-import express from 'express';
+
 import db from '../models/index.js';
 import app from '../app.js';
+import express from 'express';
 
 
 // Vérifier que db est correctement importé

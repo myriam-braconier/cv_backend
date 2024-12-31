@@ -10,6 +10,7 @@ import {
 	updateSynthetiser,
 	addPost,
 	addAuction,
+	getLatestAuctionBySynthId
 } from "../controllers/synthetiserController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js"; // Import nommé
 const router = express.Router();

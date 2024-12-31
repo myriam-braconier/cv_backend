@@ -2,7 +2,6 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-import db from "../models/index.js";
 import dotenv from 'dotenv';
 
 
@@ -12,174 +11,167 @@ dotenv.config();
 
 const router = express.Router();
 
-// Route /me  pour utiliser Sequelize
-
-export const me = async (req, res) => {
-    try {
-        const user = await db.User.findOne({
-            where: { id: req.user.userId },
-            include: {
-                model: db.Role,
-                as: 'role',
-                attributes: ['name']
-            },
-            attributes: ['id', 'email', 'username'] // Exclure le password
-        });
-        
-        if (!user) {
-            return res.status(404).json({ message: 'Utilisateur non trouvé' });
-        }
-
-        res.json({
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            role: user.role ? user.role.name : null
-        });
-    } catch (err) {
-        console.error('Error in /auth/me:', err);
-        res.status(500).json({ message: 'Erreur serveur' });
-    }
-}
 
 
-export const register = async (req, res) => {
-    const { username, email, password, has_instrument } = req.body;
-   
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        
-        const result = await db.sequelize.transaction(async (t) => {
-            console.log('Données reçues:', { username, email, has_instrument });
+export const authController = {
+    // Login
+    login: async (req, res) => {
+        try {
+            const { email, password } = req.body;
 
-            const existingUser = await db.User.findOne({
-                where: {
-                    [db.Sequelize.Op.or]: [
-                        { email: email },
-                        { username: username }
-                    ]
-                }
-            });
-
-            if (existingUser) {
-                throw new Error('Un utilisateur avec cet email ou ce nom existe déjà');
+            // Vérifier si l'utilisateur existe
+            const user = await User.findOne({ where: { email } });
+            if (!user) {
+                return res.status(401).json({ message: "Email ou mot de passe incorrect" });
             }
 
-            const defaultRoleId = 1; // user
-            const creatorRoleId = 2; // creator
-            const roleId = has_instrument ? creatorRoleId : defaultRoleId;
-            
-            console.log('RoleId sélectionné:', roleId);
+            // Vérifier le mot de passe
+            const validPassword = await bcrypt.compare(password, user.password);
+            if (!validPassword) {
+                return res.status(401).json({ message: "Email ou mot de passe incorrect" });
+            }
 
-            const newUser = await db.User.create({
-                username,
+            // Créer le token
+            const token = jwt.sign(
+                { 
+                    id: user.id, 
+                    email: user.email, 
+                    name: user.username,
+                    role: user.role 
+                },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }
+            );
+
+            // Préparer les données utilisateur à renvoyer
+            const userData = {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                role: user.role
+            };
+
+            // Définir le cookie
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'None',
+                maxAge: 24 * 60 * 60 * 1000 // 24 heures
+            });
+
+            // Renvoyer la réponse
+            res.status(200).json({
+                message: "Connexion réussie",
+                user: userData,
+                token
+            });
+
+        } catch (error) {
+            console.error('Erreur de connexion:', error);
+            res.status(500).json({ message: "Erreur lors de la connexion" });
+        }
+    },
+
+    // Vérification du token
+    verify: async (req, res) => {
+        try {
+            // Le middleware authenticateToken a déjà vérifié le token
+            const user = await User.findByPk(req.user.id, {
+                attributes: ['id', 'email', 'username', 'role']
+            });
+
+            if (!user) {
+                return res.status(404).json({ message: "Utilisateur non trouvé" });
+            }
+
+            res.status(200).json({ 
+                valid: true, 
+                user 
+            });
+
+        } catch (error) {
+            console.error('Erreur de vérification:', error);
+            res.status(500).json({ message: "Erreur lors de la vérification" });
+        }
+    },
+
+    // Déconnexion
+    logout: async (req, res) => {
+        try {
+            res.clearCookie('token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'None'
+            });
+
+            res.status(200).json({ message: "Déconnexion réussie" });
+
+        } catch (error) {
+            console.error('Erreur de déconnexion:', error);
+            res.status(500).json({ message: "Erreur lors de la déconnexion" });
+        }
+    },
+
+    // Inscription
+    register: async (req, res) => {
+        try {
+            const { email, password, username } = req.body;
+
+            // Vérifier si l'utilisateur existe déjà
+            const existingUser = await User.findOne({ where: { email } });
+            if (existingUser) {
+                return res.status(400).json({ message: "Cet email est déjà utilisé" });
+            }
+
+            // Hasher le mot de passe
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            // Créer l'utilisateur
+            const user = await User.create({
                 email,
                 password: hashedPassword,
-                has_instrument: has_instrument || false,
-                roleId: roleId,
-                isActive: true
-            }, { 
-                transaction: t,
+                username,
+                role: ['user'] // rôle par défaut
             });
 
-            console.log('Nouvel utilisateur créé:', {
-                id: newUser.id,
-                username: newUser.username,
-                roleId: newUser.roleId,
-                hasInstrument: newUser.has_instrument
+            // Créer le token
+            const token = jwt.sign(
+                { 
+                    id: user.id, 
+                    email: user.email, 
+                    role: user.role 
+                },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }
+            );
+
+            // Préparer les données utilisateur
+            const userData = {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                role: user.role
+            };
+
+            // Définir le cookie
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'None',
+                maxAge: 24 * 60 * 60 * 1000
             });
 
-            return newUser;
-        });
+            res.status(201).json({
+                message: "Inscription réussie",
+                user: userData,
+                token
+            });
 
-        return res.status(201).json({
-            message: "Utilisateur créé avec succès",
-            userId: result.id,
-            username: result.username,
-            hasInstrument: result.has_instrument
-        });
-
-    } catch (error) {
-        console.error('Erreur:', error);
-        if (error.message.includes('existe déjà')) {
-            return res.status(409).json({ message: error.message });
+        } catch (error) {
+            console.error('Erreur d\'inscription:', error);
+            res.status(500).json({ message: "Erreur lors de l'inscription" });
         }
-        return res.status(500).json({
-            message: "Erreur lors de la création de l'utilisateur",
-            error: error.message
-        });
     }
 };
 
-
-// Route de connexion
-export const login = async (req, res) => {
-    console.log('Route /login atteinte');
-    console.log('Corps de la requête reçue:', req.body);
-    console.log('Tentative de connexion pour:', req.body.email);
-    
-    const { email, password } = req.body;
-    
-    try {
-        if (!email || !password) {
-            console.log('Validation échouée - champs manquants');
-            return res.status(400).json({
-                message: "Email et mot de passe sont requis."
-            });
-        }
-
-        const user = await db.User.findOne({
-            where: { email },
-            include: [{
-                model: db.Role,
-                as: 'role'
-            }]
-        });
-       
-        console.log('Utilisateur trouvé:', user ? 'Oui' : 'Non');
-       
-        if (!user) {
-            return res.status(404).json({ message: "Utilisateur non trouvé." });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: "Mot de passe incorrect." });
-        }
-
-        const token = jwt.sign({
-            userId: user.id,
-            roleId: user.roleId,
-            role: user.role ? user.role.name : null
-        }, 
-        process.env.JWT_SECRET,
-        { expiresIn: '24h' });
-
-        // Configuration du cookie sécurisé
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // true en production
-            sameSite: 'none',
-            maxAge: 24 * 60 * 60 * 1000, // 24 heures en millisecondes
-            path: '/'
-        });
-
-        console.log('Cookie token défini avec succès');
-
-        res.status(200).json({
-            message: "Connexion réussie",
-            token,
-            userId: user.id,
-            username: user.username,
-            email: user.email,
-            role: user.role ? user.role.name : null
-        });
-
-    } catch (error) {
-        console.error("Erreur lors de la connexion:", error);
-        res.status(500).json({
-            message: "Erreur interne du serveur lors de la connexion."
-        });
-    }
-}
-
+export default authController;

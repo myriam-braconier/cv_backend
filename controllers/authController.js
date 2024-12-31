@@ -1,19 +1,16 @@
 // controllers/authController.js
-import express from "express";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { User } from '../models/User.js';  
 
 
 
 // Configuration de dotenv
 dotenv.config();
 
-const router = express.Router();
 
-
-
-export const authController = {
+const authController = {
     // Login
     login: async (req, res) => {
         try {

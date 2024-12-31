@@ -7,6 +7,18 @@
   ],
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "/app.js"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "/app.js"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/app.js"
+    },
+    {
       "source": "/(.*)",
       "destination": "/app.js"
     }

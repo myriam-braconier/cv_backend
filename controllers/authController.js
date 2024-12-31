@@ -42,11 +42,17 @@ export const authController = {
                 role: user.role
             };
 
+
+// Définir les headers CORS explicitement avant de définir le cookie
+res.header('Access-Control-Allow-Origin', 'https://concrete-frontend.vercel.app');
+res.header('Access-Control-Allow-Credentials', 'true');
+
+
             // Définir le cookie
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true, // Important pour SameSite=None
-                sameSite: 'None',
+                sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000, // 24 heures
                 path: '/' // S'assurer que le cookie est disponible sur tout le site
             });
@@ -92,11 +98,16 @@ export const authController = {
         try {
 
 
+             // Configuration identique pour supprimer le cookie
+        res.header('Access-Control-Allow-Origin', 'https://concrete-frontend.vercel.app');
+        res.header('Access-Control-Allow-Credentials', 'true');
+
+
 
              res.cookie('token', '', {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'None',
+                sameSite: 'none',
                 maxAge: 0,
                 path: '/'
             });
@@ -154,7 +165,7 @@ export const authController = {
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
+                sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000
             });
 

@@ -185,7 +185,7 @@ export const deleteSynthetiser = async (req, res) => {
 
 		// Vérifier le rôle de l'utilisateur
 		const userRole = req.user.role;
-		if (userRole !== "admin") {
+		if (userRole !== 2) {
 			return res.status(403).json({
 				error: "Non autorisé",
 				message: "Seuls les administrateurs peuvent supprimer un synthétiseur",

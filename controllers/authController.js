@@ -68,7 +68,11 @@ const authController = {
         try {
             // Le middleware authenticateToken a déjà vérifié le token
             const user = await db.User.findByPk(req.user.id, {
-                attributes: ['id', 'email', 'username', 'roleId']
+                attributes: ['id', 'email', 'username', 'roleId'],
+                include: [{
+                    model: db.Role,
+                    attributes: ['name']
+                }]
             });
 
             if (!user) {
@@ -77,7 +81,10 @@ const authController = {
 
             res.status(200).json({ 
                 valid: true, 
-                user 
+                user: {
+                    ...user.get(),
+                    role: user.Role.name
+                }
             });
 
         } catch (error) {

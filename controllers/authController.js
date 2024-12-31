@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { User } from '../models/User.js';  
+import db from "../models/index.js";
 
 
 
@@ -17,7 +17,7 @@ const authController = {
             const { email, password } = req.body;
 
             // Vérifier si l'utilisateur existe
-            const user = await User.findOne({ where: { email } });
+            const user = await db.User.findOne({ where: { email } });
             if (!user || !await bcrypt.compare(password, user.password)) {
                 return res.status(401).json({ message: "Email ou mot de passe incorrect" });
             }
@@ -67,7 +67,7 @@ const authController = {
     verify: async (req, res) => {
         try {
             // Le middleware authenticateToken a déjà vérifié le token
-            const user = await User.findByPk(req.user.id, {
+            const user = await db.User.findByPk(req.user.id, {
                 attributes: ['id', 'email', 'username', 'role']
             });
 
@@ -119,7 +119,7 @@ const authController = {
             const { email, password, username } = req.body;
 
             // Vérifier si l'utilisateur existe déjà
-            const existingUser = await User.findOne({ where: { email } });
+            const existingUser = await db.User.findOne({ where: { email } });
             if (existingUser) {
                 return res.status(400).json({ message: "Cet email est déjà utilisé" });
             }
@@ -128,7 +128,7 @@ const authController = {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             // Créer l'utilisateur
-            const user = await User.create({
+            const user = await db.User.create({
                 email,
                 password: hashedPassword,
                 username,

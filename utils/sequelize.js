@@ -14,13 +14,15 @@ const sequelize = new Sequelize({
     host: dbConfig.host,
     dialect: dbConfig.dialect,
     pool: {
-        max: env === "production" ? 5 : 10, // Plus de connexions en dev
+        max: env === "production" ? 2 : 10, // Plus de connexions en dev
         min: 0,
-        acquire: 30000,
-        idle: 10000
+        acquire: 60000,
+        idle: 5000,
+		evict: 1000 // vérifie les connexions inactives toutes les secondes
     },
     logging: env === "development" ? console.log : false, // Logs SQL uniquement en dev
     dialectOptions: {
+		connectTimeout: 60000, // Timeout de connexion plus long
         ssl: env === "production" ? {
             require: true,
             rejectUnauthorized: false

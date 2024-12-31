@@ -45,7 +45,7 @@ const authController = {
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true, // Important pour SameSite=None
-                sameSite: 'None',
+                sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000, // 24 heures
                 path: '/' // S'assurer que le cookie est disponible sur tout le site
             });
@@ -100,7 +100,7 @@ const authController = {
              res.cookie('token', '', {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'None',
+                sameSite: 'none',
                 maxAge: 0,
                 path: '/'
             });
@@ -157,9 +157,10 @@ const authController = {
             // Définir le cookie
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
-                maxAge: 24 * 60 * 60 * 1000
+                secure: true,  // Toujours true quand sameSite est 'None'
+                sameSite: 'none',
+                maxAge: 24 * 60 * 60 * 1000,
+                path: '/'
             });
 
             res.status(201).json({

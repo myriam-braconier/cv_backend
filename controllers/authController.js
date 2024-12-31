@@ -43,10 +43,6 @@ export const authController = {
             };
 
 
-// Définir les headers CORS explicitement avant de définir le cookie
-res.header('Access-Control-Allow-Origin', 'https://concrete-frontend.vercel.app');
-res.header('Access-Control-Allow-Credentials', 'true');
-
 
             // Définir le cookie
             res.cookie('token', token, {

@@ -26,7 +26,7 @@ const authController = {
             // Créer le token
           
             const token = jwt.sign(
-                { id: user.id, email: user.email, role: user.role },
+                { id: user.id, email: user.email, roleId: user.roleId },
                 process.env.JWT_SECRET,
                 { expiresIn: '24h' }
             );
@@ -36,7 +36,7 @@ const authController = {
                 id: user.id,
                 email: user.email,
                 username: user.username,
-                role: user.role
+                roleId: user.roleId
             };
 
 
@@ -68,7 +68,7 @@ const authController = {
         try {
             // Le middleware authenticateToken a déjà vérifié le token
             const user = await db.User.findByPk(req.user.id, {
-                attributes: ['id', 'email', 'username', 'role']
+                attributes: ['id', 'email', 'username', 'roleId']
             });
 
             if (!user) {
@@ -132,7 +132,7 @@ const authController = {
                 email,
                 password: hashedPassword,
                 username,
-                role: ['user'] // rôle par défaut
+                roleId: ['user'] // rôle par défaut
             });
 
             // Créer le token

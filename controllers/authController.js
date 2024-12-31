@@ -138,7 +138,7 @@ const authController = {
                 email,
                 password: hashedPassword,
                 username,
-                roleId: ['user'] // rôle par défaut
+                roleId: 1// rôle par défaut
             });
 
             // Créer le token
@@ -146,7 +146,7 @@ const authController = {
                 { 
                     id: user.id, 
                     email: user.email, 
-                    role: user.role 
+                    roleId: user.roleId
                 },
                 process.env.JWT_SECRET,
                 { expiresIn: '24h' }
@@ -157,7 +157,8 @@ const authController = {
                 id: user.id,
                 email: user.email,
                 username: user.username,
-                role: user.role
+                roleId: user.roleId
+
             };
 
             // Définir le cookie

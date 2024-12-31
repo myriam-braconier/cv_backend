@@ -1,6 +1,6 @@
 // routes/auth.js
 import express from "express";
-import { register, login, me } from '../controllers/authController.js';
+import { register, login, verify, logout } from '../controllers/authController.js';
 import dotenv from 'dotenv';
 import { authenticateToken } from '../middleware/authMiddleware.js';
 

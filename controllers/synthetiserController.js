@@ -184,7 +184,7 @@ export const deleteSynthetiser = async (req, res) => {
 		}
 
 		// Vérifier le rôle de l'utilisateur
-		const userRole = req.user.role;
+		const userRole = req.user.roleId;
 		if (userRole !== 2) {
 			return res.status(403).json({
 				error: "Non autorisé",
@@ -202,10 +202,7 @@ export const deleteSynthetiser = async (req, res) => {
 		}
 
 		// Supprimer le synthétiseur et ses relations
-		await existingSynth.destroy({
-			where: { id: id },
-			force: true, // Suppression physique
-		});
+		await existingSynth.destroy();
 
 		res.status(200).json({
 			message: "Synthétiseur supprimé avec succès",

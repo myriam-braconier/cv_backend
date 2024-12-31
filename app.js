@@ -19,7 +19,13 @@ if (!jwtSecret) {
 const allowedOrigins = ['https://concrete-frontend.vercel.app', 'http://localhost:4000', 'http://localhost:3000'];
 
 app.use(cors({
-    origin: ['https://concrete-frontend.vercel.app', 'http://localhost:3000'],
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -29,13 +35,47 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
+// Configuration des headers pour les cookies
+app.use((req, res, next) => {
+    // Vérifier si l'origine est dans la liste des origines autorisées
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
+    
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Max-Age', '86400'); // 24 heures
+    
+    // Gérer les requêtes OPTIONS préliminaires
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
+
+
+
+
 // Middleware d'authentification
 export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
+
+    // Si pas de token dans le header, vérifier dans les cookies
+    if (!token && req.cookies) {
+        token = req.cookies.token;
+    }
+
     if (!token) {
         return res.status(401).json({ error: "No token provided" });
     }
+
+
+
+
+
     jwt.verify(token, jwtSecret, (err, user) => {
         if (err) {
             return res.status(403).json({ error: "Invalid token" });

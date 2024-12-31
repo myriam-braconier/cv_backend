@@ -71,6 +71,7 @@ const authController = {
                 attributes: ['id', 'email', 'username', 'roleId'],
                 include: [{
                     model: db.Role,
+                    as: 'role', // ajout de l'alias
                     attributes: ['name']
                 }]
             });

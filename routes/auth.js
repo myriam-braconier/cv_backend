@@ -10,8 +10,8 @@ dotenv.config();
 const router = express.Router();
 
 
-router.post('/register', register);
-router.post('/login', login);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
 
 
 export default router;

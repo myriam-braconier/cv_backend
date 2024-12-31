@@ -15,10 +15,10 @@ const sequelize = new Sequelize(
 		host: dbConfig.host,
 		dialect: dbConfig.dialect,
 		pool: {
-            max: 5,
-            min: 0,
-            acquire: 30000,
-            idle: 10000
+            max: 5,// nbre max de connexion dans le pool
+            min: 0, // nombre minimum
+            acquire: 30000, // temps maximum en ms pour obtenir une connexion
+            idle: 10000 // temp max en ms qu'un connexion peut-être inactive
         }
 		
 	}

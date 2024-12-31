@@ -87,9 +87,12 @@ const authController = {
                 }
             });
 
+            await sequelize.connectionManager.close(); // Fermeture ici
+
         } catch (error) {
             console.error('Erreur de vérification:', error);
             res.status(500).json({ message: "Erreur lors de la vérification" });
+            await sequelize.connectionManager.close(); // Fermeture ici
         }
     },
 

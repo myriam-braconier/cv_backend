@@ -14,7 +14,7 @@ const sequelize = new Sequelize({
     host: dbConfig.host,
     dialect: dbConfig.dialect,
     pool: {
-        max: env === "production" ? 2 : 10, // Plus de connexions en dev
+        max: 2,
         min: 0,
         acquire: 60000,
         idle: 5000,
@@ -29,6 +29,21 @@ const sequelize = new Sequelize({
         } : false
     }
 });
+
+
+// Fermeture propre des connexions
+process.on('SIGTERM', async () => {
+    try {
+        await sequelize.close();
+        console.log('Connexions fermées');
+        process.exit(0);
+    } catch (err) {
+        console.error('Erreur lors de la fermeture des connexions:', err);
+        process.exit(1);
+    }
+});
+
+
 
 // Une seule fonction de test de connexion
 const initializeDatabase = async () => {

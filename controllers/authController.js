@@ -52,7 +52,7 @@ res.header('Access-Control-Allow-Credentials', 'true');
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true, // Important pour SameSite=None
-                sameSite: 'none',
+                sameSite: 'None',
                 maxAge: 24 * 60 * 60 * 1000, // 24 heures
                 path: '/' // S'assurer que le cookie est disponible sur tout le site
             });
@@ -107,7 +107,7 @@ res.header('Access-Control-Allow-Credentials', 'true');
              res.cookie('token', '', {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'none',
+                sameSite: 'None',
                 maxAge: 0,
                 path: '/'
             });
@@ -165,7 +165,7 @@ res.header('Access-Control-Allow-Credentials', 'true');
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'none',
+                sameSite: 'None',
                 maxAge: 24 * 60 * 60 * 1000
             });
 

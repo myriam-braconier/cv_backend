@@ -82,10 +82,7 @@ const authController = {
 
             res.status(200).json({ 
                 valid: true, 
-                user: {
-                    ...user.get(),
-                    role: user.Role?.name
-                }
+                user
             });
 
 

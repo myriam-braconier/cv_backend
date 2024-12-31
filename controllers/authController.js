@@ -21,24 +21,15 @@ export const authController = {
 
             // Vérifier si l'utilisateur existe
             const user = await User.findOne({ where: { email } });
-            if (!user) {
+            if (!user || !await bcrypt.compare(password, user.password)) {
                 return res.status(401).json({ message: "Email ou mot de passe incorrect" });
             }
 
-            // Vérifier le mot de passe
-            const validPassword = await bcrypt.compare(password, user.password);
-            if (!validPassword) {
-                return res.status(401).json({ message: "Email ou mot de passe incorrect" });
-            }
 
             // Créer le token
+          
             const token = jwt.sign(
-                { 
-                    id: user.id, 
-                    email: user.email, 
-                    name: user.username,
-                    role: user.role 
-                },
+                { id: user.id, email: user.email, role: user.role },
                 process.env.JWT_SECRET,
                 { expiresIn: '24h' }
             );
@@ -54,9 +45,10 @@ export const authController = {
             // Définir le cookie
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
+                secure: true, // Important pour SameSite=None
                 sameSite: 'None',
-                maxAge: 24 * 60 * 60 * 1000 // 24 heures
+                maxAge: 24 * 60 * 60 * 1000, // 24 heures
+                path: '/' // S'assurer que le cookie est disponible sur tout le site
             });
 
             // Renvoyer la réponse
@@ -98,10 +90,15 @@ export const authController = {
     // Déconnexion
     logout: async (req, res) => {
         try {
-            res.clearCookie('token', {
+
+
+
+             res.cookie('token', '', {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None'
+                secure: true,
+                sameSite: 'None',
+                maxAge: 0,
+                path: '/'
             });
 
             res.status(200).json({ message: "Déconnexion réussie" });

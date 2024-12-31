@@ -71,6 +71,7 @@ const authController = {
                 attributes: ['id', 'email', 'username', 'roleId'],
                 include: [{
                     model: db.Role,
+                    as: 'Role', // ajout de l'alias
                     attributes: ['name']
                 }]
             });
@@ -83,16 +84,14 @@ const authController = {
                 valid: true, 
                 user: {
                     ...user.get(),
-                    role: user.Role.name
+                    role: user.Role?.name
                 }
             });
 
-            await sequelize.connectionManager.close(); // Fermeture ici
 
         } catch (error) {
             console.error('Erreur de vérification:', error);
             res.status(500).json({ message: "Erreur lors de la vérification" });
-            await sequelize.connectionManager.close(); // Fermeture ici
         }
     },
 

@@ -174,6 +174,58 @@ export const createSynthetiser = async (req, res) => {
 	}
   };
   
+  export const duplicateSynthetiser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        // Vérifier si l'utilisateur est authentifié
+        if (!req.user) {
+            return res.status(401).json({ error: "Non authentifié" });
+        }
+
+        // Vérifier le rôle de l'utilisateur
+        const userRole = req.user.roleId;
+        if (userRole !== 2) {
+            return res.status(403).json({
+                error: "Non autorisé",
+                message: "Seuls les administrateurs peuvent dupliquer un synthétiseur"
+            });
+        }
+
+        // Récupérer le synthétiseur original
+        const originalSynth = await db.Synthetiser.findByPk(id);
+        if (!originalSynth) {
+            return res.status(404).json({
+                error: "Synthétiseur non trouvé",
+                details: `Aucun synthétiseur trouvé avec l'ID ${id}`
+            });
+        }
+
+        // Créer une copie du synthétiseur
+        const duplicatedSynth = await db.Synthetiser.create({
+            marque: originalSynth.marque,
+            modele: `${originalSynth.modele} (copie)`,
+            specifications: originalSynth.specifications,
+            image_url: originalSynth.image_url,
+            note: originalSynth.note,
+            nb_avis: originalSynth.nb_avis,
+            price: originalSynth.price,
+            userId: req.user.id
+        });
+
+        res.status(201).json({
+            message: "Synthétiseur dupliqué avec succès",
+            data: duplicatedSynth
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la duplication:", error);
+        res.status(500).json({
+            error: "Erreur lors de la duplication du synthétiseur",
+            details: error.message
+        });
+    }
+};
+
 
 export const deleteSynthetiser = async (req, res) => {
 	const { id } = req.params;

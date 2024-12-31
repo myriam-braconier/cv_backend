@@ -4,6 +4,7 @@ import {
 	importData,
 	getAllSynthetisers,
 	createSynthetiser,
+	duplicateSynthetiser,
 	deleteSynthetiser,
 	getSynthetiser,
 	updateSynthetiser,
@@ -11,29 +12,30 @@ import {
 	addAuction,
 } from "../controllers/synthetiserController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js"; // Import nommé
-
 const router = express.Router();
 
 router.use(authenticateToken); // Utilisation du middleware sur toutes les routes
 
-// routes de lecture
-router.get("/", authenticateToken, getAllSynthetisers);
-router.get("/:id", authenticateToken, getSynthetiser);
 
-// routes de création
 router.post("/import", authenticateToken, importData);
-router.post("/", authenticateToken, createSynthetiser);
-// routes de destruction
-router.delete("/:id", authenticateToken, deleteSynthetiser);
-// Route pour ajouter un post
-router.post("/:id/posts", authenticateToken, addPost);
 
-// Route pour mettre à jour un synthétiseur
-router.put("/:id",  authenticateToken, updateSynthetiser);
+// Routes publiques
+router.get('/', getAllSynthetisers);
+router.get('/:id', getSynthetiser);
 
-// sous-routes
-//route pour encherir
-router.post("/:id/auctions", authenticateToken, addAuction); 
+// Routes protégées nécessitant une authentification
+router.post('/', authenticateToken, createSynthetiser);
+router.put('/:id', authenticateToken, updateSynthetiser);
+router.delete('/:id', authenticateToken, deleteSynthetiser);
 
+// Routes pour les enchères
+router.post('/:id/auctions', authenticateToken, addAuction);
+router.get('/:id/auctions/latest', getLatestAuctionBySynthId);
+
+// Routes pour les posts
+router.post('/:id/posts', authenticateToken, addPost);
+
+// Route pour la duplication (admin uniquement)
+router.post('/:id/duplicate', authenticateToken, duplicateSynthetiser);
 
 export default router;

@@ -30,14 +30,23 @@ const config = {
     },
     production: {
         username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
-        host: process.env.DB_HOST,
-        port: 3306,
-        dialect: process.env.DB_DIALECT || 'mysql',
-        dialectOptions: {
-            connectTimeout: 30000
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    port: 3306,
+    dialect: 'mysql',
+    pool: {
+        max: 2,           // Réduit pour les fonctions serverless
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    dialectOptions: {
+        connectTimeout: 60000,
+        ssl: {
+            rejectUnauthorized: true
         }
+    }
     }
 };
 

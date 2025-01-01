@@ -1,5 +1,6 @@
 import { importJsonData } from "../utils/importService.js";
 import db from "../models/index.js";
+import { AuctionPrice } from '../models/AuctionPrice.js'; 
 
 // Fonction pour importer des données JSON dans la base de données
 export const importData = async (req, res) => {
@@ -452,7 +453,7 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 
 		const latestAuction = await AuctionPrice.findOne({
 			where: {
-				synthetiserId: synthetiserId,
+				synthetiserId: synthId,
 				status: "active",
 			},
 			order: [

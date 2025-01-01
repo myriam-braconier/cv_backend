@@ -14,11 +14,10 @@ const sequelize = new Sequelize({
     host: dbConfig.host,
     dialect: dbConfig.dialect,
     pool: {
-        max: 2,
+        max: 5,
         min: 0,
-        acquire: 60000,
-        idle: 5000,
-		evict: 1000 // vérifie les connexions inactives toutes les secondes
+        acquire: 30000,
+        idle: 10000,
     },
     logging: env === "development" ? console.log : false, // Logs SQL uniquement en dev
     dialectOptions: {

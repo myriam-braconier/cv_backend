@@ -1,44 +1,39 @@
 import db from "../models/index.js";
-const { AuctionPrice } = db;
+
+
 
 
 
 export const getLatestAuctionBySynthId = async (req, res) => {
- try {
-  const synthetiserId = parseInt(req.params.id, 10); // Conversion en nombre
+  try {
+    const synthId = req.params.synthId; // ou req.query.synthId selon votre route
+    
+    const latestAuction = await AuctionPrice.findOne({
+      where: { synthId },
+      order: [['createdAt', 'DESC']]
+    });
 
-  if (!synthetiserId || isNaN(synthetiserId)) {
-    return res.status(400).json({ 
-      message: "ID du synthétiseur invalide" 
+    if (!latestAuction) {
+      return res.status(404).json({
+        success: false,
+        message: 'Aucune enchère trouvée pour ce synthétiseur'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: latestAuction
+    });
+
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\'enchère:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération de l\'enchère',
+      error: error.message
     });
   }
-
-   const latestAuction = await AuctionPrice.findOne({
-     where: { 
-       synthetiserId: synthetiserId,
-       status: 'active'
-     },
-     order: [
-       ['proposal_price', 'DESC'],
-       ['createdAt', 'DESC']
-     ],
-   });
-
-   if (!latestAuction) {
-     return res.status(404).json({ 
-       message: "Aucune enchère trouvée pour ce synthétiseur" 
-     });
-   }
-
-   res.json(latestAuction);
-
- } catch (error) {
-   console.error('Erreur lors de la récupération de l\'enchère:', error);
-   res.status(500).json({ 
-     message: "Erreur serveur lors de la récupération de l'enchère" 
-   });
- }
-};
+};  
 
 // controllers/auctionController.js
 export const createAuction = async (req, res) => {

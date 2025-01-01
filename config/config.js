@@ -1,7 +1,15 @@
-import dotenv from "dotenv";
-dotenv.config();
+import { fileURLToPath } from "url";
+import { dirname } from 'path';
+import path from "path";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Charger le bon fichier .env selon l'environnement
 const env = process.env.NODE_ENV || 'development';
+dotenv.config({
+    path: path.resolve(__dirname, `../.env.${env}`)
+});
 
 // Configuration Debug
 console.log('====== Config Debug ======');

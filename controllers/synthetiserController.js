@@ -442,36 +442,25 @@ export const updatePrice = async (req, res) => {
 };
 
 export const getLatestAuctionBySynthId = async (req, res) => {
-	try {
-		const synthetiserId = parseInt(req.params.id, 10); // Conversion en nombre
-
-		if (!synthetiserId || isNaN(synthetiserId)) {
-			return res.status(400).json({
-				message: "ID du synthétiseur invalide",
-			});
-		}
-
-		const latestAuction = await db.AuctionPrice.findOne({
-			where: {
-				synthetiserId: synthId,
-				status: "active",
-			},
-			order: [
-				["proposal_price", "DESC"],
-				["createdAt", "DESC"],
-			],
-		});
-
-		if (!latestAuction) {
-			return res.status(404).json({
-				message: "Aucune enchère trouvée pour ce synthétiseur",
-			});
-		}
-
-		return res.json(latestAuction);
+    try {
+        const synthetiserId = parseInt(req.params.id, 10);
+        console.log('ID recherché:', synthetiserId);
+        
+        const latestAuction = await db.AuctionPrice.findOne({
+            where: { synthetiserId, status: "active" },
+            order: [["proposal_price", "DESC"], ["createdAt", "DESC"]]
+        });
+        
+        console.log('Enchère trouvée:', latestAuction);
+        
+        if (!latestAuction) {
+            return res.status(404).json({ message: "Aucune enchère trouvée" });
+        }
+        
+        return res.status(200).json(latestAuction);
     } catch (error) {
-        console.error("Erreur lors de la récupération de l'enchère:", error);
-        throw error;
+        console.error(error);
+        return res.status(500).json({ message: error.message });
     }
 };
 

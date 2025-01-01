@@ -4,9 +4,18 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 
+console.log('=================================');
+console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
+console.log(`📦 Database: ${process.env.DB_HOST}`);
+console.log('=================================');
+
+
 // Configuration
 dotenv.config();
 const app = express();
+
+
+
 const jwtSecret = process.env.JWT_SECRET;
 
 // Vérifier la présence de JWT_SECRET
@@ -120,9 +129,9 @@ app.use((err, req, res, next) => {
 });
 
 // Démarrage du serveur
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.NODE_ENV === 'development' ? 4000 : 3306;
 app.listen(PORT, () => {
-    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
 
 export default app;

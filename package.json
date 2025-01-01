@@ -5,8 +5,9 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "dev": "nodemon index.js",
-        "build": "echo 'No build required'"
+        "start": "node app.js",
+       "dev": "set NODE_ENV=development&& node app.js",
+    "prod": "set NODE_ENV=production&& node app.js"
     },
     "keywords": [
         "electronic",

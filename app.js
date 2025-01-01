@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import initWebSocket from './websocket/server';
 
 console.log('=================================');
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
@@ -133,5 +134,6 @@ const PORT = process.env.NODE_ENV === 'development' ? 4000 : 3306;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+initWebSocket();
 
 export default app;

@@ -457,7 +457,10 @@ export const getLatestAuctionBySynthId = async (req, res) => {
             return res.status(404).json({ message: "Aucune enchère trouvée" });
         }
         
-        return res.status(200).json(latestAuction);
+		return res.status(200).json({
+			...latestAuction.toJSON(),
+			createdAt: latestAuction.createdAt,
+		});
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: error.message });

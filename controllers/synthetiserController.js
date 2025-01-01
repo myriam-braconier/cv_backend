@@ -468,7 +468,7 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 			});
 		}
 
-		return latestAuction;
+		return res.json(latestAuction);
     } catch (error) {
         console.error("Erreur lors de la récupération de l'enchère:", error);
         throw error;

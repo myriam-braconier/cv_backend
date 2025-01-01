@@ -14,7 +14,6 @@ const __dirname = dirname(__filename);
 dotenv.config();
 
 const env = process.env.NODE_ENV || "development";
-let sequelize;
 
 // Configuration de base optimisée
 const defaultConfig = {
@@ -36,26 +35,12 @@ const defaultConfig = {
     }
 };
 
-// Initialisation de Sequelize avec gestion des connexions
-try {
-    sequelize = new Sequelize(
-        process.env.DATABASE_URL || 
-        `mysql://${config[env].username}:${config[env].password}@${config[env].host}:${config[env].port}/${config[env].database}`,
-        {
-            ...defaultConfig,
-            hooks: {
-                beforeConnect: async () => {
-                    if (sequelize?.connectionManager?.pool) {
-                        await sequelize.connectionManager.pool.clear();
-                    }
-                }
-            }
-        }
-    );
-} catch (error) {
-    console.error('Sequelize initialization error:', error);
-    throw error;
-}
+// Création de l'instance Sequelize
+const sequelize = new Sequelize(
+    process.env.DATABASE_URL || 
+    `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT || 3306}/${process.env.DB_DATABASE}`,
+    defaultConfig
+);
 
 // Initialisation de l'objet db
 const db = {
@@ -63,7 +48,7 @@ const db = {
     Sequelize
 };
 
-// Chargement des modèles de manière asynchrone avec gestion d'erreurs améliorée
+// Chargement des modèles
 try {
     const modelFiles = readdirSync(__dirname).filter(file =>
         file.indexOf('.') !== 0 &&
@@ -105,26 +90,41 @@ try {
         }
     });
 
-    // Vérification de la connexion
-    await sequelize.authenticate();
-    console.log('Connexion à la base de données établie avec succès');
+    // Vérification de la connexion avec retry
+    const maxRetries = 3;
+    let retryCount = 0;
+    
+    while (retryCount < maxRetries) {
+        try {
+            await sequelize.authenticate();
+            console.log('Connexion à la base de données établie avec succès');
+            break;
+        } catch (error) {
+            retryCount++;
+            console.error(`Tentative ${retryCount}/${maxRetries} échouée:`, error);
+            if (retryCount === maxRetries) throw error;
+            await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+        }
+    }
 
 } catch (error) {
-    console.error('Erreur d\'initialisation de la base de données:', error);
+    console.error('Erreur d'initialisation de la base de données:', error);
     throw error;
 }
 
 // Gestion de la fermeture propre des connexions
-process.on('SIGTERM', async () => {
-    try {
-        await sequelize.close();
-        console.log('Connexions à la base de données fermées');
-    } catch (err) {
-        console.error('Erreur lors de la fermeture des connexions:', err);
-    } finally {
-        process.exit(0);
-    }
-});
+if (env === "production") {
+    process.on('SIGTERM', async () => {
+        try {
+            await sequelize.close();
+            console.log('Connexions à la base de données fermées');
+        } catch (err) {
+            console.error('Erreur lors de la fermeture des connexions:', err);
+        } finally {
+            process.exit(0);
+        }
+    });
+}
 
 // Exports
 export default db;

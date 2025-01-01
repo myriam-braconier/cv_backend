@@ -1,6 +1,6 @@
 import { importJsonData } from "../utils/importService.js";
 import db from "../models/index.js";
-import { AuctionPrice } from '../models/AuctionPrice.js'; 
+
 
 // Fonction pour importer des données JSON dans la base de données
 export const importData = async (req, res) => {
@@ -451,7 +451,7 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 			});
 		}
 
-		const latestAuction = await AuctionPrice.findOne({
+		const latestAuction = await db.AuctionPrice.findOne({
 			where: {
 				synthetiserId: synthId,
 				status: "active",
@@ -468,13 +468,11 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 			});
 		}
 
-		res.json(latestAuction);
-	} catch (error) {
-		console.error("Erreur lors de la récupération de l'enchère:", error);
-		res.status(500).json({
-			message: "Erreur serveur lors de la récupération de l'enchère",
-		});
-	}
+		return latestAuction;
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'enchère:", error);
+        throw error;
+    }
 };
 
-export default { getLatestAuctionBySynthId };
+

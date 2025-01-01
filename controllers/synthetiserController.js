@@ -453,7 +453,7 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 
 		const latestAuction = await db.AuctionPrice.findOne({
 			where: {
-				synthetiserId: synthetiserId,
+				synthetiserId: synthId,
 				status: "active",
 			},
 			order: [

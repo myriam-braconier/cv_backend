@@ -444,10 +444,10 @@ export const updatePrice = async (req, res) => {
 export const getLatestAuctionBySynthId = async (req, res) => {
     try {
         const synthetiserId = parseInt(req.params.id, 10);
-        console.log('ID recherché:', synthId);
+        console.log('ID recherché:', synthetiserId);
         
         const latestAuction = await db.AuctionPrice.findOne({
-            where: { synthId, status: "active" },
+            where: { synthetiserId, status: "active" },
             order: [["proposal_price", "DESC"], ["createdAt", "DESC"]]
         });
         

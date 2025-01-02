@@ -1,9 +1,12 @@
 // routes/auctionRoutes.js
 import express from 'express';
 const router = express.Router();
-import { createAuction, getLatestAuctionBySynthId } from '../controllers/auctionPriceController.js';
-import { authenticateToken } from '../middleware/authMiddleware.js';  // Import nommé
+import { createAuction, getLatestAuctionBySynthId, getAllAuctions } from '../controllers/auctionPriceController.js';
+import { authenticateToken } from '../middleware/authMiddleware.js';  
 
+
+
+router.get('/', authenticateToken, getAllAuctions);
 
 router.post('/:synthId', authenticateToken, createAuction);
 

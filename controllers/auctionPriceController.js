@@ -1,7 +1,51 @@
 import db from "../models/index.js";
 
 
+export const getAllAuctions = async (req, res) => {
+  let connection;
+  try {
+      // Obtention d'une connexion du pool
+      connection = await sequelize.connectionManager.getConnection();
+      
+      // Récupération des enchères avec leurs relations
+      const auctions = await db.AuctionPrice.findAll({
+          include: [
+              {
+                  model: db.User,
+                  as: 'user',
+                  attributes: ['id', 'username'] // Sélectionner uniquement les champs nécessaires
+              },
+              {
+                  model: db.Synthetiser,
+                  as: 'synthetiser',
+                  attributes: ['id', 'marque', 'modele'] // Sélectionner uniquement les champs nécessaires
+              }
+          ],
+          order: [['createdAt', 'DESC']], // Tri par date de création décroissante
+          attributes: {
+              exclude: ['userId'] // Exclure les champs sensibles
+          }
+      });
 
+      // Retourner les résultats
+      res.json({
+          success: true,
+          data: auctions
+      });
+  } catch (error) {
+      console.error("Erreur lors de la récupération des enchères:", error);
+      res.status(500).json({
+          success: false,
+          error: "Erreur lors de la récupération des enchères",
+          details: error.message
+      });
+  } finally {
+      // Libérer la connexion dans tous les cas
+      if (connection) {
+          await sequelize.connectionManager.releaseConnection(connection);
+      }
+  }
+};
 
 
 export const getLatestAuctionBySynthId = async (req, res) => {
@@ -79,10 +123,7 @@ export const createAuction = async (req, res) => {
 }
 };
 
-
-
-
-export default { createAuction, getLatestAuctionBySynthId };
+export default { getAllAuctions, createAuction, getLatestAuctionBySynthId };
 
   
 

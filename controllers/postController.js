@@ -32,8 +32,6 @@ export const updatePost = async (req, res) => {
 let connection;
 	try {
 
-
-
  // Obtenir une connexion du pool
  connection = await sequelize.connectionManager.getConnection();
 

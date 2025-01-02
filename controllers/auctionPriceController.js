@@ -8,7 +8,7 @@ export const getAllAuctions = async (req, res) => {
       connection = await sequelize.connectionManager.getConnection();
       
       // Récupération des enchères avec leurs relations
-      const auctions = await db.AuctionPrice.findAll({
+      const auctions = await db.Auction.findAll({
           include: [
               {
                   model: db.User,

@@ -233,10 +233,7 @@ export const createSynthetiser = async (req, res) => {
             error: "Erreur lors de la duplication du synthétiseur",
             details: error.message
         });
-    } finally {
-		// Libère explicitement la connexion
-		await sequelize.connectionManager.releaseConnection(connection);
-	}
+    }
 };
 
 

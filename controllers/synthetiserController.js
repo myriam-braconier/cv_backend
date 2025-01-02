@@ -1,5 +1,4 @@
 import { importJsonData } from "../utils/importService.js";
-import { sequelize } from '../models';
 import db from "../models/index.js";
 
 

@@ -37,11 +37,6 @@ export const getAllAuctions = async (req, res) => {
           error: "Erreur lors de la récupération des enchères",
           details: error.message
       });
-  } finally {
-      // Libérer la connexion dans tous les cas
-      if (connection) {
-          await sequelize.connectionManager.releaseConnection(connection);
-      }
   }
 };
 

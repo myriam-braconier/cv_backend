@@ -16,7 +16,7 @@ export const getAllAuctions = async (req, res) => {
               {
                   model: db.Synthetiser,
                   as: 'synthetiser',
-                  attributes: ['id', 'marque', 'modele'] // Sélectionner uniquement les champs nécessaires
+                  attributes: ['id', 'marque', 'modele', 'image_url'] // Sélectionner uniquement les champs nécessaires
               }
           ],
           order: [['createdAt', 'DESC']], // Tri par date de création décroissante

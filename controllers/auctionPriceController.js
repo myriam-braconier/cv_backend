@@ -110,15 +110,13 @@ export const createAuction = async (req, res) => {
     // Retourner la nouvelle enchère créée
     res.status(201).json(newAuction);
   } catch (error) {
-    console.error('Erreur création enchère:', error);
-    res.status(400).json({ 
-      message: "Erreur lors de la création de l'enchère",
-      details: error.message 
+    console.error("Erreur lors de la récupération des enchères:", error);
+    res.status(500).json({
+        success: false,
+        error: "Erreur lors de la récupération des enchères",
+        details: error.message
     });
-  }  finally {
-    // Libère explicitement la connexion
-    await sequelize.connectionManager.releaseConnection(connection);
-}
+} 
 };
 
 export default { getAllAuctions, createAuction, getLatestAuctionBySynthId };

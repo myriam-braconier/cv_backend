@@ -186,6 +186,8 @@ export const createSynthetiser = async (req, res) => {
   
   export const duplicateSynthetiser = async (req, res) => {
     const { id } = req.params;
+    const { price, currency } = req.body;  // Récupérer le prix et la devise du body
+    
     try {
         // Vérifier si l'utilisateur est authentifié
         if (!req.user) {
@@ -210,7 +212,7 @@ export const createSynthetiser = async (req, res) => {
             });
         }
 
-        // Créer une copie du synthétiseur
+        // Créer une copie du synthétiseur avec le nouveau prix
         const duplicatedSynth = await db.Synthetiser.create({
             marque: originalSynth.marque,
             modele: `${originalSynth.modele} (copie)`,
@@ -218,13 +220,19 @@ export const createSynthetiser = async (req, res) => {
             image_url: originalSynth.image_url,
             note: originalSynth.note,
             nb_avis: originalSynth.nb_avis,
-            price: originalSynth.price,
+            price: {
+                value: price,
+                currency: currency || 'EUR',
+                lastUpdatedBy: req.user.id
+            },
             userId: req.user.id
         });
 
+        // Retourner le nouveau synthétiseur avec son ID
         res.status(201).json({
             message: "Synthétiseur dupliqué avec succès",
-            data: duplicatedSynth
+            data: duplicatedSynth,
+            id: duplicatedSynth.id  // Assurer que l'ID est inclus dans la réponse
         });
 
     } catch (error) {
@@ -465,17 +473,50 @@ export const updatePrice = async (req, res) => {
 	}
 };
 
-const getLatestAuctionBySynthId = async (synthId) => {
+
+export const getLatestAuctionBySynthId = async (req, res) => {
     try {
-        const latestAuction = await AuctionPrice.findOne({
+        const { synthId } = req.params;
+
+        // Vérification de l'ID
+        if (!synthId || isNaN(parseInt(synthId))) {
+            return res.status(400).json({
+                success: false,
+                message: 'ID de synthétiseur invalide'
+            });
+        }
+
+        const latestAuction = await db.AuctionPrice.findOne({
             where: { synthetiser_id: synthId },
             order: [['createdAt', 'DESC']],
+            // Vous pouvez ajouter des includes si nécessaire
+            include: [
+                {
+                    model: Synthetiser,
+                    attributes: ['id', 'name', 'marque', 'modele','image_url']
+                }
+            ]
         });
-        return latestAuction;
+
+        if (!latestAuction) {
+            return res.status(404).json({
+                success: false,
+                message: 'Aucune enchère trouvée pour ce synthétiseur'
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: latestAuction
+        });
+
     } catch (error) {
         console.error('Erreur lors de la récupération de la dernière enchère:', error);
-        throw error;
+        return res.status(500).json({
+            success: false,
+            message: 'Erreur serveur lors de la récupération de l\'enchère'
+        });
     }
-}
+};
 
 

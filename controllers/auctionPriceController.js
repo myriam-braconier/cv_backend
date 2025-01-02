@@ -2,13 +2,11 @@ import db from "../models/index.js";
 
 
 export const getAllAuctions = async (req, res) => {
-  let connection;
+
   try {
-      // Obtention d'une connexion du pool
-      connection = await sequelize.connectionManager.getConnection();
-      
+            
       // Récupération des enchères avec leurs relations
-      const auctions = await db.Auction.findAll({
+      const auctions = await db.AuctionPrice.findAll({
           include: [
               {
                   model: db.User,

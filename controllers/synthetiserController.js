@@ -65,7 +65,7 @@ export const getAllSynthetisers = async (req, res) => {
 					posts: [],
 					postCount: 0,
 				};
-			}
+			}  
 		});
 
 		console.log("Données formatées avec succès");
@@ -87,6 +87,9 @@ export const getAllSynthetisers = async (req, res) => {
 			details: error.message,
 			stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 // Fonction pour obtenir un synthétiseur spécifique
@@ -127,6 +130,9 @@ export const getSynthetiser = async (req, res) => {
 			error: "Échec de la récupération du synthétiseur",
 			details: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 // Fonction pour créer un nouveau synthétiseur
@@ -172,6 +178,9 @@ export const createSynthetiser = async (req, res) => {
 		error: "Échec de la création du synthétiseur",
 		details: error.message
 	  });
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
   };
   
@@ -224,7 +233,10 @@ export const createSynthetiser = async (req, res) => {
             error: "Erreur lors de la duplication du synthétiseur",
             details: error.message
         });
-    }
+    } finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
+	}
 };
 
 
@@ -266,6 +278,9 @@ export const deleteSynthetiser = async (req, res) => {
 			error: "Erreur lors de la suppression du synthétiseur",
 			details: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 
@@ -296,6 +311,9 @@ export const updateSynthetiser = async (req, res) => {
 			error: "Erreur lors de la mise à jour du synthétiseur",
 			details: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 
@@ -337,6 +355,9 @@ export const addAuction = async (req, res) => {
 			error: "Échec de l'ajout de l'enchère",
 			details: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 
@@ -380,6 +401,9 @@ export const addPost = async (req, res) => {
 			error: "Échec de l'ajout du post",
 			details: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 
@@ -438,6 +462,9 @@ export const updatePrice = async (req, res) => {
 			error: "Erreur lors de la mise à jour du prix",
 			message: error.message,
 		});
+	} finally {
+		// Libère explicitement la connexion
+		await sequelize.connectionManager.releaseConnection(connection);
 	}
 };
 
@@ -464,6 +491,9 @@ export const getLatestAuctionBySynthId = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: error.message });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 

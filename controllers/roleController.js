@@ -8,6 +8,9 @@ export const getAllRoles = async (req, res) => {
         res.json(roles);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve roles' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 
@@ -18,6 +21,9 @@ export const createRole = async (req, res) => {
         res.status(201).json(newRole);
     } catch (error) {
         res.status(400).json({ error: 'Failed to create role' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 

@@ -8,6 +8,9 @@ export const getAllProfiles = async (req, res) => {
         res.json(profiles);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve profiles' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 
@@ -18,6 +21,9 @@ export const createProfile = async (req, res) => {
         res.status(201).json(newProfile);
     } catch (error) {
         res.status(400).json({ error: 'Failed to create profile' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 

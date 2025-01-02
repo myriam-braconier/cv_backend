@@ -16,7 +16,7 @@ const sequelize = new Sequelize(
         dialect: dbConfig.dialect || 'mysql',
         port: process.env.DB_PORT || 3306,  // Ajout du port par défaut
         pool: {
-            max: 5,
+            max: 15,
             min: 0,
             acquire: 30000,
             idle: 10000,

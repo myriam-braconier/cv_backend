@@ -13,6 +13,9 @@ export const getAllUsers = async (req, res) => {
         res.json(users);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve users' });
+    } finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 
@@ -23,5 +26,8 @@ export const createUser = async (req, res) => {
         res.status(201).json(newUser);
     } catch (error) {
         res.status(400).json({ error: 'Failed to create user' });
+    } finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };

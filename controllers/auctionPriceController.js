@@ -32,7 +32,10 @@ export const getLatestAuctionBySynthId = async (req, res) => {
       message: 'Erreur lors de la récupération de l\'enchère',
       error: error.message
     });
-  }
+  }  finally {
+    // Libère explicitement la connexion
+    await sequelize.connectionManager.releaseConnection(connection);
+}
 };  
 
 // controllers/auctionController.js
@@ -70,7 +73,10 @@ export const createAuction = async (req, res) => {
       message: "Erreur lors de la création de l'enchère",
       details: error.message 
     });
-  }
+  }  finally {
+    // Libère explicitement la connexion
+    await sequelize.connectionManager.releaseConnection(connection);
+}
 };
 
 

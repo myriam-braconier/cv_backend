@@ -60,6 +60,9 @@ const authController = {
         } catch (error) {
             console.error('Erreur de connexion:', error);
             res.status(500).json({ message: "Erreur lors de la connexion" });
+        }  finally {
+            // Libère explicitement la connexion
+            await sequelize.connectionManager.releaseConnection(connection);
         }
     },
 
@@ -89,6 +92,9 @@ const authController = {
         } catch (error) {
             console.error('Erreur de vérification:', error);
             res.status(500).json({ message: "Erreur lors de la vérification" });
+        }  finally {
+            // Libère explicitement la connexion
+            await sequelize.connectionManager.releaseConnection(connection);
         }
     },
 
@@ -116,6 +122,9 @@ const authController = {
         } catch (error) {
             console.error('Erreur de déconnexion:', error);
             res.status(500).json({ message: "Erreur lors de la déconnexion" });
+        }  finally {
+            // Libère explicitement la connexion
+            await sequelize.connectionManager.releaseConnection(connection);
         }
     },
 
@@ -179,6 +188,9 @@ const authController = {
         } catch (error) {
             console.error('Erreur d\'inscription:', error);
             res.status(500).json({ message: "Erreur lors de l'inscription" });
+        }  finally {
+            // Libère explicitement la connexion
+            await sequelize.connectionManager.releaseConnection(connection);
         }
     }
 };

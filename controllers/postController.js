@@ -9,6 +9,9 @@ export const getAllPosts = async (req, res) => {
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve posts' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 
@@ -19,6 +22,9 @@ export const createPost = async (req, res) => {
         res.status(201).json(newPost);
     } catch (error) {
         res.status(400).json({ error: 'Failed to create post' });
+    }  finally {
+        // Libère explicitement la connexion
+        await sequelize.connectionManager.releaseConnection(connection);
     }
 };
 

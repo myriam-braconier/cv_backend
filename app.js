@@ -134,6 +134,16 @@ const PORT = process.env.NODE_ENV === 'development' ? 4000 : 3306;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
+// pour gérer la fermeture globale au shutdown
+process.on('SIGINT', async () => {
+    try {
+        await sequelize.close();
+        console.log('Connexions DB fermées');
+        process.exit(0);
+    } catch (error) {
+        console.error('Erreur fermeture DB:', error);
+        process.exit(1);
+    }
+});
 
 export default app;

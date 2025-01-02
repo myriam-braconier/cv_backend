@@ -1,5 +1,5 @@
 import { importJsonData } from "../utils/importService.js";
-const { sequelize } = require('../models'); 
+import{ sequelize } from ('../models'); 
 
 
 // Fonction pour importer des données JSON dans la base de données

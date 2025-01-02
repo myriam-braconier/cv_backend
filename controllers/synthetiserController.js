@@ -1,5 +1,5 @@
 import { importJsonData } from "../utils/importService.js";
-import db from "../models/index.js";
+const { sequelize } = require('../models'); 
 
 
 // Fonction pour importer des données JSON dans la base de données
@@ -465,33 +465,17 @@ export const updatePrice = async (req, res) => {
 	}
 };
 
-export const getLatestAuctionBySynthId = async (req, res) => {
+const getLatestAuctionBySynthId = async (synthId) => {
     try {
-        const synthetiserId = parseInt(req.params.id, 10);
-        console.log('ID recherché:', synthetiserId);
-        
-        const latestAuction = await db.AuctionPrice.findOne({
-            where: { synthetiserId, status: "active" },
-            order: [["proposal_price", "DESC"], ["createdAt", "DESC"]]
+        const latestAuction = await AuctionPrice.findOne({
+            where: { synthetiser_id: synthId },
+            order: [['createdAt', 'DESC']],
         });
-        
-        console.log('Enchère trouvée:', latestAuction);
-        
-        if (!latestAuction) {
-            return res.status(404).json({ message: "Aucune enchère trouvée" });
-        }
-        
-		return res.status(200).json({
-			...latestAuction.toJSON(),
-			createdAt: latestAuction.createdAt,
-		});
+        return latestAuction;
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: error.message });
-    }  finally {
-        // Libère explicitement la connexion
-        await sequelize.connectionManager.releaseConnection(connection);
+        console.error('Erreur lors de la récupération de la dernière enchère:', error);
+        throw error;
     }
-};
+}
 
 

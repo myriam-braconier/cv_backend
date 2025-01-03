@@ -36,6 +36,7 @@ export const initModel = (sequelize, DataTypes) => {
         {
             tableName: "auction_prices",
             timestamps: true,
+            underscored: true  // Pour utiliser created_at et updated_at en snake_case
         }
     );
 

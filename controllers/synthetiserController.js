@@ -1,7 +1,6 @@
 import { importJsonData } from "../utils/importService.js";
 import db from "../models/index.js";
 
-
 // Fonction pour importer des données JSON dans la base de données
 export const importData = async (req, res) => {
 	try {
@@ -65,7 +64,7 @@ export const getAllSynthetisers = async (req, res) => {
 					posts: [],
 					postCount: 0,
 				};
-			}  
+			}
 		});
 
 		console.log("Données formatées avec succès");
@@ -87,7 +86,7 @@ export const getAllSynthetisers = async (req, res) => {
 			details: error.message,
 			stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
 		});
-	} 
+	}
 };
 // Fonction pour obtenir un synthétiseur spécifique
 export const getSynthetiser = async (req, res) => {
@@ -127,114 +126,113 @@ export const getSynthetiser = async (req, res) => {
 			error: "Échec de la récupération du synthétiseur",
 			details: error.message,
 		});
-	} 
+	}
 };
 // Fonction pour créer un nouveau synthétiseur
 export const createSynthetiser = async (req, res) => {
 	try {
-	  // Vérifier si l'utilisateur est authentifié
-	  if (!req.user) {
-		return res.status(401).json({ error: "Non authentifié" });
-	  }
-  
-	  const synthData = {
-		...req.body,
-		price: req.body.price ? {
-		  value: req.body.price.value,
-		  currency: req.body.price.currency,
-		  lastUpdatedBy: req.user.id
-		} : null,
-		userId: req.user.id
-	  };
-  
-	  // Créer le synthétiseur avec les colonnes générées
-	  const newSynth = await db.Synthetiser.create(synthData, {
-		fields: [
-		  'marque',
-		  'modele',
-		  'specifications',
-		  'image_url',
-		  'note',
-		  'nb_avis',
-		  'price',
-		  'userId'
-		]
-	  });
-  
-	  res.status(201).json({
-		data: newSynth,
-		message: "Synthétiseur créé avec succès"
-	  });
-  
+		// Vérifier si l'utilisateur est authentifié
+		if (!req.user) {
+			return res.status(401).json({ error: "Non authentifié" });
+		}
+
+		const synthData = {
+			...req.body,
+			price: req.body.price
+				? {
+						value: req.body.price.value,
+						currency: req.body.price.currency,
+						lastUpdatedBy: req.user.id,
+				  }
+				: null,
+			userId: req.user.id,
+		};
+
+		// Créer le synthétiseur avec les colonnes générées
+		const newSynth = await db.Synthetiser.create(synthData, {
+			fields: [
+				"marque",
+				"modele",
+				"specifications",
+				"image_url",
+				"note",
+				"nb_avis",
+				"price",
+				"userId",
+			],
+		});
+
+		res.status(201).json({
+			data: newSynth,
+			message: "Synthétiseur créé avec succès",
+		});
 	} catch (error) {
-	  console.error("Create error:", error);
-	  res.status(400).json({
-		error: "Échec de la création du synthétiseur",
-		details: error.message
-	  });
-	} 
-  };
-  
-  export const duplicateSynthetiser = async (req, res) => {
-    const { id } = req.params;
-    const { price, currency } = req.body;  // Récupérer le prix et la devise du body
-    
-    try {
-        // Vérifier si l'utilisateur est authentifié
-        if (!req.user) {
-            return res.status(401).json({ error: "Non authentifié" });
-        }
-
-        // Vérifier le rôle de l'utilisateur
-        const userRole = req.user.roleId;
-        if (userRole !== 2) {
-            return res.status(403).json({
-                error: "Non autorisé",
-                message: "Seuls les administrateurs peuvent dupliquer un synthétiseur"
-            });
-        }
-
-        // Récupérer le synthétiseur original
-        const originalSynth = await db.Synthetiser.findByPk(id);
-        if (!originalSynth) {
-            return res.status(404).json({
-                error: "Synthétiseur non trouvé",
-                details: `Aucun synthétiseur trouvé avec l'ID ${id}`
-            });
-        }
-
-        // Créer une copie du synthétiseur avec le nouveau prix
-        const duplicatedSynth = await db.Synthetiser.create({
-            marque: originalSynth.marque,
-            modele: `${originalSynth.modele} (copie)`,
-            specifications: originalSynth.specifications,
-            image_url: originalSynth.image_url,
-            note: originalSynth.note,
-            nb_avis: originalSynth.nb_avis,
-            price: {
-                value: price,
-                currency: currency || 'EUR',
-                lastUpdatedBy: req.user.id
-            },
-            userId: req.user.id
-        });
-
-        // Retourner le nouveau synthétiseur avec son ID
-        res.status(201).json({
-            message: "Synthétiseur dupliqué avec succès",
-            data: duplicatedSynth,
-            id: duplicatedSynth.id  // Assurer que l'ID est inclus dans la réponse
-        });
-
-    } catch (error) {
-        console.error("Erreur lors de la duplication:", error);
-        res.status(500).json({
-            error: "Erreur lors de la duplication du synthétiseur",
-            details: error.message
-        });
-    }
+		console.error("Create error:", error);
+		res.status(400).json({
+			error: "Échec de la création du synthétiseur",
+			details: error.message,
+		});
+	}
 };
 
+export const duplicateSynthetiser = async (req, res) => {
+	const { id } = req.params;
+	const { price, currency } = req.body; // Récupérer le prix et la devise du body
+
+	try {
+		// Vérifier si l'utilisateur est authentifié
+		if (!req.user) {
+			return res.status(401).json({ error: "Non authentifié" });
+		}
+
+		// Vérifier le rôle de l'utilisateur
+		const userRole = req.user.roleId;
+		if (userRole !== 2) {
+			return res.status(403).json({
+				error: "Non autorisé",
+				message: "Seuls les administrateurs peuvent dupliquer un synthétiseur",
+			});
+		}
+
+		// Récupérer le synthétiseur original
+		const originalSynth = await db.Synthetiser.findByPk(id);
+		if (!originalSynth) {
+			return res.status(404).json({
+				error: "Synthétiseur non trouvé",
+				details: `Aucun synthétiseur trouvé avec l'ID ${id}`,
+			});
+		}
+
+		// Créer une copie du synthétiseur avec le nouveau prix
+		const duplicatedSynth = await db.Synthetiser.create({
+			marque: originalSynth.marque,
+			modele: `${originalSynth.modele} (copie)`,
+			specifications: originalSynth.specifications,
+			image_url: originalSynth.image_url,
+			note: originalSynth.note,
+			nb_avis: originalSynth.nb_avis,
+			price: {
+				value: price,
+				currency: currency || "EUR",
+				lastUpdatedBy: req.user.id,
+			},
+			userId: req.user.id,
+		});
+
+		// Retourner le nouveau synthétiseur avec son ID
+		res.status(201).json({
+			message: "Synthétiseur dupliqué avec succès",
+			data: duplicatedSynth,
+			id: duplicatedSynth.id, // Assurer que l'ID est inclus dans la réponse
+		});
+	} catch (error) {
+		console.error("Erreur lors de la duplication:", error);
+		res.status(500).json({
+			error: "Erreur lors de la duplication du synthétiseur",
+			details: error.message,
+		});
+	}
+};
 
 export const deleteSynthetiser = async (req, res) => {
 	const { id } = req.params;
@@ -274,7 +272,7 @@ export const deleteSynthetiser = async (req, res) => {
 			error: "Erreur lors de la suppression du synthétiseur",
 			details: error.message,
 		});
-	} 
+	}
 };
 
 // Fonction pour mettre à jour un synthétiseur
@@ -304,7 +302,7 @@ export const updateSynthetiser = async (req, res) => {
 			error: "Erreur lors de la mise à jour du synthétiseur",
 			details: error.message,
 		});
-	} 
+	}
 };
 
 // Fonction pour ajouter une enchère
@@ -345,7 +343,7 @@ export const addAuction = async (req, res) => {
 			error: "Échec de l'ajout de l'enchère",
 			details: error.message,
 		});
-	} 
+	}
 };
 
 // Fonction pour ajouter un post à un synthétiseur
@@ -388,7 +386,7 @@ export const addPost = async (req, res) => {
 			error: "Échec de l'ajout du post",
 			details: error.message,
 		});
-	} 
+	}
 };
 
 export const updatePrice = async (req, res) => {
@@ -449,70 +447,66 @@ export const updatePrice = async (req, res) => {
 	}
 };
 
-
 export const getLatestAuctionBySynthetiser = async (req, res) => {
 	try {
-	  const { id: synthetiserId } = req.params;
-      console.log("Recherche de l'enchère pour le synthétiseur:", synthetiserId);
+		const { id: synthetiserId } = req.params;
+		console.log("Recherche de l'enchère pour le synthétiseur:", synthetiserId);
 
-	  if (!synthetiserId) {
-		return res.status(400).json({ 
-		  error: 'Le paramètre ID du synthétiseur est requis' 
+		if (!synthetiserId) {
+			return res.status(400).json({
+				error: "Le paramètre ID du synthétiseur est requis",
+			});
+		}
+
+		// Récupère la dernière enchère pour le synthétiseur spécifié
+		const latestAuction = await req.app.get("models").AuctionPrice.findOne({
+			where: { synthetiserId },
+			order: [["created_at", "DESC"]], // Utilisez created_at à cause de underscored: true
+			attributes: [
+				"id",
+				"proposal_price",
+				"status",
+				"synthetiserId",
+				"userId",
+				"created_at",
+				"updated_at",
+			],
+			include: [
+				{
+					model: req.app.get("models").Synthetiser,
+					as: "synthetiser",
+					attributes: ["marque", "modele", "image_url"],
+				},
+			],
 		});
-	  }
-  
-	  // Récupère la dernière enchère pour le synthétiseur spécifié
-	  const latestAuction = await req.app.get('models').AuctionPrice.findOne({
-		where: { synthetiserId },
-		order: [['createdAt', 'DESC']], // Tri par date de création décroissante
-		attributes: [
-		  'id',
-		  'proposal_price',
-		  'status',
-		  'synthetiserId',
-		  'userId',
-		  ['created_at', 'createdAt'],  // Ajout explicite des timestamps
-		  ['updated_at', 'updatedAt']   // Ajout explicite des timestamps
-		],
-		raw: true, // Pour obtenir un objet JavaScript pur
-		include: [{
-		  model: req.app.get('models').Synthetiser,
-		  as: 'synthetiser',
-		  attributes: ['marque', 'modele', 'image_url']
-		}]
-	  });
 
+		console.log("Enchère trouvée dans la BD:", latestAuction);
 
-	  console.log("Enchère trouvée dans la BD:", latestAuction);
-  
-	  if (!latestAuction) {
+		if (!latestAuction) {
+			console.log("Aucune enchère trouvée");
+			return res.status(404).json({
+				message: "Aucune enchère trouvée pour ce synthétiseur",
+			});
+		}
 
-		console.log("Aucune enchère trouvée");
-		return res.status(404).json({
-		  message: 'Aucune enchère trouvée pour ce synthétiseur'
-		});
-	  }
-  
+		 // Formatage explicite des dates
+		 const formattedAuction = {
+            ...latestAuction.get({ plain: true }),
+            createdAt: latestAuction.created_at.getTime(), // Conversion en timestamp
+            updatedAt: latestAuction.updated_at.toISOString() // Conversion en ISO string
+        };
 
-// Formatage des dates avant envoi
-const formattedAuction = {
-	...latestAuction,
-	createdAt: latestAuction.createdAt ? new Date(latestAuction.createdAt).getTime() : Date.now(),
-	updatedAt: latestAuction.updatedAt ? new Date(latestAuction.updatedAt).toISOString() : new Date().toISOString()
-  };
+		console.log("Données formatées envoyées au client:", formattedAuction);
 
-  console.log("Données formatées envoyées au client:", formattedAuction);
-
-
-	  return res.status(200).json(latestAuction);
-  
+		return res.status(200).json(latestAuction);
 	} catch (error) {
-	  console.error('Erreur lors de la récupération de la dernière enchère:', error);
-	  return res.status(500).json({
-		error: 'Erreur lors de la récupération de la dernière enchère',
-		details: error.message
-	  });
+		console.error(
+			"Erreur lors de la récupération de la dernière enchère:",
+			error
+		);
+		return res.status(500).json({
+			error: "Erreur lors de la récupération de la dernière enchère",
+			details: error.message,
+		});
 	}
-  };
-
-
+};

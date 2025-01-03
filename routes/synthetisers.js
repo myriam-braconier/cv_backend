@@ -10,7 +10,7 @@ import {
 	updateSynthetiser,
 	addPost,
 	addAuction,
-	getLatestAuctionBySynthId
+	getLatestAuctionBySynthetiser
 } from "../controllers/synthetiserController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js"; // Import nommé
 const router = express.Router();
@@ -31,7 +31,7 @@ router.delete('/:id', authenticateToken, deleteSynthetiser);
 
 // Routes pour les enchères
 router.post('/:id/auctions', authenticateToken, addAuction);
-router.get('/:id/auctions/latest', getLatestAuctionBySynthId);
+router.get('/:id/auctions/latest', authenticateToken, getLatestAuctionBySynthetiser);
 
 // Routes pour les posts
 router.post('/:id/posts', authenticateToken, addPost);

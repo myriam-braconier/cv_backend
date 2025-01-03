@@ -450,49 +450,51 @@ export const updatePrice = async (req, res) => {
 };
 
 
-export const getLatestAuctionBySynthId = async (req, res) => {
-    try {
-        const { synthId } = req.params;
-
-        // Vérification de l'ID
-        if (!synthId || isNaN(parseInt(synthId))) {
-            return res.status(400).json({
-                success: false,
-                message: 'ID de synthétiseur invalide'
-            });
-        }
-
-        const latestAuction = await db.AuctionPrice.findOne({
-            where: { synthetiser_id: synthId },
-            order: [['createdAt', 'DESC']],
-            // Vous pouvez ajouter des includes si nécessaire
-            include: [
-                {
-                    model: Synthetiser,
-                    attributes: ['id', 'name', 'marque', 'modele','image_url']
-                }
-            ]
-        });
-
-        if (!latestAuction) {
-            return res.status(404).json({
-                success: false,
-                message: 'Aucune enchère trouvée pour ce synthétiseur'
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            data: latestAuction
-        });
-
-    } catch (error) {
-        console.error('Erreur lors de la récupération de la dernière enchère:', error);
-        return res.status(500).json({
-            success: false,
-            message: 'Erreur serveur lors de la récupération de l\'enchère'
-        });
-    }
-};
+export const getLatestAuctionBySynthetiser = async (req, res) => {
+	try {
+	  const { id: synthetiserId } = req.params;
+  
+	  if (!synthetiserId) {
+		return res.status(400).json({ 
+		  error: 'Le paramètre ID du synthétiseur est requis' 
+		});
+	  }
+  
+	  // Récupère la dernière enchère pour le synthétiseur spécifié
+	  const latestAuction = await req.app.get('models').AuctionPrice.findOne({
+		where: { synthetiserId },
+		order: [['createdAt', 'DESC']], // Tri par date de création décroissante
+		attributes: [
+		  'id',
+		  'proposal_price',
+		  'status',
+		  'synthetiserId',
+		  'userId',
+		  'createdAt',
+		  'updatedAt'
+		],
+		include: [{
+		  model: req.app.get('models').Synthetiser,
+		  as: 'synthetiser',
+		  attributes: ['marque', 'modele', 'image_url']
+		}]
+	  });
+  
+	  if (!latestAuction) {
+		return res.status(404).json({
+		  message: 'Aucune enchère trouvée pour ce synthétiseur'
+		});
+	  }
+  
+	  return res.status(200).json(latestAuction);
+  
+	} catch (error) {
+	  console.error('Erreur lors de la récupération de la dernière enchère:', error);
+	  return res.status(500).json({
+		error: 'Erreur lors de la récupération de la dernière enchère',
+		details: error.message
+	  });
+	}
+  };
 
 

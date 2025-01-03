@@ -36,7 +36,6 @@ export const initModel = (sequelize, DataTypes) => {
         {
             tableName: "auction_prices",
             timestamps: true,
-            underscored: false  // on désactive l'underscore automatique
         }
     );
 

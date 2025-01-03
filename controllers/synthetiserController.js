@@ -469,28 +469,29 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 					attributes: ["marque", "modele", "image_url"],
 				},
 			],
-			raw: true, // Pour avoir un objet simple
-			nest: true // Pour avoir les relations imbriquées proprement
 		});
 
 		console.log("Enchère trouvée dans la BD:", latestAuction);
 
-		if (!latestAuction) {
-			console.log("Aucune enchère trouvée");
-			return res.status(404).json({
-				message: "Aucune enchère trouvée pour ce synthétiseur",
-			});
-		}
+	
+        if (!latestAuction) {
+            return res.status(404).json({
+                message: 'Aucune enchère trouvée pour ce synthétiseur'
+            });
+        }
 
+		const plainAuction = latestAuction.get({ plain: true });
+        console.log('Dates de l\'enchère:', {
+            createdAt: plainAuction.createdAt,
+            updatedAt: plainAuction.updatedAt
+        });
 
-		 // Ajout des dates par défaut si manquantes
-		 const now = new Date();
 		 // Formatage explicite des dates
 		 const formattedAuction = {
-            ...latestAuction,
-            proposal_price: parseFloat(latestAuction.proposal_price),
-            createdAt: latestAuction.createdAt ? new Date(latestAuction.createdAt).getTime() : now.getTime(),
-            updatedAt: latestAuction.updatedAt ? new Date(latestAuction.updatedAt).toISOString() : now.toISOString(),
+            ...plainAuction,
+            proposal_price: parseFloat(plainAuction.proposal_price),
+            createdAt: plainAuction.createdAt ? new Date(plainAuction.createdAt).getTime() : now.getTime(),
+            updatedAt: plainAuction.updatedAt ? new Date(plainAuction.updatedAt).toISOString() : now.toISOString(),
         };
 
 		console.log("Données formatées envoyées au client:", formattedAuction);

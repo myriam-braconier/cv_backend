@@ -492,8 +492,8 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		 // Formatage explicite des dates
 		 const formattedAuction = {
             ...latestAuction.get({ plain: true }),
-            createdAt: latestAuction.created_at.getTime(), // Conversion en timestamp
-            updatedAt: latestAuction.updated_at.toISOString() // Conversion en ISO string
+            createdAt: latestAuction.createdAt.getTime(), // Conversion en timestamp
+            updatedAt: latestAuction.updatedAt.toISOString() // Conversion en ISO string
         };
 
 		console.log("Données formatées envoyées au client:", formattedAuction);

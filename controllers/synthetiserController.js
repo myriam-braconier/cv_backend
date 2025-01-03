@@ -461,16 +461,7 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		// Récupère la dernière enchère pour le synthétiseur spécifié
 		const latestAuction = await req.app.get("models").AuctionPrice.findOne({
 			where: { synthetiserId },
-			order: [["created_at", "DESC"]], // Utilisez created_at à cause de underscored: true
-			attributes: [
-				"id",
-				"proposal_price",
-				"status",
-				"synthetiserId",
-				"userId",
-				"created_at",
-				"updated_at",
-			],
+			order: [["createdAt", "DESC"]], // Utilisez created_at à cause de underscored: true
 			include: [
 				{
 					model: req.app.get("models").Synthetiser,
@@ -478,6 +469,8 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 					attributes: ["marque", "modele", "image_url"],
 				},
 			],
+			raw: true, // Pour avoir un objet simple
+			nest: true // Pour avoir les relations imbriquées proprement
 		});
 
 		console.log("Enchère trouvée dans la BD:", latestAuction);
@@ -489,11 +482,15 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 			});
 		}
 
+
+		 // Ajout des dates par défaut si manquantes
+		 const now = new Date();
 		 // Formatage explicite des dates
 		 const formattedAuction = {
-            ...latestAuction.get({ plain: true }),
-            createdAt: latestAuction.createdAt.getTime(), // Conversion en timestamp
-            updatedAt: latestAuction.updatedAt.toISOString() // Conversion en ISO string
+            ...latestAuction,
+            proposal_price: parseFloat(latestAuction.proposal_price),
+            createdAt: latestAuction.createdAt ? new Date(latestAuction.createdAt).getTime() : now.getTime(),
+            updatedAt: latestAuction.updatedAt ? new Date(latestAuction.updatedAt).toISOString() : now.toISOString(),
         };
 
 		console.log("Données formatées envoyées au client:", formattedAuction);

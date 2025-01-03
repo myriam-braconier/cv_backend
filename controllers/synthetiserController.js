@@ -470,9 +470,10 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		  'status',
 		  'synthetiserId',
 		  'userId',
-		  'createdAt',
-		  'updatedAt'
+		  ['created_at', 'createdAt'],  // Ajout explicite des timestamps
+		  ['updated_at', 'updatedAt']   // Ajout explicite des timestamps
 		],
+		raw: true, // Pour obtenir un objet JavaScript pur
 		include: [{
 		  model: req.app.get('models').Synthetiser,
 		  as: 'synthetiser',
@@ -486,6 +487,18 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		});
 	  }
   
+
+// Formatage des dates avant envoi
+const formattedAuction = {
+	...latestAuction,
+	createdAt: latestAuction.createdAt ? new Date(latestAuction.createdAt).getTime() : Date.now(),
+	updatedAt: latestAuction.updatedAt ? new Date(latestAuction.updatedAt).toISOString() : new Date().toISOString()
+  };
+
+  console.log('Données de l\'enchère envoyées:', formattedAuction); // Log de debug
+
+
+
 	  return res.status(200).json(latestAuction);
   
 	} catch (error) {

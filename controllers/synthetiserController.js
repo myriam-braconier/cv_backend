@@ -453,7 +453,8 @@ export const updatePrice = async (req, res) => {
 export const getLatestAuctionBySynthetiser = async (req, res) => {
 	try {
 	  const { id: synthetiserId } = req.params;
-  
+      console.log("Recherche de l'enchère pour le synthétiseur:", synthetiserId);
+
 	  if (!synthetiserId) {
 		return res.status(400).json({ 
 		  error: 'Le paramètre ID du synthétiseur est requis' 
@@ -480,8 +481,13 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		  attributes: ['marque', 'modele', 'image_url']
 		}]
 	  });
+
+
+	  console.log("Enchère trouvée dans la BD:", latestAuction);
   
 	  if (!latestAuction) {
+
+		console.log("Aucune enchère trouvée");
 		return res.status(404).json({
 		  message: 'Aucune enchère trouvée pour ce synthétiseur'
 		});
@@ -495,8 +501,7 @@ const formattedAuction = {
 	updatedAt: latestAuction.updatedAt ? new Date(latestAuction.updatedAt).toISOString() : new Date().toISOString()
   };
 
-  console.log('Données de l\'enchère envoyées:', formattedAuction); // Log de debug
-
+  console.log("Données formatées envoyées au client:", formattedAuction);
 
 
 	  return res.status(200).json(latestAuction);

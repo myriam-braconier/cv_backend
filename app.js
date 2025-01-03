@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import { models } from './models/index.js'; 
+
 
 
 console.log('=================================');
@@ -14,6 +16,8 @@ console.log('=================================');
 // Configuration
 dotenv.config();
 const app = express();
+// rendre les models disponibles dans l'app
+app.set('models', models);
 
 
 

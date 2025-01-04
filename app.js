@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import { models } from "./models/index.js";
-import aboutRouter from './routes/about.js';
+import aboutRoutes from './routes/about.js'; ///renonmmé pour éviter le conflit
 
 console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
@@ -89,7 +89,6 @@ app.get("/favicon.ico", (req, res) => res.status(204).send());
 app.get("/favicon.png", (req, res) => res.status(204).send());
 
 // Importer et utiliser les routes
-import aboutRouter from './routes/about.js';
 import authRoutes from "./routes/auth.js";
 import synthetiserRoutes from "./routes/synthetisers.js";
 import userRoutes from "./routes/users.js";
@@ -100,7 +99,7 @@ import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
 
 // Routes
-app.use('/api', aboutRouter);
+app.use('/api', aboutRoutes);
 app.use("/admin", adminRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/synthetisers", synthetiserRoutes);

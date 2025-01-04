@@ -1,6 +1,3 @@
-// models/about.js
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
 
 export const initAboutModel = (sequelize, DataTypes) => {
   const About = sequelize.define(

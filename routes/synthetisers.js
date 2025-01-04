@@ -13,9 +13,10 @@ import {
 	getLatestAuctionBySynthetiser
 } from "../controllers/synthetiserController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js"; // Import nommé
+
 const router = express.Router();
 
-router.use(authenticateToken); // Utilisation du middleware sur toutes les routes
+// router.use(authenticateToken); // Utilisation du middleware sur toutes les routes
 
 
 router.post("/import", authenticateToken, importData);

@@ -1,15 +1,29 @@
 import jwt from 'jsonwebtoken';
 
+// Liste des routes publiques
+const publicRoutes = [
+    '/api/synthetisers',      // Liste des synthétiseurs
+    '/api/synthetisers/:id'   // Détails d'un synthétiseur
+];
 
+export const authenticateToken = (req, res, next) => {
+    // Vérifier si la route actuelle est publique
+    const isPublicRoute = publicRoutes.some(route => {
+        // Convertir la route publique en regex pour gérer les paramètres dynamiques
+        const routeRegex = new RegExp('^' + route.replace(/:\w+/g, '[^/]+') + '$');
+        return routeRegex.test(req.path);
+    });
 
-const jwtSecret = process.env.JWT_SECRET;
+    // Si c'est une route publique, passer directement au suivant
+    if (isPublicRoute) {
+        return next();
+    }
 
-// Correction : exporter la fonction comme export nommé
-export const authenticateToken = (req, res, next) => { // export nommé donc on ne l'importe pas par défaut
+    // Pour les routes protégées, vérifier le token
     try {
         const authHeader = req.headers['authorization'];
         const token = authHeader && authHeader.split(' ')[1];
-
+        
         if (!token) {
             return res.status(401).json({ message: "Token manquant" });
         }
@@ -22,13 +36,14 @@ export const authenticateToken = (req, res, next) => { // export nommé donc on 
             req.user = user;
             next();
         });
-   } catch (error) {
-       console.error('Erreur d\'authentification:', error);
-       return res.status(403).json({ 
-           error: "Token invalide ou expiré." 
-       });
-   }
+    } catch (error) {
+        console.error('Erreur d\'authentification:', error);
+        return res.status(403).json({
+            error: "Token invalide ou expiré."
+        });
+    }
 };
+
 const checkPricePermission = async (req, res, next) => {
     try {
         const user = req.user; 

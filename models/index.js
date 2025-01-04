@@ -1,23 +1,18 @@
-// models/index.js
 import { Sequelize, DataTypes } from 'sequelize';
-import sequelize from '../utils/sequelize.js'; 
-
-
-
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { readdirSync } from "fs";
+import path from "path";
 import dotenv from "dotenv";
+import config from "../config/config.js";
 import mysql2 from "mysql2";
 
-// Configuration ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();
 
 const env = process.env.NODE_ENV || "development";
-
 const defaultConfig = {
     dialect: "mysql",
     dialectModule: mysql2,
@@ -37,6 +32,7 @@ const defaultConfig = {
     },
 };
 
+// Un seul import de sequelize
 const sequelize = new Sequelize(
     process.env.DATABASE_URL ||
     `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${
@@ -57,11 +53,9 @@ try {
             file.slice(-3) === ".js"
     );
 
-    // Charger les modèles
     for (const file of modelFiles) {
         const modelPath = new URL(file, import.meta.url).href;
         const model = await import(modelPath);
-        // Vérifier si c'est un modèle About ou autre
         const initFunction = model.default || model.initAboutModel || model.initModel;
         
         if (typeof initFunction === "function") {
@@ -74,7 +68,6 @@ try {
         }
     }
 
-    // Associations
     Object.keys(db).forEach((modelName) => {
         if (db[modelName].associate) {
             db[modelName].associate(db);
@@ -91,12 +84,15 @@ try {
 export default db;
 export const models = {
     sequelize,
-    User: db.User,
-    Role: db.Role,
-    Permission: db.Permission,
-    Post: db.Post,
-    Synthetiser: db.Synthetiser,
+    About: db.About,
+    AdminAcionLog: db.AdminActionLog,
     AuctionPrice: db.AuctionPrice,
+    Permission: db.Permission,
+    Post: db.post,
     Profile: db.Profile,
-    About: db.About, // Ajout du modèle About
+    Role: db.Role,
+    Synthetisr: db.Synthetiser,
+    User: db.User
+
+    // ... autres modèles
 };

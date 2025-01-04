@@ -1,3 +1,7 @@
+// models/about.js
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
+
 export const initAboutModel = (sequelize, DataTypes) => {
   const About = sequelize.define(
     "About",
@@ -15,6 +19,10 @@ export const initAboutModel = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false
       },
+    },
+    {
+      tableName: 'abouts',  // Nom de la table dans la base de données
+      timestamps: true      // Ajoute created_at et updated_at
     }
   );
   return About;

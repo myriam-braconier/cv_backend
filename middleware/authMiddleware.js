@@ -1,4 +1,13 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+
+// Initialiser dotenv pour charger les variables d'environnement
+dotenv.config();
+
+
+// Définir le secret à partir des variables d'environnement
+const jwtSecret = process.env.JWT_SECRET;
 
 // Liste des routes publiques
 const publicRoutes = [
@@ -44,24 +53,26 @@ export const authenticateToken = (req, res, next) => {
     }
 };
 
-const checkPricePermission = async (req, res, next) => {
-    try {
-        const user = req.user; 
-        const role = await user.getRole();
+// const checkPricePermission = async (req, res, next) => {
+//     try {
+//         const user = req.user; 
+//         const role = await user.getRole();
         
-        if (role.role_name === 'admin' || role.role_name === 'owner_instr') {
-            next();
-        } else {
-            res.status(403).json({ 
-                message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix" 
-            });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Erreur lors de la vérification des permissions" });
-    }
-};
+//         if (role.role_name === 'admin' || role.role_name === 'owner_instr') {
+//             next();
+//         } else {
+//             res.status(403).json({ 
+//                 message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix" 
+//             });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ message: "Erreur lors de la vérification des permissions" });
+//     }
+// };
 
 
 
 
-export const secret = jwtSecret;
+
+// Exporter le secret
+export const secret = process.env.JWT_SECRET;

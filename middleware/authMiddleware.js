@@ -12,8 +12,9 @@ const jwtSecret = process.env.JWT_SECRET;
 // Liste des routes publiques
 const publicRoutes = [
     '/api/synthetisers',      // Liste des synthétiseurs
-    '/api/synthetisers/:id'   // Détails d'un synthétiseur
-    'api/'
+    '/api/synthetisers/:id',  // Détails d'un synthétiseur
+    'api/synthetisers/:id/auctions/latest',
+    'api/synthetisers/:id/auctions'
 ];
 
 export const authenticateToken = (req, res, next) => {

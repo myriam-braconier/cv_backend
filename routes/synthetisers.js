@@ -24,6 +24,8 @@ router.post("/import", authenticateToken, importData);
 // Routes publiques
 router.get('/', getAllSynthetisers);
 router.get('/:id', getSynthetiser);
+router.post('/:id/auctions', addAuction);
+router.get('/:id/auctions/latest',getLatestAuctionBySynthetiser);
 
 // Routes protégées nécessitant une authentification
 router.post('/', authenticateToken, createSynthetiser);

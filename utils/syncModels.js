@@ -1,4 +1,5 @@
 import sequelize from "./sequelize.js";
+import initAbout from "../models/About.js";
 import initUser from "../models/User.js";
 import initRole from "../models/Role.js";
 import initSynthetiser from "../models/Synthetiser.js";

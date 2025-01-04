@@ -1,5 +1,5 @@
 
-export const initAboutModel = (sequelize, DataTypes) => {
+export const initAbout = (sequelize, DataTypes) => {
   const About = sequelize.define(
     "About",
     {
@@ -25,4 +25,4 @@ export const initAboutModel = (sequelize, DataTypes) => {
   return About;
 };
 
-export default initAboutModel;
+export default initAbout;

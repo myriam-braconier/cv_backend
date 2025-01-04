@@ -89,6 +89,7 @@ app.get("/favicon.ico", (req, res) => res.status(204).send());
 app.get("/favicon.png", (req, res) => res.status(204).send());
 
 // Importer et utiliser les routes
+import aboutRouter from './routes/about.js';
 import authRoutes from "./routes/auth.js";
 import synthetiserRoutes from "./routes/synthetisers.js";
 import userRoutes from "./routes/users.js";

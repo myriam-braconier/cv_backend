@@ -5,4 +5,4 @@ router.get("/about", (req, res) => {
 	res.status(200).send("Page About");
 });
 
-module.exports = router;
+export default About

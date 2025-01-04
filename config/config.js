@@ -3,6 +3,10 @@ import { fileURLToPath } from "url";
 import { dirname } from 'path';
 import path from "path";
 
+
+
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -96,9 +100,9 @@ const config = {
   }
 };
 
-// Validation uniquement si pas sur Vercel (car Vercel gère ses propres variables d'environnement)
+// Validation uniquement si pas sur Vercel CLI (car Vercel gère ses propres variables d'environnement)
 if (!isVercel) {
-  const requiredEnvVars = ['DB_USERNAME', 'DB_PASSWORD', 'DB_DATABASE', 'DB_HOST'];
+  const requiredEnvVars = ['DB_USERNAME', 'DB_DATABASE', 'DB_HOST'];
   const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
   if (missingEnvVars.length > 0) {
     throw new Error(`Variables d'environnement manquantes: ${missingEnvVars.join(', ')}`);

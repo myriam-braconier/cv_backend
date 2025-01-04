@@ -103,12 +103,12 @@ const authController = {
         try {
 
 
-             // Configuration identique pour supprimer le cookie
+             // Configuration pour les CORS
         res.header('Access-Control-Allow-Origin', 'https://concrete-frontend.vercel.app');
         res.header('Access-Control-Allow-Credentials', 'true');
 
 
-
+// suppression du cookie
              res.cookie('token', '', {
                 httpOnly: true,
                 secure: true,
@@ -122,10 +122,7 @@ const authController = {
         } catch (error) {
             console.error('Erreur de déconnexion:', error);
             res.status(500).json({ message: "Erreur lors de la déconnexion" });
-        }  finally {
-            // Libère explicitement la connexion
-            await sequelize.connectionManager.releaseConnection(connection);
-        }
+        } 
     },
 
     // Inscription

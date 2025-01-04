@@ -1,10 +1,13 @@
 // models/index.js
 import { Sequelize, DataTypes } from 'sequelize';
+import sequelize from '../utils/sequelize.js'; 
+
+
+
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { readdirSync } from "fs";
 import dotenv from "dotenv";
-import config from "../config/config.js";
 import mysql2 from "mysql2";
 
 // Configuration ES Modules

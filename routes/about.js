@@ -2,6 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
+
 router.get('/about', async (req, res) => {
   try {
     res.status(200).json({ message: "About page" });

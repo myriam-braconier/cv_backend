@@ -16,7 +16,8 @@ const publicRoutes = [
     'api/synthetisers/:id/auctions/latest',
     'api/synthetisers/:id/auctions',
     'api/auctions',
-    'api/auctions/:id'
+    'api/auctions/:id',
+    'api/about'
 ];
 
 export const authenticateToken = (req, res, next) => {

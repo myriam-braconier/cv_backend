@@ -128,7 +128,7 @@ app.use((err, req, res, next) => {
 });
 
 // Démarrage du serveur
-const PORT = process.env.NODE_ENV === "development" ? 4000 : 3306;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });

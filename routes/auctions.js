@@ -5,11 +5,11 @@ import {
 	getLatestAuctionBySynthId,
 	getAllAuctions,
 } from "../controllers/auctionPriceController.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
+// import { authenticateToken } from "../middleware/authMiddleware.js"; // pour auth
 
-router.get("/", authenticateToken, getAllAuctions);
+router.get("/",  getAllAuctions);
 
-router.post("/:synthId", authenticateToken, createAuction);
+router.post("/:synthId",  createAuction);
 
-router.put("/:id/auctions", authenticateToken, getLatestAuctionBySynthId);
+router.put("/:id/auctions",  getLatestAuctionBySynthId);
 export default router;

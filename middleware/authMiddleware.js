@@ -14,7 +14,9 @@ const publicRoutes = [
     '/api/synthetisers',      // Liste des synthétiseurs
     '/api/synthetisers/:id',  // Détails d'un synthétiseur
     'api/synthetisers/:id/auctions/latest',
-    'api/synthetisers/:id/auctions'
+    'api/synthetisers/:id/auctions',
+    'api/auctions',
+    'api/auctions/:id'
 ];
 
 export const authenticateToken = (req, res, next) => {

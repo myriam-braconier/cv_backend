@@ -62,7 +62,7 @@ try {
     for (const file of modelFiles) {
         const modelPath = new URL(file, import.meta.url).href;
         const model = await import(modelPath);
-        const initFunction = model.default || model.initAboutModel || model.initModel;
+        const initFunction = model.default || model.initModel;
        
         if (typeof initFunction === "function") {
             const modelInstance = initFunction(dbInstance, DataTypes);
@@ -90,7 +90,6 @@ try {
 export default db;
 export const models = {
     sequelize: dbInstance,
-    About: db.About,
     AdminActionLog: db.AdminActionLog,
     AuctionPrice: db.AuctionPrice,
     Permission: db.Permission,

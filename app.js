@@ -98,7 +98,6 @@ import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
 
 // Routes
-app.use('/api', aboutRoutes);
 app.use("/admin", adminRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/synthetisers", synthetiserRoutes);

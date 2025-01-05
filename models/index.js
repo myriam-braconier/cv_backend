@@ -4,15 +4,15 @@ import { dirname } from "path";
 import { readdirSync } from "fs";
 import path from "path";
 import dotenv from "dotenv";
-import config from "../config/config.js";
+// Supprimé l'import de ../utils/sequelize.js car on crée l'instance ici
 import mysql2 from "mysql2";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 dotenv.config();
 
 const env = process.env.NODE_ENV || "development";
+
 const defaultConfig = {
     dialect: "mysql",
     dialectModule: mysql2,
@@ -32,24 +32,30 @@ const defaultConfig = {
     },
 };
 
-// Un seul import de sequelize
-const sequelize = new Sequelize(
-    process.env.DATABASE_URL ||
-    `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${
-        process.env.DB_HOST
-    }:${process.env.DB_PORT || 3306}/${process.env.DB_DATABASE}`,
-    defaultConfig
-);
+// Une seule déclaration de sequelize
+let dbInstance;
+try {
+    dbInstance = new Sequelize(
+        process.env.DATABASE_URL ||
+        `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${
+            process.env.DB_HOST
+        }:${process.env.DB_PORT || 3306}/${process.env.DB_DATABASE}`,
+        defaultConfig
+    );
+} catch (error) {
+    console.error("Erreur lors de la création de l'instance Sequelize:", error);
+    throw error;
+}
 
 const db = {};
-db.sequelize = sequelize;
+db.sequelize = dbInstance;
 db.Sequelize = Sequelize;
 
 try {
     const modelFiles = readdirSync(__dirname).filter(
         (file) =>
-            file.indexOf(".") !== 0 && 
-            file !== "index.js" && 
+            file.indexOf(".") !== 0 &&
+            file !== "index.js" &&
             file.slice(-3) === ".js"
     );
 
@@ -57,11 +63,11 @@ try {
         const modelPath = new URL(file, import.meta.url).href;
         const model = await import(modelPath);
         const initFunction = model.default || model.initAboutModel || model.initModel;
-        
+       
         if (typeof initFunction === "function") {
-            const modelInstance = initFunction(sequelize, DataTypes);
+            const modelInstance = initFunction(dbInstance, DataTypes);
             if (modelInstance?.name) {
-                const modelName = modelInstance.name.charAt(0).toUpperCase() + 
+                const modelName = modelInstance.name.charAt(0).toUpperCase() +
                                 modelInstance.name.slice(1);
                 db[modelName] = modelInstance;
             }
@@ -74,7 +80,7 @@ try {
         }
     });
 
-    await sequelize.authenticate();
+    await dbInstance.authenticate();
     console.log("Base de données connectée!");
 } catch (error) {
     console.error("Erreur de connexion à la base:", error);
@@ -83,16 +89,14 @@ try {
 
 export default db;
 export const models = {
-    sequelize,
+    sequelize: dbInstance,
     About: db.About,
-    AdminAcionLog: db.AdminActionLog,
+    AdminActionLog: db.AdminActionLog,
     AuctionPrice: db.AuctionPrice,
     Permission: db.Permission,
-    Post: db.post,
+    Post: db.Post,
     Profile: db.Profile,
     Role: db.Role,
-    Synthetisr: db.Synthetiser,
+    Synthetiser: db.Synthetiser,
     User: db.User
-
-    // ... autres modèles
 };

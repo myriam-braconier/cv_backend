@@ -132,6 +132,16 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+console.log(`🚀 Environment: ${NODE_ENV}`);
+console.log("=================================");
+console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
+console.log(`📦 Database: ${process.env.DB_HOST}`);
+console.log("=================================");
+
+
 // pour gérer la fermeture globale au shutdown
 process.on("SIGINT", async () => {
 	try {

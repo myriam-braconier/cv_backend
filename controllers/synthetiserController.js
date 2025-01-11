@@ -13,80 +13,98 @@ export const importData = async (req, res) => {
 };
 // Fonction pour obtenir tous les synthétiseurs
 export const getAllSynthetisers = async (req, res) => {
-	try {
-		console.log("Début de la récupération des synthétiseurs");
+    try {
+        console.log("Début de la récupération des synthétiseurs");
 
-		// Vérifier que le modèle Post existe
-		if (!db.Post) {
-			console.error("Modèle Post non trouvé dans db:", Object.keys(db));
-			throw new Error("Modèle Post non configuré");
-		}
+        // Paramètres de pagination
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 12;
+        const offset = (page - 1) * limit;
 
-		// Récupération des synthétiseurs avec leurs posts
-		const synths = await db.Synthetiser.findAll({
-			include: [
-				{
-					model: db.Post,
-					as: "posts",
-					required: false, // Pour faire un LEFT JOIN
-				},
-			],
-			raw: false,
-			nest: true,
-			include: [
-				{
-					model: db.AuctionPrice,
-					as: "auctionPrices", // Comme défini dans les associations
-					attributes: ["id", "proposal_price", "status"], // Les champs que vous voulez
-					order: [["createdAt", "DESC"]], // Pour avoir les plus récentes d'abord
-				},
-			],
-			order: [["createdAt", "DESC"]], // Ordre des synthétiseurs
-		});
+        // Vérifier que le modèle Post existe
+        if (!db.Post) {
+            console.error("Modèle Post non trouvé dans db:", Object.keys(db));
+            throw new Error("Modèle Post non configuré");
+        }
 
-		console.log("Synthétiseurs récupérés, nombre:", synths.length);
+        // Récupération du nombre total de synthétiseurs
+        const total = await db.Synthetiser.count();
 
-		// Formatage des données avec gestion d'erreur
-		const formattedSynths = synths.map((synth) => {
-			try {
-				const plainSynth = synth.get({ plain: true });
-				return {
-					...plainSynth,
-					posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
-					postCount: Array.isArray(plainSynth.posts)
-						? plainSynth.posts.length
-						: 0,
-				};
-			} catch (error) {
-				console.error("Erreur lors du formatage du synthétiseur:", error);
-				return {
-					...synth,
-					posts: [],
-					postCount: 0,
-				};
-			}
-		});
+        // Récupération des synthétiseurs paginés
+        const synths = await db.Synthetiser.findAll({
+            limit,
+            offset,
+            include: [
+                {
+                    model: db.Post,
+                    as: "posts",
+                    required: false,
+                },
+                {
+                    model: db.AuctionPrice,
+                    as: "auctionPrices",
+                    attributes: ["id", "proposal_price", "status"],
+                    order: [["createdAt", "DESC"]],
+                },
+            ],
+            order: [["createdAt", "DESC"]],
+            raw: false,
+            nest: true,
+        });
 
-		console.log("Données formatées avec succès");
+        console.log("Synthétiseurs récupérés, nombre:", synths.length);
 
-		res.json({
-			data: formattedSynths,
-			roles: ["user"],
-			message: "Synthétiseurs récupérés avec succès",
-		});
-	} catch (error) {
-		console.error("Erreur détaillée:", {
-			message: error.message,
-			stack: error.stack,
-			name: error.name,
-		});
+        // Formatage des données
+        const formattedSynths = synths.map((synth) => {
+            try {
+                const plainSynth = synth.get({ plain: true });
+                return {
+                    ...plainSynth,
+                    posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
+                    postCount: Array.isArray(plainSynth.posts)
+                        ? plainSynth.posts.length
+                        : 0,
+                };
+            } catch (error) {
+                console.error("Erreur lors du formatage du synthétiseur:", error);
+                return {
+                    ...synth,
+                    posts: [],
+                    postCount: 0,
+                };
+            }
+        });
 
-		res.status(500).json({
-			error: "Erreur lors de la récupération des synthétiseurs",
-			details: error.message,
-			stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
-		});
-	}
+        console.log("Données formatées avec succès");
+
+        // Calcul des métadonnées de pagination
+        const totalPages = Math.ceil(total / limit);
+        
+        res.json({
+            synths: formattedSynths,
+            pagination: {
+                total,
+                currentPage: page,
+                totalPages,
+                limit,
+                hasMore: page < totalPages
+            },
+            roles: ["user"],
+            message: "Synthétiseurs récupérés avec succès",
+        });
+
+    } catch (error) {
+        console.error("Erreur détaillée:", {
+            message: error.message,
+            stack: error.stack,
+            name: error.name,
+        });
+        res.status(500).json({
+            error: "Erreur lors de la récupération des synthétiseurs",
+            details: error.message,
+            stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+        });
+    }
 };
 // Fonction pour obtenir un synthétiseur spécifique
 export const getSynthetiser = async (req, res) => {

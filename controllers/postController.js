@@ -7,10 +7,7 @@ export const getAllPosts = async (req, res) => {
 		res.json(posts);
 	} catch (error) {
 		res.status(500).json({ error: "Failed to retrieve posts" });
-	} finally {
-		// Libère explicitement la connexion
-		await sequelize.connectionManager.releaseConnection(connection);
-	}
+	} 
 };
 
 // Fonction pour créer un nouveau post
@@ -20,10 +17,7 @@ export const createPost = async (req, res) => {
 		res.status(201).json(newPost);
 	} catch (error) {
 		res.status(400).json({ error: "Failed to create post" });
-	} finally {
-		// Libère explicitement la connexion
-		await sequelize.connectionManager.releaseConnection(connection);
-	}
+	} 
 };
 
 // Updater le post d'un utilisateur
@@ -64,10 +58,7 @@ let connection;
 			error: "Erreur lors de la mise à jour du post",
 			details: error.message,
 		});
-	} finally {
-		// Libère explicitement la connexion
-		await sequelize.connectionManager.releaseConnection(connection);
-	}
+	} 
 };
 
 // Exporter les fonctions avec un export par défaut

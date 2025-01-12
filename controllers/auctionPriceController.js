@@ -114,7 +114,43 @@ export const createAuction = async (req, res) => {
 } 
 };
 
-export default { getAllAuctions, createAuction, getLatestAuctionBySynthId };
+export const deleteAuction = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validation de l'ID
+    if (!id) {
+      return res.status(400).json({ 
+        message: "L'ID de l'enchère est requis" 
+      });
+    }
+
+    // Recherche et suppression de l'enchère
+    const deletedAuction = await Auction.findByIdAndDelete(id);
+
+    // Vérification si l'enchère existe
+    if (!deletedAuction) {
+      return res.status(404).json({ 
+        message: "Enchère non trouvée" 
+      });
+    }
+
+    return res.status(200).json({ 
+      message: "Enchère supprimée avec succès",
+      data: deletedAuction 
+    });
+
+  } catch (error) {
+    return res.status(500).json({ 
+      message: "Erreur lors de la suppression de l'enchère",
+      error: error.message 
+    });
+  }
+};
+
+
+
+export default { getAllAuctions, createAuction, deleteAuction,getLatestAuctionBySynthId };
 
   
 

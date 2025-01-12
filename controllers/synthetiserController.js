@@ -27,13 +27,13 @@ export const getAllSynthetisers = async (req, res) => {
             throw new Error("Modèle Post non configuré");
         }
 
-        // Récupération du nombre total de synthétiseurs
+        // Récupérer le total AVANT la pagination
         const total = await db.Synthetiser.count();
 
-        // Récupération des synthétiseurs paginés
+        // Récupération des synthétiseurs AVEC pagination
         const synths = await db.Synthetiser.findAll({
-            limit,
-            offset,
+            limit: limit,  // Nombre d'éléments par page
+            offset: offset, // Point de départ
             include: [
                 {
                     model: db.Post,
@@ -52,8 +52,6 @@ export const getAllSynthetisers = async (req, res) => {
             nest: true,
         });
 
-        console.log("Synthétiseurs récupérés, nombre:", synths.length);
-
         // Formatage des données
         const formattedSynths = synths.map((synth) => {
             try {
@@ -61,9 +59,7 @@ export const getAllSynthetisers = async (req, res) => {
                 return {
                     ...plainSynth,
                     posts: Array.isArray(plainSynth.posts) ? plainSynth.posts : [],
-                    postCount: Array.isArray(plainSynth.posts)
-                        ? plainSynth.posts.length
-                        : 0,
+                    postCount: Array.isArray(plainSynth.posts) ? plainSynth.posts.length : 0,
                 };
             } catch (error) {
                 console.error("Erreur lors du formatage du synthétiseur:", error);
@@ -77,20 +73,19 @@ export const getAllSynthetisers = async (req, res) => {
 
         console.log("Données formatées avec succès");
 
-        // Calcul des métadonnées de pagination
+        // Calcul de la pagination
         const totalPages = Math.ceil(total / limit);
-        
-        res.json({
-            synths: formattedSynths,
+
+        // Structure de réponse modifiée
+        return res.json({
+            synths: formattedSynths,  // Uniquement les synthés de la page courante
             pagination: {
-                total,
-                currentPage: page,
-                totalPages,
-                limit,
-                hasMore: page < totalPages
+                total,          // Nombre total de synthétiseurs
+                totalPages,     // Nombre total de pages
+                currentPage: page,   // Page courante
+                limit,         // Nombre d'éléments par page
             },
-            roles: ["user"],
-            message: "Synthétiseurs récupérés avec succès",
+            message: "Synthétiseurs récupérés avec succès"
         });
 
     } catch (error) {
@@ -99,7 +94,7 @@ export const getAllSynthetisers = async (req, res) => {
             stack: error.stack,
             name: error.name,
         });
-        res.status(500).json({
+        return res.status(500).json({
             error: "Erreur lors de la récupération des synthétiseurs",
             details: error.message,
             stack: process.env.NODE_ENV === "development" ? error.stack : undefined,

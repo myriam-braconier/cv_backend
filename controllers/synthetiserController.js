@@ -47,7 +47,11 @@ export const getAllSynthetisers = async (req, res) => {
                     order: [["createdAt", "DESC"]],
                 },
             ],
-            order: [["createdAt", "DESC"]],
+			order: [
+				["marque", "ASC"],  // Tri principal par marque
+				["modele", "ASC"],  // Tri secondaire par modèle
+				["createdAt", "DESC"]  // Tri tertiaire par date de création
+			],
             raw: false,
             nest: true,
         });

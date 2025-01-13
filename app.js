@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import { models } from "./models/index.js";
+import { Sequelize } from 'sequelize';
 
 console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
@@ -14,6 +15,13 @@ console.log("=================================");
 dotenv.config();
 const app = express();
 // rendre les models disponibles dans l'app
+
+
+const sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'mysql' // ou postgres, sqlite, etc.
+});
+
 
 app.set("models", models);
 
@@ -113,6 +121,13 @@ app.get("/protected", authenticateToken, (req, res) => {
 		message: "Welcome to the protected route!",
 		user: req.user,
 	});
+});
+
+// Pour debug 
+app._router.stack.forEach(function(r){
+    if (r.route && r.route.path){
+        console.log(r.route.path, r.route.methods);
+    }
 });
 
 // Middleware 404

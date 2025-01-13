@@ -71,7 +71,7 @@ export const initModel = (sequelize, DataTypes) => {
 		if (models.Synthetiser) {
 			Post.belongsTo(models.Synthetiser, {
 				foreignKey: "synthetiserId",
-				as: "synthetisers",
+				as: "synthetiser",
 				onDelete: "CASCADE",
 				onUpdate: "CASCADE",
 			});

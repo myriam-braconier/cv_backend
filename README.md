@@ -13,7 +13,7 @@
 
 ### Déploiement
 - Vercel
-- Hébergement de la base de données : AWS (à l'aide de MysqlWorkbench)
+- Hébergement de la base de données : AWS (via MysqlWorkbench)
 
 ### janvier 2025
 

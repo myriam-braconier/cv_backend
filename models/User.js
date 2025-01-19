@@ -46,17 +46,19 @@ export const initModel = (sequelize, DataTypes) => {
 		{
 			tableName: "users",
 			timestamps: true,
-            hooks: {
-                beforeUpdate: async (user) => {
-                    const role = await user.getRole();
-                    const isAuthorized = role.role_name === 'admin' || 
-                                       role.role_name === 'owner_instr';
-                    
-                    if (!isAuthorized && user.changed('price')) {
-                        throw new Error('Seuls les administrateurs et les propriétaires d\'instruments peuvent modifier le prix');
-                    }
-                }
-            }
+			hooks: {
+				beforeUpdate: async (user) => {
+					const role = await user.getRole();
+					const isAuthorized =
+						role.role_name === "admin" || role.role_name === "owner_instr";
+
+					if (!isAuthorized && user.changed("price")) {
+						throw new Error(
+							"Seuls les administrateurs et les propriétaires d'instruments peuvent modifier le prix"
+						);
+					}
+				},
+			},
 		}
 	);
 
@@ -66,8 +68,7 @@ export const initModel = (sequelize, DataTypes) => {
 			User.hasMany(models.AuctionPrice, {
 				foreignKey: "userId",
 				as: "auctionPrice",
-				tableName: "auction_prices" // Ajout du nom de table explicite
-
+				tableName: "auction_prices", // Ajout du nom de table explicite
 			});
 		}
 
@@ -79,9 +80,9 @@ export const initModel = (sequelize, DataTypes) => {
 				onDelete: "RESTRICT",
 				onUpdate: "CASCADE",
 				references: {
-                    model: "roles", // Nom de la table en minuscules
-                    key: "id"
-                }
+					model: "roles", // Nom de la table en minuscules
+					key: "id",
+				},
 			});
 		}
 
@@ -91,12 +92,22 @@ export const initModel = (sequelize, DataTypes) => {
 				foreignKey: "userId",
 				as: "posts",
 				references: {
-                    model: "posts", // Nom de la table en minuscules
-                    key: "id"
-                }
+					model: "posts", // Nom de la table en minuscules
+					key: "id",
+				},
 			});
 		}
-		
+
+		if (models.Profile) {
+			User.hasOne(models.Profile, {
+				foreignKey: "userId",
+				as: "profile",
+				references: {
+					model: "profiles",
+					key: "id",
+				},
+			});
+		}
 	};
 
 	return User;

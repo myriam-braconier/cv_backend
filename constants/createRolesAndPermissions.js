@@ -26,7 +26,7 @@ const roles = [
 	{ name: "admin", description: "Administrateur avec tous les droits" },
 	{ name: "user", description: "Utilisateur standard" },
 	{ name: "moderator", description: "Modérateur avec des droits étendus" },
-	{ name: "owner", description: "Propriétaire" },
+	{ name: "owner_instr", description: "Propriétaire" },
 	{ name: "creator", description: "Créateur" },
 ];
 

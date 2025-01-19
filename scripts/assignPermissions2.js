@@ -22,7 +22,7 @@ const assignPermissionsToRoles = async () => {
             console.log('✓ Permissions attribuées au rôle creator');
         }
 
-        // 5. Attribution pour le rôle OWNER_INSTr (toutes les permissions comme admin)
+        // 5. Attribution pour le rôle OWNER_INSTr
         const ownerRole = await db.Role.findOne({ where: { name: 'owner_instr' } });
         if (ownerRole) {
             const ownerPermissions = await db.Permission.findAll({
@@ -31,7 +31,6 @@ const assignPermissionsToRoles = async () => {
                         'synths:read',
                         'synths:create',
                         'synths:update',
-                        'synths:delete'
                     ]
                 }
             });

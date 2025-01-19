@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
-import { models } from "./models/index.js";
+import  db,{ models } from "./models/index.js";
 import { Sequelize } from 'sequelize';
 
 console.log("=================================");
@@ -155,6 +155,12 @@ console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
 console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
+
+// Debug pour voir ce qui est chargé
+console.log('Modèles disponibles:', {
+    fromDb: Object.keys(db).filter(key => key !== 'sequelize' && key !== 'Sequelize'),
+    fromModels: Object.keys(models)
+});
 
 
 // pour gérer la fermeture globale au shutdown

@@ -23,7 +23,7 @@ const createRoles = async () => {
                 description: 'Créateur de contenu avec droits de publication'
             },
             {
-                name: 'owner',
+                name: 'owner_instr',
                 description: 'Propriétaire avec accès complet au système'
             }
         ];

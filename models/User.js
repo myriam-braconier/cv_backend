@@ -23,6 +23,9 @@ export const initModel = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				unique: true,
+				validate: {
+					isEmail: true,
+				},
 			},
 			password: {
 				type: DataTypes.STRING,
@@ -30,37 +33,43 @@ export const initModel = (sequelize, DataTypes) => {
 			},
 			has_instrument: {
 				type: DataTypes.BOOLEAN,
+				allowNull: false,
+				defaultValue: false,
 			},
 			age: {
 				type: DataTypes.INTEGER,
 			},
-			roleId: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				references: {
-					model: "Roles",
-					key: "id",
-				},
-			},
-		},
-		{
-			tableName: "users",
-			timestamps: true,
-			hooks: {
-				beforeUpdate: async (user) => {
-					const role = await user.getRole();
-					const isAuthorized =
-						role.role_name === "admin" || role.role_name === "owner_instr";
+            roleId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                // Supprimé defaultValue: 1
+                // À la place, utilisons un hook beforeCreate
+            },
+        },
+        {
+            tableName: "users",
+            timestamps: true,
+            hooks: {
+				beforeCreate: async (user) => {
+                    // Si roleId n'est pas défini, le calculer à partir de has_instrument
+                    if (!user.roleId) {
+                        user.roleId = user.has_instrument ? 5 : 1;
+                    }
+                },
 
-					if (!isAuthorized && user.changed("price")) {
-						throw new Error(
-							"Seuls les administrateurs et les propriétaires d'instruments peuvent modifier le prix"
-						);
-					}
-				},
-			},
-		}
-	);
+                beforeUpdate: async (user) => {
+                    const role = await user.getRole();
+                    const isAuthorized =
+                        role.role_name === "admin" || role.role_name === "owner_instr";
+                    if (!isAuthorized && user.changed("price")) {
+                        throw new Error(
+                            "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier le prix"
+                        );
+                    }
+                },
+            },
+        }
+    );
 
 	User.associate = (models) => {
 		// Association avec AuctionPrice

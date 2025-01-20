@@ -8,10 +8,7 @@ export const getAllRoles = async (req, res) => {
         res.json(roles);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve roles' });
-    }  finally {
-        // Libère explicitement la connexion
-        await sequelize.connectionManager.releaseConnection(connection);
-    }
+    }  
 };
 
 // Fonction pour créer un nouveau role

@@ -1,13 +1,12 @@
- export const initModel = (sequelize, DataTypes) => {
-      const Role = sequelize.define(
-        "Role",
+export const initModel = (sequelize, DataTypes) => {
+  const Role = sequelize.define(
+    "Role",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -19,18 +18,15 @@
           notEmpty: { msg: "Le nom du rôle ne peut pas être vide" },
         },
       },
-
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-
       permission: {
         type: DataTypes.JSON,
         allowNull: true,
         defaultValue: {},
       },
-
     },
     {
       tableName: "roles",
@@ -41,21 +37,20 @@
   Role.associate = (models) => {
     // Association avec Permission
     Role.belongsToMany(models.Permission, {
-      through: 'RolePermission',
-      as: 'permissions',  // Important pour générer les méthodes setPermissions et getPermissions
+      through: models.RolePermission, // Utilisez le modèle RolePermission
+      as: 'permissions',
       foreignKey: 'roleId',
       otherKey: 'permissionId'
     });
 
     // Association avec User 
     if (models.User) {
-    Role.hasMany(models.User, {
-      as: 'users', // alias pour les requêtes
-      foreignKey: 'roleId',
-      as: 'users'
-    });
-  }
-  }
+      Role.hasMany(models.User, {
+        foreignKey: 'roleId',
+        as: 'users'  // Un seul alias
+      });
+    }
+  };
 
   return Role;
 };

@@ -1,84 +1,75 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
 // Initialiser dotenv pour charger les variables d'environnement
 dotenv.config();
 
-
-// Définir le secret à partir des variables d'environnement
 const jwtSecret = process.env.JWT_SECRET;
 
 // Liste des routes publiques
 const publicRoutes = [
-    '/api/synthetisers',      // Liste des synthétiseurs
-    '/api/synthetisers/:id',  // Détails d'un synthétiseur
-    '/api/synthetisers/:id/auctions/latest',
-    '/api/synthetisers/:id/auctions',
-    '/api/auctions',
-    '/api/auctions/:id',
-    '/api/users',
-    '/api/users/with-posts'
+	"/api/synthetisers",
+	"/api/synthetisers/:id",
+	"/api/synthetisers/:id/auctions/latest",
+	"/api/synthetisers/:id/auctions",
+	"/api/auctions",
+	"/api/auctions/:id",
+	"/api/users",
+	"/api/users/with-posts",
 ];
 
+// middleware/authMiddleware.js
 export const authenticateToken = (req, res, next) => {
-    // Vérifier si la route actuelle est publique
-    const isPublicRoute = publicRoutes.some(route => {
-        // Convertir la route publique en regex pour gérer les paramètres dynamiques
-        const routeRegex = new RegExp('^' + route.replace(/:\w+/g, '[^/]+') + '$');
-        return routeRegex.test(req.path);
-    });
+	console.log("Path:", req.path);
+	console.log("Headers:", req.headers);
 
-    // Si c'est une route publique, passer directement au suivant
-    if (isPublicRoute) {
-        return next();
-    }
+	let token = null;
+	const authHeader = req.headers["authorization"];
 
-    // Pour les routes protégées, vérifier le token
-    try {
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
-        
-        if (!token) {
-            return res.status(401).json({ message: "Token manquant" });
-        }
+	if (authHeader) {
+		token = authHeader.split(" ")[1];
+		console.log("Token from header:", token);
+	} else if (req.cookies && req.cookies.token) {
+		token = req.cookies.token;
+		console.log("Token from cookies:", token);
+	}
 
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-            if (err) {
-                console.error('Erreur d\'authentification:', err);
-                return res.status(403).json({ message: "Token invalide" });
-            }
-            req.user = user;
-            next();
-        });
-    } catch (error) {
-        console.error('Erreur d\'authentification:', error);
-        return res.status(403).json({
-            error: "Token invalide ou expiré."
-        });
-    }
+	if (!token) {
+		console.log("No token found");
+		// Si c'est une route publique, on continue
+		if (publicRoutes.includes(req.path)) {
+			return next();
+		}
+		return res.status(401).json({ error: "No token provided" });
+	}
+
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if (err) {
+			console.error("Token verification error:", err);
+			return res.status(403).json({ error: "Invalid token" });
+		}
+		console.log("Decoded user:", JSON.stringify(user, null, 2)); // Log détaillé
+		req.user = user;
+		next();
+	});
 };
 
 // const checkPricePermission = async (req, res, next) => {
 //     try {
-//         const user = req.user; 
+//         const user = req.user;
 //         const role = await user.getRole();
-        
+
 //         if (role.role_name === 'admin' || role.role_name === 'owner_instr') {
 //             next();
 //         } else {
-//             res.status(403).json({ 
-//                 message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix" 
+//             res.status(403).json({
+//                 message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix"
 //             });
 //         }
 //     } catch (error) {
 //         res.status(500).json({ message: "Erreur lors de la vérification des permissions" });
 //     }
 // };
-
-
-
-
 
 // Exporter le secret
 export const secret = process.env.JWT_SECRET;

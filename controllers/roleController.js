@@ -4,11 +4,14 @@ import db from "../models/index.js";
 // Fonction pour obtenir tous les roles
 export const getAllRoles = async (req, res) => {
     try {
+        console.log("Modèles disponibles:", Object.keys(db));
         const roles = await db.Role.findAll();
+        console.log("Rôles trouvés:", roles);
         res.json(roles);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to retrieve roles' });
-    }  
+        console.error("Erreur complète:", error);
+        res.status(500).json({ message: error.message });
+    }
 };
 
 // Fonction pour créer un nouveau role

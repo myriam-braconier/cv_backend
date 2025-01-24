@@ -115,101 +115,73 @@ const authController = {
 	},
 
 	// Inscription
-	// controllers/authController.js
 	register: async (req, res) => {
 		try {
-			const { username, email, password, has_instrument, roleId, role_id } =
-				req.body;
-
-			// Log des données reçues pour debug
-			console.log("Données reçues du frontend:", {
-				username,
-				email,
-				has_instrument,
-				roleId,
-				role_id,
-			});
-
-			// Conversion explicite des valeurs
-			const isOwner = Boolean(has_instrument);
-			// Utiliser le roleId envoyé ou le calculer en fonction de has_instrument
-			const finalRoleId = roleId || role_id || (isOwner ? 5 : 1);
-
-			console.log("Valeurs calculées:", {
-				isOwner,
-				finalRoleId,
-			});
-
-			// Vérifier si l'utilisateur existe déjà
-			const existingUser = await db.User.findOne({ where: { email } });
-			if (existingUser) {
-				return res.status(400).json({ message: "Cet email est déjà utilisé" });
+			const { username, email, password, has_instrument } = req.body;
+	
+			// Vérification des données requises
+			if (!username || !email || !password) {
+				return res.status(400).json({ 
+					success: false,
+					message: "Veuillez remplir tous les champs requis" 
+				});
 			}
-
-			// Hasher le mot de passe
-			const hashedPassword = await bcrypt.hash(password, 10);
-
-			// Log avant création
-			console.log("Données avant création:", {
-				username,
-				email,
-				has_instrument: isOwner,
-				roleId,
+	
+			// Création de l'utilisateur avec transaction
+			const result = await db.sequelize.transaction(async (t) => {
+				const user = await db.User.create({
+					username,
+					email,
+					password: await bcrypt.hash(password, 10),
+					has_instrument: Boolean(has_instrument)
+				}, { 
+					transaction: t
+				});
+	
+				return user;
 			});
-
-			// Créer l'utilisateur avec le mot de passe hashé
-			const user = await db.User.create({
-				username,
-				email,
-				password: hashedPassword,
-				has_instrument: isOwner,
-				roleId: finalRoleId, // Utiliser le roleId calculé
-			});
-
-			// Log après création
-			console.log("Utilisateur créé:", {
-				id: user.id,
-				email: user.email,
-				has_instrument: user.has_instrument,
-				roleId: user.roleId,
-			});
-
-			// Vérifier que l'utilisateur a bien été créé avec le bon rôle
-			const verifiedUser = await db.User.findByPk(user.id);
-			console.log("Vérification après création:", {
-				id: verifiedUser.id,
-				roleId: verifiedUser.roleId,
-			});
-
-			// Créer le token avec le bon roleId
+	
+			// Création du token
 			const token = jwt.sign(
 				{
-					id: verifiedUser.id,
-					email: verifiedUser.email,
-					roleId: verifiedUser.roleId, // Utiliser le roleId de l'utilisateur vérifié
+					id: result.id,
+					email: result.email,
+					roleId: result.roleId
 				},
 				process.env.JWT_SECRET,
 				{ expiresIn: "24h" }
 			);
-
+	
+			// Réponse
 			res.status(201).json({
+				success: true,
 				message: "Inscription réussie",
 				user: {
-					id: verifiedUser.id,
-					email: verifiedUser.email,
-					username: verifiedUser.username,
-					roleId: verifiedUser.roleId, // S'assurer que c'est le bon roleId
+					id: result.id,
+					email: result.email,
+					username: result.username,
+					roleId: result.roleId,
+					has_instrument: result.has_instrument
 				},
-				token,
+				token
 			});
+	
 		} catch (error) {
-			console.error("Erreur détaillée d'inscription:", error);
+			if (error.name === 'SequelizeUniqueConstraintError') {
+				return res.status(400).json({
+					success: false,
+					message: "Cet email est déjà utilisé"
+				});
+			}
+	
+			console.error("Erreur d'inscription:", error);
 			res.status(500).json({
+				success: false,
 				message: "Erreur lors de l'inscription",
-				error: error.message,
+				error: process.env.NODE_ENV === 'development' ? error.message : undefined
 			});
 		}
-	},
+	}
 };
 
 export default authController;

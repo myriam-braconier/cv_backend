@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
-import  db,{ models } from "./models/index.js";
+import  db from "./models/index.js";
 import { Sequelize } from 'sequelize';
 
 console.log("=================================");
@@ -17,13 +17,8 @@ const app = express();
 // rendre les models disponibles dans l'app
 
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql' // ou postgres, sqlite, etc.
-});
 
-
-app.set("models", models);
+app.set("models", db);
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -40,6 +35,11 @@ const allowedOrigins = [
 	"http://localhost:3000",
 ];
 
+
+
+// Middlewares de base
+app.use(cookieParser());
+app.use(express.json());
 app.use(
 	cors({
 		origin: "https://concrete-frontend.vercel.app" || "http://localhost:3000",
@@ -48,12 +48,17 @@ app.use(
 		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
+// app.use(cors({
+//     origin: origin => {
+//         if (!origin || allowedOrigins.includes(origin)) return origin;
+//         return false;
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 
-// Middlewares de base
-app.use(cookieParser());
-app.use(express.json());
-
-// Configuration des headers pour les cookies
+// Headers CORS
 app.use((req, res, next) => {
 	// Vérifier si l'origine est dans la liste des origines autorisées
 	const origin = req.headers.origin;
@@ -68,28 +73,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Middleware d'authentification
-export const authenticateToken = (req, res, next) => {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader && authHeader.split(" ")[1];
-
-	// Si pas de token dans le header, vérifier dans les cookies
-	if (!token && req.cookies) {
-		token = req.cookies.token;
-	}
-
-	if (!token) {
-		return res.status(401).json({ error: "No token provided" });
-	}
-
-	jwt.verify(token, jwtSecret, (err, user) => {
-		if (err) {
-			return res.status(403).json({ error: "Invalid token" });
-		}
-		req.user = user;
-		next();
-	});
-};
+// app.use(authenticateToken); // quand on veut Appliquer le middleware à toutes les routes
 
 // Handler pour favicon
 app.get("/favicon.ico", (req, res) => res.status(204).send());
@@ -104,13 +88,17 @@ import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
 import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
+import { authenticateToken } from './middleware/authMiddleware.js';
 
-// Routes
-app.use("/admin", adminRoutes);
+// Routes publiques qui ne nécessitent pas d'authentification
 app.use("/auth", authRoutes);
+app.use("/api/roles", roleRoutes);
+
+
+// Routes protégées
+app.use("/admin", adminRoutes);
 app.use("/api/synthetisers", synthetiserRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/roles", roleRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/auctions", auctionRoutes);
@@ -157,10 +145,10 @@ console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
 
 // Debug pour voir ce qui est chargé
-console.log('Modèles disponibles:', {
-    fromDb: Object.keys(db).filter(key => key !== 'sequelize' && key !== 'Sequelize'),
-    fromModels: Object.keys(models)
-});
+console.log('Modèles disponibles:', 
+   Object.keys(db).filter(key => key !== 'sequelize' && key !== 'Sequelize')
+    
+);
 
 
 // pour gérer la fermeture globale au shutdown

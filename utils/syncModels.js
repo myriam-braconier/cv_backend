@@ -7,6 +7,7 @@ import initProfile from "../models/Profile.js";
 import initPermission from "../models/Permission.js";
 import initAuctionPrice from "../models/AuctionPrice.js";
 import { DataTypes } from "sequelize";
+import { initRolePermission } from "../models/RolePermission.js"
 
 const syncModels = async () => {
 	try {

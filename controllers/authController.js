@@ -24,7 +24,7 @@ const authController = {
 			}
 
 			// Créer le token
-			const token = await generateToken(result);
+			const token = await generateToken(user);
 
 			// Préparer les données utilisateur à renvoyer
 			const userData = {

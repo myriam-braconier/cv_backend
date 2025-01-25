@@ -18,38 +18,35 @@ const publicRoutes = [
 	"/api/users/with-posts",
 ];
 
-
-export const checkPermissions = (requiredPermissions, mode = 'all') => (req, res, next) => {
-	if (mode === 'all') {
-	  const hasAll = requiredPermissions.every(perm => req.user?.permissions?.includes(perm));
-	  if (!hasAll) return res.status(403).json({ error: "All permissions required" });
-	} else {
-	  const hasAny = requiredPermissions.some(perm => req.user?.permissions?.includes(perm));
-	  if (!hasAny) return res.status(403).json({ error: "At least one permission required" });
-	}
-	next();
-  };
+export const checkPermissions =
+	(requiredPermissions, mode = "all") =>
+	(req, res, next) => {
+		if (mode === "all") {
+			const hasAll = requiredPermissions.every((perm) =>
+				req.user?.permissions?.includes(perm)
+			);
+			if (!hasAll)
+				return res.status(403).json({ error: "All permissions required" });
+		} else {
+			const hasAny = requiredPermissions.some((perm) =>
+				req.user?.permissions?.includes(perm)
+			);
+			if (!hasAny)
+				return res
+					.status(403)
+					.json({ error: "At least one permission required" });
+		}
+		next();
+	};
 
 // Middleware pour charger les permissions du rôle
 const loadUserPermissions = async (user) => {
 	const role = await user.getRole();
 	return role.permissions;
-   };
-   
-   // Génération du token avec permissions
-   export const generateToken = async (user) => {
-	const defaultPermissions = ['synths:read']; // Permission par défaut
-	const userRole = await db.Role.findByPk(user.roleId);
-	const rolePermissions = userRole?.permissions || [];
-	
-	return jwt.sign({
-	  id: user.id,
-	  email: user.email,
-	  roleId: user.roleId,
-	  permissions: [...defaultPermissions, ...rolePermissions]
-	}, process.env.JWT_SECRET, { expiresIn: "24h" });
-  };
-   
+};
+
+// Génération du token avec permissions
+//  Voir tokenUtils.js
 
 export const authenticateToken = (req, res, next) => {
 	console.log("Path:", req.path);
@@ -85,7 +82,6 @@ export const authenticateToken = (req, res, next) => {
 		next();
 	});
 };
-
 
 // Exporter le secret
 export const secret = process.env.JWT_SECRET;

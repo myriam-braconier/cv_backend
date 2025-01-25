@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import db from "../models/index.js";
-import { generateToken } from "./authMiddleware.js";
+import { generateToken } from "../utils/tokenUtils.js";
 
 const { sequelize } = db;
 

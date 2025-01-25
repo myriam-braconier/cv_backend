@@ -1,8 +1,9 @@
-// controllers/authController.js
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import db from "../models/index.js";
+import { generateToken } from "./authMiddleware.js";
+
 const { sequelize } = db;
 
 // Configuration de dotenv
@@ -23,12 +24,7 @@ const authController = {
 			}
 
 			// Créer le token
-
-			const token = jwt.sign(
-				{ id: user.id, email: user.email, roleId: user.roleId },
-				process.env.JWT_SECRET,
-				{ expiresIn: "24h" }
-			);
+			const token = await generateToken(user);
 
 			// Préparer les données utilisateur à renvoyer
 			const userData = {
@@ -118,40 +114,35 @@ const authController = {
 	register: async (req, res) => {
 		try {
 			const { username, email, password, has_instrument } = req.body;
-	
+
 			// Vérification des données requises
 			if (!username || !email || !password) {
-				return res.status(400).json({ 
+				return res.status(400).json({
 					success: false,
-					message: "Veuillez remplir tous les champs requis" 
+					message: "Veuillez remplir tous les champs requis",
 				});
 			}
-	
+
 			// Création de l'utilisateur avec transaction
 			const result = await db.sequelize.transaction(async (t) => {
-				const user = await db.User.create({
-					username,
-					email,
-					password: await bcrypt.hash(password, 10),
-					has_instrument: Boolean(has_instrument)
-				}, { 
-					transaction: t
-				});
-	
+				const user = await db.User.create(
+					{
+						username,
+						email,
+						password: await bcrypt.hash(password, 10),
+						has_instrument: Boolean(has_instrument),
+					},
+					{
+						transaction: t,
+					}
+				);
+
 				return user;
 			});
-	
+
 			// Création du token
-			const token = jwt.sign(
-				{
-					id: result.id,
-					email: result.email,
-					roleId: result.roleId
-				},
-				process.env.JWT_SECRET,
-				{ expiresIn: "24h" }
-			);
-	
+			const token = await generateToken(user);
+
 			// Réponse
 			res.status(201).json({
 				success: true,
@@ -161,27 +152,27 @@ const authController = {
 					email: result.email,
 					username: result.username,
 					roleId: result.roleId,
-					has_instrument: result.has_instrument
+					has_instrument: result.has_instrument,
 				},
-				token
+				token,
 			});
-	
 		} catch (error) {
-			if (error.name === 'SequelizeUniqueConstraintError') {
+			if (error.name === "SequelizeUniqueConstraintError") {
 				return res.status(400).json({
 					success: false,
-					message: "Cet email est déjà utilisé"
+					message: "Cet email est déjà utilisé",
 				});
 			}
-	
+
 			console.error("Erreur d'inscription:", error);
 			res.status(500).json({
 				success: false,
 				message: "Erreur lors de l'inscription",
-				error: process.env.NODE_ENV === 'development' ? error.message : undefined
+				error:
+					process.env.NODE_ENV === "development" ? error.message : undefined,
 			});
 		}
-	}
+	},
 };
 
 export default authController;

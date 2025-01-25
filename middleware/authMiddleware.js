@@ -18,7 +18,39 @@ const publicRoutes = [
 	"/api/users/with-posts",
 ];
 
-// middleware/authMiddleware.js
+
+export const checkPermissions = (requiredPermissions, mode = 'all') => (req, res, next) => {
+	if (mode === 'all') {
+	  const hasAll = requiredPermissions.every(perm => req.user?.permissions?.includes(perm));
+	  if (!hasAll) return res.status(403).json({ error: "All permissions required" });
+	} else {
+	  const hasAny = requiredPermissions.some(perm => req.user?.permissions?.includes(perm));
+	  if (!hasAny) return res.status(403).json({ error: "At least one permission required" });
+	}
+	next();
+  };
+
+// Middleware pour charger les permissions du rôle
+const loadUserPermissions = async (user) => {
+	const role = await user.getRole();
+	return role.permissions;
+   };
+   
+   // Génération du token avec permissions
+   export const generateToken = async (user) => {
+	const defaultPermissions = ['synths:read']; // Permission par défaut
+	const userRole = await db.Role.findByPk(user.roleId);
+	const rolePermissions = userRole?.permissions || [];
+	
+	return jwt.sign({
+	  id: user.id,
+	  email: user.email,
+	  roleId: user.roleId,
+	  permissions: [...defaultPermissions, ...rolePermissions]
+	}, process.env.JWT_SECRET, { expiresIn: "24h" });
+  };
+   
+
 export const authenticateToken = (req, res, next) => {
 	console.log("Path:", req.path);
 	console.log("Headers:", req.headers);
@@ -54,22 +86,7 @@ export const authenticateToken = (req, res, next) => {
 	});
 };
 
-// const checkPricePermission = async (req, res, next) => {
-//     try {
-//         const user = req.user;
-//         const role = await user.getRole();
-
-//         if (role.role_name === 'admin' || role.role_name === 'owner_instr') {
-//             next();
-//         } else {
-//             res.status(403).json({
-//                 message: "Seuls les administrateurs et les propriétaires d'instruments peuvent modifier les prix"
-//             });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: "Erreur lors de la vérification des permissions" });
-//     }
-// };
 
 // Exporter le secret
 export const secret = process.env.JWT_SECRET;
+export { generateToken };

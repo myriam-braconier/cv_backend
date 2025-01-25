@@ -25,7 +25,7 @@ export const getUserPermissions = async (req, res) => {
 			include: [
 				{
 					model: db.Role,
-					as: "role", // Ajout de l'alias
+					as: "role", 
 					include: [
 						{
 							model: db.Permission,
@@ -40,7 +40,7 @@ export const getUserPermissions = async (req, res) => {
 		console.log("Utilisateur trouvé:", {
 			id: user?.id,
 			roleId: user?.roleId,
-			role: user?.Role?.name,
+			role: user?.role?.name,
 		});
 
 		if (!user) {

@@ -47,7 +47,7 @@ export const initModel = (sequelize, DataTypes) => {
     if (models.User) {
       Role.hasMany(models.User, {
         foreignKey: 'roleId',
-        as: 'users'  // Un seul alias
+        as: 'role'  
       });
     }
   };

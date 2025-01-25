@@ -6,15 +6,13 @@ import initPost from "../models/Post.js";
 import initProfile from "../models/Profile.js";
 import initPermission from "../models/Permission.js";
 import initAuctionPrice from "../models/AuctionPrice.js";
+import initRolePermission from "../models/RolePermission.js";
 import { DataTypes } from "sequelize";
-import { initRolePermission } from "../models/RolePermission.js"
 
 const syncModels = async () => {
 	try {
-
-// Désactiver les contraintes
-await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
-
+		// Désactiver les contraintes
+		await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
 
 		// Vérification de la connexion
 		await sequelize.authenticate();
@@ -30,13 +28,12 @@ await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
 			Auctionprice: initAuctionPrice(sequelize, DataTypes),
 			//  tables avec dépendances multiples
 			Post: initPost(sequelize, DataTypes),
-			
+
 			// tables avec relations complexex
 			Profile: initProfile(sequelize, DataTypes),
 			Permission: initPermission(sequelize, DataTypes),
+			RolePermission: initRolePermission(sequelize, DataTypes),
 		};
-
-		
 
 		// Définition des associations
 		Object.values(models).forEach((model) => {

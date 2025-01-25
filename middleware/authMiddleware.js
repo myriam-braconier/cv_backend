@@ -89,4 +89,3 @@ export const authenticateToken = (req, res, next) => {
 
 // Exporter le secret
 export const secret = process.env.JWT_SECRET;
-export { generateToken };

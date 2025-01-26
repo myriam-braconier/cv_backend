@@ -113,7 +113,7 @@ const authController = {
 	// Inscription
 	register: async (req, res) => {
 		try {
-			const { username, email, password, has_instrument } = req.body;
+			const { username, email, password, has_instrument, roleId } = req.body;
 
 			// Vérification des données requises
 			if (!username || !email || !password) {
@@ -131,6 +131,7 @@ const authController = {
 						email,
 						password: await bcrypt.hash(password, 10),
 						has_instrument: Boolean(has_instrument),
+						roleId
 					},
 					{
 						transaction: t,

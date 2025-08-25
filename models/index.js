@@ -31,6 +31,7 @@ const defaultConfig = {
        } : false,
    },
 };
+console.log("DB_HOST:", process.env.DB_HOST);
 
 const sequelize = new Sequelize(
    process.env.DATABASE_URL ||

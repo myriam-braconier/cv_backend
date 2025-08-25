@@ -10,16 +10,6 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Détecter l'environnement Vercel
-const isVercel = process.env.VERCEL === '1';
-const env = process.env.NODE_ENV || 'development';
-
-// Charger les variables d'environnement uniquement en local
-if (!isVercel) {
-  dotenv.config({
-    path: path.resolve(__dirname, `../.env.${env}`)
-  });
-}
 
 // Debug uniquement en développement
 if (env === 'development') {

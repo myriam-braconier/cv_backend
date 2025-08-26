@@ -90,7 +90,7 @@ const authController = {
 			// Configuration pour les CORS
 			res.header(
 				"Access-Control-Allow-Origin",
-				"https://concrete-frontend.vercel.app"
+				"https://concrete-vibes.up.railway.app"
 			);
 			res.header("Access-Control-Allow-Credentials", "true");
 

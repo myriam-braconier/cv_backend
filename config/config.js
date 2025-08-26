@@ -6,6 +6,7 @@ import path from "path";
 
 
 
+const env = process.env.NODE_ENV || "development";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -82,14 +83,6 @@ const config = {
   }
 };
 
-// Validation uniquement si pas sur Vercel CLI (car Vercel gère ses propres variables d'environnement)
-if (!isVercel) {
-  const requiredEnvVars = ['DB_USERNAME', 'DB_DATABASE', 'DB_HOST'];
-  const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
-  if (missingEnvVars.length > 0) {
-    throw new Error(`Variables d'environnement manquantes: ${missingEnvVars.join(', ')}`);
-  }
-}
 
 // Vérification de la configuration
 const currentConfig = config[env];

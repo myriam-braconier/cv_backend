@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./models/index.js";
+import sequelize from "./utils/sequelize.js";
+
 
 console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);

@@ -15,7 +15,6 @@ const __dirname = dirname(__filename);
 if (env === 'development') {
   console.log('====== Config Debug ======');
   console.log('Environment:', env);
-  console.log('Running on Vercel:', isVercel);
   console.log('Config loaded:', {
     username: process.env.DB_USERNAME,
     database: process.env.DB_DATABASE,
@@ -41,16 +40,6 @@ const baseConfig = {
   },
   dialectOptions: {
     connectTimeout: 60000,
-    requestTimeout: 30000,
-    connectionLimit: 10,
-    queueLimit: 0,
-    keepAlive: true,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 10000,
-    ssl: isVercel ? {  // Configuration SSL spécifique pour AWS RDS
-      require: true,
-      rejectUnauthorized: false // Permettre les certificats auto-signés en prod
-    } : false
   },
   retry: {
     max: 3,

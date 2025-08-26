@@ -12,7 +12,7 @@
 - En Python avec Scrapy, framework de scraping et web crawling
 
 ### Déploiement
-- Vercel
+- Railway
 - Hébergement de la base de données : AWS (via MysqlWorkbench)
 
 ### janvier 2025

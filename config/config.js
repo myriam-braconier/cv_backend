@@ -71,13 +71,16 @@ const config = {
     }
   },
   production: {
-    ...baseConfig,
-    port: process.env.DB_PORT || 3306,
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'mysql',
+    dialectOptions: {
+      // Optionnel : SSL, etc.
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
     logging: false,
-    pool: {
-      ...baseConfig.pool,
-      max: 2
-    }
   },
   test: {
     ...baseConfig,

@@ -33,13 +33,11 @@ const defaultConfig = {
 };
 console.log("DB_HOST:", process.env.DB_HOST);
 
-const sequelize = new Sequelize(
-   process.env.DATABASE_URL ||
-   `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${
-       process.env.DB_HOST
-   }:${process.env.DB_PORT || 3306}/${process.env.DB_DATABASE}`,
-   defaultConfig
-);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'mysql',
+  logging: false,
+  // autres options si besoin
+});
 
 const models = {};
 

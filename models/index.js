@@ -50,7 +50,24 @@ const defaultConfig = {
 };
 
 // Création de l'instance Sequelize avec la variable d'environnement complète
-const sequelize = new Sequelize(process.env.DATABASE_URL, defaultConfig);
+const sequelize = new Sequelize(
+  process.env.DB_DATABASE, // nom base (premier argument)
+  process.env.DB_USERNAME, // utilisateur (deuxième argument)
+  process.env.DB_PASSWORD, // mot de passe (troisième argument)
+  {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+    dialectOptions: {
+      connectTimeout: 60000,
+    },
+  }
+);
 
 // Objet pour stocker les modèles
 const models = {};

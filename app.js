@@ -1,22 +1,15 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
 import cors from "cors";
-import  db from "./models/index.js";
-import { Sequelize } from 'sequelize';
+import db from "./models/index.js";
 
 console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
 console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
 
-// Configuration
-dotenv.config();
 const app = express();
 // rendre les models disponibles dans l'app
-
-
 
 app.set("models", db);
 
@@ -34,8 +27,6 @@ const allowedOrigins = [
 	"http://localhost:4000",
 	"http://localhost:3000",
 ];
-
-
 
 // Middlewares de base
 app.use(cookieParser());
@@ -88,12 +79,11 @@ import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
 import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
-import { authenticateToken } from './middleware/authMiddleware.js';
+import { authenticateToken } from "./middleware/authMiddleware.js";
 
 // Routes publiques qui ne nécessitent pas d'authentification
 app.use("/auth", authRoutes);
 app.use("/api/roles", roleRoutes);
-
 
 // Routes protégées
 app.use("/admin", adminRoutes);
@@ -111,11 +101,11 @@ app.get("/protected", authenticateToken, (req, res) => {
 	});
 });
 
-// Pour debug 
-app._router.stack.forEach(function(r){
-    if (r.route && r.route.path){
-        console.log(r.route.path, r.route.methods);
-    }
+// Pour debug
+app._router.stack.forEach(function (r) {
+	if (r.route && r.route.path) {
+		console.log(r.route.path, r.route.methods);
+	}
 });
 
 // Middleware 404
@@ -136,7 +126,7 @@ app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 console.log(`🚀 Environment: ${NODE_ENV}`);
 console.log("=================================");
@@ -145,11 +135,10 @@ console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
 
 // Debug pour voir ce qui est chargé
-console.log('Modèles disponibles:', 
-   Object.keys(db).filter(key => key !== 'sequelize' && key !== 'Sequelize')
-    
+console.log(
+	"Modèles disponibles:",
+	Object.keys(db).filter((key) => key !== "sequelize" && key !== "Sequelize")
 );
-
 
 // pour gérer la fermeture globale au shutdown
 process.on("SIGINT", async () => {

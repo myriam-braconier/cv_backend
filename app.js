@@ -3,7 +3,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./models/index.js";
 import sequelize from "./utils/sequelize.js";
+import { authenticateToken } from './middleware/authMiddleware.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 console.log("=================================");
 console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
@@ -11,83 +14,72 @@ console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
 
 const app = express();
-// rendre les models disponibles dans l'app
 
 app.set("models", db);
 
 const jwtSecret = process.env.JWT_SECRET;
 
-// Vérifier la présence de JWT_SECRET
 if (!jwtSecret) {
-	console.error("JWT_SECRET is not set in environment variables");
-	process.exit(1);
+  console.error("JWT_SECRET is not set in environment variables");
+  process.exit(1);
 }
 
-// Configuration CORS unifiée
+// Configuration des origines autorisées pour CORS
 const allowedOrigins = [
-	"https://concrete-vibes.up.railway.app/",
-	"http://localhost:4000",
-	"http://localhost:3000",
+  "https://concrete-vibes.up.railway.app",
+  "http://localhost:4000",
+  "http://localhost:3000",
 ];
 
-// Middlewares de base
-app.use(cookieParser());
-app.use(express.json());
-app.use(
-	cors({
-		origin: "https://concrete-vibes.up.railway.app/" || "http://localhost:3000",
-		credentials: true,
-		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-		allowedHeaders: ["Content-Type", "Authorization"],
-	})
-);
-// app.use(cors({
-//     origin: origin => {
-//         if (!origin || allowedOrigins.includes(origin)) return origin;
-//         return false;
-//     },
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"]
-// }));
-
-// Headers CORS
-app.use((req, res, next) => {
-	// Vérifier si l'origine est dans la liste des origines autorisées
-	const origin = req.headers.origin;
-	if (allowedOrigins.includes(origin)) {
-		res.header("Access-Control-Allow-Origin", origin);
-	}
-
-	// Gérer les requêtes OPTIONS préliminaires
-	if (req.method === "OPTIONS") {
-		return res.status(200).end();
-	}
-	next();
+// Middleware pour forcer la non-mise en cache
+app.use('/api/auth/login', (req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
 });
 
-// app.use(authenticateToken); // quand on veut Appliquer le middleware à toutes les routes
 
-// Handler pour favicon
-app.get("/favicon.ico", (req, res) => res.status(204).send());
-app.get("/favicon.png", (req, res) => res.status(204).send());
+// Middleware CORS
+app.use(cors({
+  origin: (origin, callback) => {
+    // Autoriser les requêtes sans origine (ex: Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error("CORS policy: Origin not allowed"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
-// Importer et utiliser les routes
-import authRoutes from "./routes/auth.js";
+// Middlewares globaux
+app.use(cookieParser());
+app.use(express.json());
+
+
+import authRoutes from './routes/auth.js';
+// Routes publiques avant le middleware d'authentification
+app.use('/auth', authRoutes); // routes de login/register/logout
+
+// Middleware d'authentification global qui protège les routes suivantes
+app.use(authenticateToken);
+
+// Gestion des prévol OPTIONS rapidement
+app.options('*', (req, res) => res.sendStatus(200));
+
+// Routes favicon (pour éviter les erreurs 404 liées au favicon)
+app.get("/favicon.ico", (req, res) => res.sendStatus(204));
+app.get("/favicon.png", (req, res) => res.sendStatus(204));
+
+// Import et déclaration des routes
 import synthetiserRoutes from "./routes/synthetisers.js";
 import userRoutes from "./routes/users.js";
-import roleRoutes from "./routes/roles.js";
 import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
 import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
-import { authenticateToken } from "./middleware/authMiddleware.js";
 
-// Routes publiques qui ne nécessitent pas d'authentification
-app.use("/auth", authRoutes);
-app.use("/api/roles", roleRoutes);
-
-// Routes protégées
 app.use("/admin", adminRoutes);
 app.use("/api/synthetisers", synthetiserRoutes);
 app.use("/api/users", userRoutes);
@@ -95,63 +87,97 @@ app.use("/api/profiles", profileRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/auctions", auctionRoutes);
 
-// Route protégée d'exemple
-app.get("/protected", authenticateToken, (req, res) => {
-	res.json({
-		message: "Welcome to the protected route!",
-		user: req.user,
-	});
+// Route protégée exemple
+app.get("/protected", (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Authentification requise" });
+  }
+  res.json({
+    message: "Welcome to the protected route!",
+    user: req.user,
+  });
 });
 
-// Pour debug
-app._router.stack.forEach(function (r) {
-	if (r.route && r.route.path) {
-		console.log(r.route.path, r.route.methods);
-	}
+// Health check (publique)
+app.get('/api/health', (req, res) => {
+  res.json({
+    success: true,
+    message: 'API is running',
+    timestamp: new Date(),
+    authenticated: !!req.user,
+  });
 });
 
-// Middleware 404
+// Route 'me' (auth required)
+app.get('/api/me', (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({
+      success: false,
+      error: "Not authenticated",
+    });
+  }
+  res.json({
+    success: true,
+    user: {
+      id: req.user.id,
+      email: req.user.email,
+      isAdmin: req.user.isAdmin,
+      permissions: req.user.permissions || []
+    }
+  });
+});
+
+// Log des routes chargées (debug)
+app._router.stack.forEach((r) => {
+  if (r.route && r.route.path) {
+    console.log(`${Object.keys(r.route.methods).join(', ').toUpperCase()} ${r.route.path}`);
+  }
+});
+
+// Gestion des erreurs 404
 app.use((req, res) => {
-	console.log(`Route non trouvée: ${req.method} ${req.url}`);
-	res.status(404).json({ message: "Route non trouvée" });
+  res.status(404).json({
+    success: false,
+    error: "Route not found",
+    path: req.path,
+  });
 });
 
-// Middleware de gestion des erreurs
+// Gestion globale des erreurs
 app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).json({ error: "Something went wrong!" });
+  console.error("❌ Global error handler:", err);
+  res.status(500).json({
+    success: false,
+    error: "Internal server error",
+  });
 });
 
-// Démarrage du serveur
+// Démarrage serveur
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🔐 JWT_SECRET configured: ${!!jwtSecret}`);
+  console.log(`🌐 CORS Allowed Origins: ${allowedOrigins.join(', ')}`);
 });
 
 const NODE_ENV = process.env.NODE_ENV || "development";
-
 console.log(`🚀 Environment: ${NODE_ENV}`);
+
 console.log("=================================");
-console.log(`🚀 Environment: ${process.env.NODE_ENV}`);
 console.log(`📦 Database: ${process.env.DB_HOST}`);
 console.log("=================================");
 
-// Debug pour voir ce qui est chargé
-console.log(
-	"Modèles disponibles:",
-	Object.keys(db).filter((key) => key !== "sequelize" && key !== "Sequelize")
-);
-
-// pour gérer la fermeture globale au shutdown
+// Gestion de la fermeture propre au SIGINT
 process.on("SIGINT", async () => {
-	try {
-		await sequelize.close();
-		console.log("Connexions DB fermées");
-		process.exit(0);
-	} catch (error) {
-		console.error("Erreur fermeture DB:", error);
-		process.exit(1);
-	}
+  try {
+    await sequelize.close();
+    console.log("Connexions DB fermées");
+    process.exit(0);
+  } catch (error) {
+    console.error("Erreur fermeture DB:", error);
+    process.exit(1);
+  }
 });
 
 export default app;

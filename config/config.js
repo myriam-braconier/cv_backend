@@ -1,18 +1,14 @@
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from 'path';
-import path from "path";
 
-
-
+dotenv.config(); // Charger les variables d'environnement
 
 const env = process.env.NODE_ENV || "development";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
-// Debug uniquement en développement
 if (env === 'development') {
   console.log('====== Config Debug ======');
   console.log('Environment:', env);
@@ -21,74 +17,66 @@ if (env === 'development') {
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT || 3306,
-    dialect: process.env.DB_DIALECT || 'mysql'
+    dialect: process.env.DB_DIALECT || 'mysql',
   });
   console.log('========================');
 }
 
-// Configuration de base commune
 const baseConfig = {
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  host: process.env.DB_HOST,
-  dialect: 'mysql',
   pool: {
-    max: 2,
+    max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000
   },
-  dialectOptions: {
-    connectTimeout: 60000,
-  },
   retry: {
     max: 3,
     timeout: 3000
-  }
+  },
 };
 
-// Configuration spécifique par environnement
+// Configuration par environnement
 const config = {
   development: {
-    ...baseConfig,
+    username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_DATABASE || 'ma_base_locale',
     host: process.env.DB_HOST || '127.0.0.1',
     port: process.env.DB_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: console.log,
-    pool: {
-      ...baseConfig.pool,
-      max: 5
-    }
+    pool: { ...baseConfig.pool },
+    retry: { ...baseConfig.retry },
   },
   production: {
-    use_env_variable: "DATABASE_URL",
-    dialect: "mysql",
+    use_env_variable: 'DATABASE_URL',
+    dialect: process.env.DB_DIALECT || 'mysql', // ou 'postgres' si prod postgres
     dialectOptions: {
-      // Optionnel : SSL, etc.
       ssl: {
         require: true,
         rejectUnauthorized: false,
       },
     },
     logging: false,
+    pool: { ...baseConfig.pool },
+    retry: { ...baseConfig.retry },
   },
   test: {
-    ...baseConfig,
+    username: process.env.DB_TEST_USERNAME || 'root',
+    password: process.env.DB_TEST_PASSWORD || null,
     database: process.env.DB_TEST_DATABASE || 'test_database',
+    host: process.env.DB_TEST_HOST || '127.0.0.1',
+    port: process.env.DB_TEST_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: false,
-    pool: {
-      ...baseConfig.pool,
-      max: 1
-    }
+    pool: { max: 1, min: 0, acquire: 30000, idle: 10000 },
   }
 };
 
-
-// Vérification de la configuration
 const currentConfig = config[env];
 if (!currentConfig) {
   throw new Error(`Configuration non trouvée pour l'environnement: ${env}`);
 }
 
 export default config;
-export const currentEnvConfig = config[env];
+export const currentEnvConfig = currentConfig;

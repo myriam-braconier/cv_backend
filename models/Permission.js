@@ -12,7 +12,7 @@
    },
  }, {
    sequelize,
-   tableName: 'Permissions',
+   tableName: 'permissions',
  });
 
  Permission.associate = (models) => {

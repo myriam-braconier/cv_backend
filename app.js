@@ -61,20 +61,16 @@ app.use(express.json());
 import authRoutes from './routes/auth.js';
 // Routes publiques avant le middleware d'authentification
 app.use('/auth', authRoutes); // routes de login/register/logout
+
 // endpoint temporaire :
-app.get('/admin/fix-database', async (req, res) => {
+// Ajoutez cette route dans votre app.js, AVANT vos middlewares d'auth
+app.get('/public-fix-database', async (req, res) => {
   try {
-    // Utilisez votre configuration Sequelize existante
-    const sequelize = require('./utils/sequelize'); 
-    
-    console.log('Tentative d\'ajout de la colonne isAdmin...');
-    
+    // Utilisez votre instance sequelize existante
     await sequelize.query(`
       ALTER TABLE users 
       ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE
     `);
-    
-    console.log('Colonne isAdmin ajoutée avec succès !');
     
     res.json({ 
       success: true, 
@@ -83,8 +79,6 @@ app.get('/admin/fix-database', async (req, res) => {
     });
     
   } catch (error) {
-    console.error('Erreur lors de l\'ajout de la colonne:', error.message);
-    
     if (error.message.includes('Duplicate column name')) {
       res.json({ 
         success: true, 
@@ -92,6 +86,7 @@ app.get('/admin/fix-database', async (req, res) => {
         timestamp: new Date().toISOString()
       });
     } else {
+      console.error('Erreur lors de l\'ajout de la colonne:', error);
       res.status(500).json({ 
         success: false, 
         message: error.message,
@@ -100,6 +95,8 @@ app.get('/admin/fix-database', async (req, res) => {
     }
   }
 });
+
+// VOS AUTRES ROUTES ET MIDDLEWARES...
 
 // Middleware d'authentification global qui protège les routes suivantes
 app.use(authenticateToken);

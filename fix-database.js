@@ -1,0 +1,47 @@
+// fix-database.js
+const { Sequelize } = require('sequelize');
+
+// Connexion avec votre DATABASE_URL Railway
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'mysql',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+  logging: console.log // Pour voir les requêtes
+});
+
+async function addIsAdminColumn() {
+  try {
+    console.log('🔄 Connexion à la base de données...');
+    await sequelize.authenticate();
+    console.log('✅ Connecté à la base de données');
+
+    console.log('🔄 Ajout de la colonne isAdmin...');
+    await sequelize.query(`
+      ALTER TABLE users 
+      ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE
+    `);
+    
+    console.log('✅ Colonne isAdmin ajoutée avec succès !');
+    
+    // Vérification
+    const [results] = await sequelize.query('DESCRIBE users');
+    console.log('📋 Structure de la table users :');
+    console.table(results);
+    
+  } catch (error) {
+    if (error.message.includes('Duplicate column name')) {
+      console.log('ℹ️  La colonne isAdmin existe déjà');
+    } else {
+      console.error('❌ Erreur:', error.message);
+    }
+  } finally {
+    await sequelize.close();
+    console.log('🔒 Connexion fermée');
+  }
+}
+
+addIsAdminColumn();

@@ -90,7 +90,46 @@ app.use("/api/auctions", auctionRoutes);
 app.use("/api/auction-prices", auctionRoutes); // Support legacy route
 app.use("/api/roles", roleRoutes); // Support legacy route
 
-
+// endpoint temporaire :
+// Dans votre fichier de routes principal (app.js, index.js, etc.)
+app.get('/admin/fix-database', async (req, res) => {
+  try {
+    // Utilisez votre configuration Sequelize existante
+    const sequelize = require('./utils/sequelize'); 
+    
+    console.log('Tentative d\'ajout de la colonne isAdmin...');
+    
+    await sequelize.query(`
+      ALTER TABLE users 
+      ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE
+    `);
+    
+    console.log('Colonne isAdmin ajoutée avec succès !');
+    
+    res.json({ 
+      success: true, 
+      message: 'Colonne isAdmin ajoutée avec succès !',
+      timestamp: new Date().toISOString()
+    });
+    
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la colonne:', error.message);
+    
+    if (error.message.includes('Duplicate column name')) {
+      res.json({ 
+        success: true, 
+        message: 'La colonne isAdmin existe déjà',
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      res.status(500).json({ 
+        success: false, 
+        message: error.message,
+        timestamp: new Date().toISOString()
+      });
+    }
+  }
+});
 // Route public mais protégée
 app.get('/api/public/roles', async (req, res) => {
     console.log('🎯 Route /api/public/roles appelée !');

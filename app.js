@@ -61,37 +61,7 @@ app.use(express.json());
 import authRoutes from './routes/auth.js';
 // Routes publiques avant le middleware d'authentification
 app.use('/auth', authRoutes); // routes de login/register/logout
-
-// Middleware d'authentification global qui protège les routes suivantes
-app.use(authenticateToken);
-
-// Gestion des prévol OPTIONS rapidement
-app.options('*', (req, res) => res.sendStatus(200));
-
-// Routes favicon (pour éviter les erreurs 404 liées au favicon)
-app.get("/favicon.ico", (req, res) => res.sendStatus(204));
-app.get("/favicon.png", (req, res) => res.sendStatus(204));
-
-// Import et déclaration des routes
-import synthetiserRoutes from "./routes/synthetisers.js";
-import userRoutes from "./routes/users.js";
-import profileRoutes from "./routes/profiles.js";
-import postRoutes from "./routes/posts.js";
-import adminRoutes from "./routes/admin.js";
-import auctionRoutes from "./routes/auctions.js";
-import roleRoutes from "./routes/roles.js";
-
-app.use("/admin", adminRoutes);
-app.use("/api/synthetisers", synthetiserRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/profiles", profileRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/auctions", auctionRoutes);
-app.use("/api/auction-prices", auctionRoutes); // Support legacy route
-app.use("/api/roles", roleRoutes); // Support legacy route
-
 // endpoint temporaire :
-// Dans votre fichier de routes principal (app.js, index.js, etc.)
 app.get('/admin/fix-database', async (req, res) => {
   try {
     // Utilisez votre configuration Sequelize existante
@@ -130,6 +100,36 @@ app.get('/admin/fix-database', async (req, res) => {
     }
   }
 });
+
+// Middleware d'authentification global qui protège les routes suivantes
+app.use(authenticateToken);
+
+// Gestion des prévol OPTIONS rapidement
+app.options('*', (req, res) => res.sendStatus(200));
+
+// Routes favicon (pour éviter les erreurs 404 liées au favicon)
+app.get("/favicon.ico", (req, res) => res.sendStatus(204));
+app.get("/favicon.png", (req, res) => res.sendStatus(204));
+
+// Import et déclaration des routes
+import synthetiserRoutes from "./routes/synthetisers.js";
+import userRoutes from "./routes/users.js";
+import profileRoutes from "./routes/profiles.js";
+import postRoutes from "./routes/posts.js";
+import adminRoutes from "./routes/admin.js";
+import auctionRoutes from "./routes/auctions.js";
+import roleRoutes from "./routes/roles.js";
+
+app.use("/admin", adminRoutes);
+app.use("/api/synthetisers", synthetiserRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/profiles", profileRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/auctions", auctionRoutes);
+app.use("/api/auction-prices", auctionRoutes); // Support legacy route
+app.use("/api/roles", roleRoutes); // Support legacy route
+
+
 // Route public mais protégée
 app.get('/api/public/roles', async (req, res) => {
     console.log('🎯 Route /api/public/roles appelée !');

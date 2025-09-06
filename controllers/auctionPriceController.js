@@ -64,13 +64,14 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 			message: "Erreur lors de la récupération de l'enchère",
 			error: error.message,
 		});
-	} 
+	}
 };
 
 // controllers/auctionController.js
 export const createAuction = async (req, res) => {
 	try {
-		const { proposal_price, userId, synthetiserId, status } = req.body;
+		const { proposal_price, userId,status } = req.body;
+		const synthetiserId = req.params.id || req.body.synthetiserId;
 
 		// Validation des données
 		if (!proposal_price || !userId || !synthetiserId) {
@@ -131,5 +132,3 @@ export const deleteAuction = async (req, res) => {
 		res.status(500).json({ message: "Erreur serveur", error: error.message });
 	}
 };
-
-

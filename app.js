@@ -79,6 +79,7 @@ import profileRoutes from "./routes/profiles.js";
 import postRoutes from "./routes/posts.js";
 import adminRoutes from "./routes/admin.js";
 import auctionRoutes from "./routes/auctions.js";
+import roleRoutes from "./routes/roles.js";
 
 app.use("/admin", adminRoutes);
 app.use("/api/synthetisers", synthetiserRoutes);
@@ -86,6 +87,35 @@ app.use("/api/users", userRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/auctions", auctionRoutes);
+app.use("/api/auction-prices", auctionRoutes); // Support legacy route
+app.use("/api/roles", roleRoutes); // Support legacy route
+
+
+// Route public mais protégée
+app.get('/api/public/roles', async (req, res) => {
+    console.log('🎯 Route /api/public/roles appelée !');
+
+  try {
+    console.log('📋 Récupération des rôles publics pour inscription');
+    
+    // Récupérer tous les rôles depuis votre base de données
+    const allRoles = await db.Role.findAll(); 
+    
+    // Filtrer pour exclure les rôles sensibles (admin, moderator, etc.)
+    const publicRoles = allRoles.filter(role => 
+      !['admin', 'moderator'].includes(role.name.toLowerCase())
+    );
+    
+    console.log(`✅ ${publicRoles.length} rôles publics retournés`);
+    res.json(publicRoles);
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de la récupération des rôles publics:', error);
+    res.status(500).json({ 
+      message: 'Erreur lors de la récupération des rôles disponibles' 
+    });
+  }
+});
 
 // Route protégée exemple
 app.get("/protected", (req, res) => {

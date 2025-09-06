@@ -8,9 +8,18 @@ const sequelize = new Sequelize(DATABASE_URL, {
     ssl: {
       require: true,
       rejectUnauthorized: false
-    }
+    },
+connectTimeout: 60000,
+    acquireTimeout: 60000,
+    timeout: 60000,
   },
-  logging: console.log // Pour voir les requêtes
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  logging: console.log
 });
 
 async function addIsAdminColumn() {

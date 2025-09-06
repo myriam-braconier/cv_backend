@@ -62,39 +62,7 @@ import authRoutes from './routes/auth.js';
 // Routes publiques avant le middleware d'authentification
 app.use('/auth', authRoutes); // routes de login/register/logout
 
-// endpoint temporaire :
-// Ajoutez cette route dans votre app.js, AVANT vos middlewares d'auth
-app.get('/public-fix-database', async (req, res) => {
-  try {
-    // Utilisez votre instance sequelize existante
-    await sequelize.query(`
-      ALTER TABLE users 
-      ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE
-    `);
-    
-    res.json({ 
-      success: true, 
-      message: 'Colonne isAdmin ajoutée avec succès !',
-      timestamp: new Date().toISOString()
-    });
-    
-  } catch (error) {
-    if (error.message.includes('Duplicate column name')) {
-      res.json({ 
-        success: true, 
-        message: 'La colonne isAdmin existe déjà',
-        timestamp: new Date().toISOString()
-      });
-    } else {
-      console.error('Erreur lors de l\'ajout de la colonne:', error);
-      res.status(500).json({ 
-        success: false, 
-        message: error.message,
-        timestamp: new Date().toISOString()
-      });
-    }
-  }
-});
+
 
 // VOS AUTRES ROUTES ET MIDDLEWARES...
 

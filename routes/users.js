@@ -58,4 +58,26 @@ router.post('/',
   createUser
 );
 
+// Route pour que l'utilisateur puisse voir SES propres permissions
+router.get('/my-permissions', 
+  authenticateToken, 
+  async (req, res) => {
+    try {
+      // L'utilisateur peut toujours voir ses propres permissions
+      const userId = req.user.id;
+      
+      // Récupérer les permissions de l'utilisateur connecté
+      // (adaptez cette logique selon votre modèle de données)
+      const userPermissions = await getUserPermissionsByUserId(userId);
+      
+      res.json({
+        permissions: userPermissions
+      });
+    } catch (error) {
+      console.error('Erreur lors de la récupération des permissions:', error);
+      res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+  }
+);
+
 export default router;

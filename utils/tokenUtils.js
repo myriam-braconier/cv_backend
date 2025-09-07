@@ -12,6 +12,8 @@ export const generateToken = (user) => {
 	const payload = {
 		id: user.id,
 		email: user.email,
+		username: user.username,
+		roleId: user.roleId,
 		isAdmin: user.isAdmin ?? false, // booléen isAdmin
 		permissions: user.permissions || [], // tableau de permissions
 	};

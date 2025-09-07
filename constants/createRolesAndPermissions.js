@@ -29,10 +29,10 @@ const roles = [
 const rolePermissions = {
    admin: ['users:read', 'users:create', 'users:update', 'users:delete', 'synths:read', 'synths:create', 'synths:update', 'synths:delete'],
    moderator: ['users:read', 'users:update', 'synths:read', 'synths:create'],
-   owner_instr: ['users:read', 'users:create', 'users:update', 'users:delete', 'synths:read', 'synths:create', 'synths:update'],
+   owner_instr: ['auctions:create', 'auctions:read', 'auctions:update','synths:bid','users:read', 'users:create', 'users:update', 'users:delete', 'synths:read', 'synths:create', 'synths:update'],
    creator: ['synths:read', 'synths:create', 'synths:update'],
    user: ['users:read', 'synths:read']
-};
+};x
 
 const permissions = Object.values(PERMISSIONS).map((name) => ({ name }));
 

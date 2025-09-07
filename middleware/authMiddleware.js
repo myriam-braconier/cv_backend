@@ -7,7 +7,6 @@ const jwtSecret = process.env.JWT_SECRET || "default_secret";
 
 // Liste des routes publiques (expressions régulières)
 const publicRoutes = [
-	/^\/api\/synthetisers$/,
 	/^\/api\/synthetisers\/[^\/]+$/,
 	/^\/api\/synthetisers\/[^\/]+\/auctions\/latest$/,
 	/^\/api\/synthetisers\/[^\/]+\/auctions$/,
@@ -110,6 +109,7 @@ export const authenticateToken = (req, res, next) => {
 			id: decoded.id,
 			email: decoded.email,
 			isAdmin: decoded.isAdmin ?? false,
+			roleId: decoded.roleId,
 			permissions: decoded.permissions || [],
 		};
 

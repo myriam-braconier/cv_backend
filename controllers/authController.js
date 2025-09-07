@@ -40,11 +40,22 @@ const authController = {
 			// Extraire les permissions de l'utilisateur
 			const permissions = user.role?.permissions?.map((p) => p.name) || [];
 
-			// Générer le token JWT incluant les permissions et isAdmin
-			const token = generateToken({
-				...user.toJSON(),
+			// 🎯 Créer explicitement l'objet pour le token avec toutes les données nécessaires
+			const tokenPayload = {
+				id: user.id,
+				email: user.email,
+				username: user.username,
+				roleId: user.roleId, // 🎯 Explicitement inclus
+				isAdmin: user.isAdmin,
 				permissions,
-			});
+			};
+
+
+				console.log("🔍 Token payload:", tokenPayload); // Pour debug
+
+		// Générer le token JWT avec le payload explicite
+		const token = generateToken(tokenPayload);
+
 
 			// Préparer les données utilisateur à renvoyer
 			const userData = {

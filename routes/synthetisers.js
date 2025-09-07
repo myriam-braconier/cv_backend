@@ -49,7 +49,7 @@ router.delete('/:id',
 // Routes pour les enchères
 router.post('/:id/auctions', 
     authenticateToken,
-    checkPermission(['auctions:create', 'synths:bid']),
+    checkPermission(['auctions:create', 'auctions:read', 'auctions:update','synths:bid']),
     addAuction
 );
 router.get(

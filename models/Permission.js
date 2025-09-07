@@ -18,7 +18,7 @@
  Permission.associate = (models) => {
   Permission.belongsToMany(models.Role, {
       through: models.RolePermission,
-      as: 'roles',  // Important pour générer les méthodes
+      as: 'role',  // Important pour générer les méthodes
       foreignKey: 'permissionId',
       otherKey: 'roleId'
   });

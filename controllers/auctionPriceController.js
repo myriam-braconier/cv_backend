@@ -39,12 +39,44 @@ export const getAllAuctions = async (req, res) => {
 
 export const getLatestAuctionBySynthId = async (req, res) => {
 	try {
-		const synthId = req.params.synthId; // ou req.query.synthId selon votre route
+		const synthetiserId = parseInt(req.params.id);
+		
+		if (isNaN(synthetiserId)) {
+			return res.status(400).json({
+				success: false,
+				message: "ID synthétiseur invalide",
+			});
+		}
 
+		console.log('🔍 Debug Info:');
+		console.log('- ID reçu:', req.params.id);
+		console.log('- ID converti:', synthetiserId);
+		console.log('- Type de synthetiserId:', typeof synthetiserId);
+
+		// Vérifier si le synthétiseur existe
+		const synthExists = await db.Synthetiser.findByPk(synthetiserId);
+		console.log('- Synthétiseur existe:', synthExists ? 'OUI' : 'NON');
+
+		// Compter les enchères
+		const auctionCount = await db.AuctionPrice.count({
+			where: { synthetiserId: synthetiserId }
+		});
+		console.log('- Nombre total d\'enchères:', auctionCount);
+
+		// Requête simple
 		const latestAuction = await db.AuctionPrice.findOne({
-			where: { synthId },
+			where: { synthetiserId: synthetiserId }, // Simple égalité
+			include: [
+				{
+					model: db.Synthetiser,
+					as: "synthetiser",
+					attributes: ["id", "marque", "modele", "image_url"],
+				},
+			],
 			order: [["createdAt", "DESC"]],
 		});
+
+		console.log('- Enchère trouvée:', latestAuction ? 'OUI' : 'NON');
 
 		if (!latestAuction) {
 			return res.status(404).json({
@@ -57,8 +89,9 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 			success: true,
 			data: latestAuction,
 		});
+
 	} catch (error) {
-		console.error("Erreur lors de la récupération de l'enchère:", error);
+		console.error("❌ Erreur:", error);
 		return res.status(500).json({
 			success: false,
 			message: "Erreur lors de la récupération de l'enchère",
@@ -70,13 +103,14 @@ export const getLatestAuctionBySynthId = async (req, res) => {
 // controllers/auctionController.js
 export const createAuction = async (req, res) => {
 	try {
-		const { proposal_price, userId,status } = req.body;
-		const synthetiserId = req.params.id || req.body.synthetiserId;
+		const { proposal_price, userId, status } = req.body;
+		// Conversion et validation de synthetiserId
+		const synthetiserId = parseInt(req.params.id) || parseInt(req.body.synthetiserId);
 
 		// Validation des données
-		if (!proposal_price || !userId || !synthetiserId) {
+		if (!proposal_price || !userId || !synthetiserId || isNaN(synthetiserId)) {
 			return res.status(400).json({
-				message: "Prix, userId et synthetiserId sont requis",
+				message: "Prix, userId et synthetiserId valides sont requis",
 			});
 		}
 
@@ -84,7 +118,7 @@ export const createAuction = async (req, res) => {
 		const newAuction = await db.AuctionPrice.create({
 			proposal_price: Number(proposal_price),
 			userId: Number(userId),
-			synthetiserId: Number(synthetiserId),
+			synthetiserId: synthetiserId, // Déjà converti en nombre
 			status: status || "active",
 			createdAt: new Date(),
 			updatedAt: new Date(),
@@ -96,12 +130,15 @@ export const createAuction = async (req, res) => {
 		}
 
 		// Retourner la nouvelle enchère créée
-		res.status(201).json(newAuction);
+		res.status(201).json({
+			success: true,
+			data: newAuction,
+		});
 	} catch (error) {
-		console.error("Erreur lors de la récupération des enchères:", error);
+		console.error("Erreur lors de la création de l'enchère:", error);
 		res.status(500).json({
 			success: false,
-			error: "Erreur lors de la récupération des enchères",
+			error: "Erreur lors de la création de l'enchère",
 			details: error.message,
 		});
 	}
@@ -110,7 +147,15 @@ export const createAuction = async (req, res) => {
 // Dans controllers/auctionController.js
 export const deleteAuction = async (req, res) => {
 	try {
-		const { auctionId } = req.params;
+		// Conversion et validation de l'ID
+		const auctionId = parseInt(req.params.auctionId);
+		
+		if (isNaN(auctionId)) {
+			return res.status(400).json({
+				message: "ID d'enchère invalide",
+			});
+		}
+
 		console.log("Tentative de suppression de l'enchère:", auctionId);
 
 		// Vérification que l'enchère existe avant suppression

@@ -158,6 +158,266 @@ app.get('/api/me', (req, res) => {
   });
 });
 
+
+// À ajouter dans votre app.js pour diagnostiquer les associations
+app.get('/api/debug/associations', async (req, res) => {
+  console.log('🔍 === DIAGNOSTIC ASSOCIATIONS ===');
+  
+  try {
+    // 1. Vérifier les associations disponibles
+    console.log('📋 Associations Role:', Object.keys(db.Role.associations || {}));
+    console.log('📋 Associations Permission:', Object.keys(db.Permission.associations || {}));
+    console.log('📋 Associations User:', Object.keys(db.User.associations || {}));
+    
+    // 2. Tester différents alias pour Role → Permission
+    const testRole = await db.Role.findOne({ where: { name: 'owner_instr' } });
+    
+    if (!testRole) {
+      return res.json({
+        error: 'Rôle owner_instr non trouvé',
+        availableRoles: await db.Role.findAll({ attributes: ['id', 'name'] })
+      });
+    }
+    
+    console.log('👑 Rôle testé:', testRole.name, 'ID:', testRole.id);
+    
+    const tests = [];
+    
+    // Test 1: alias 'permissions'
+    try {
+      const test1 = await db.Role.findByPk(testRole.id, {
+        include: [{ 
+          model: db.Permission, 
+          as: 'permissions',
+          through: { attributes: [] }
+        }]
+      });
+      tests.push({
+        alias: 'permissions',
+        success: true,
+        count: test1.permissions?.length || 0,
+        data: test1.permissions?.slice(0, 2) // Premiers résultats
+      });
+      console.log('✅ Test permissions:', test1.permissions?.length || 0);
+    } catch (err) {
+      tests.push({
+        alias: 'permissions',
+        success: false,
+        error: err.message
+      });
+      console.log('❌ Erreur permissions:', err.message);
+    }
+    
+    // Test 2: alias 'permission' (singulier)
+    try {
+      const test2 = await db.Role.findByPk(testRole.id, {
+        include: [{ 
+          model: db.Permission, 
+          as: 'permission',
+          through: { attributes: [] }
+        }]
+      });
+      tests.push({
+        alias: 'permission',
+        success: true,
+        count: test2.permission?.length || 0,
+        data: test2.permission?.slice(0, 2)
+      });
+      console.log('✅ Test permission:', test2.permission?.length || 0);
+    } catch (err) {
+      tests.push({
+        alias: 'permission',
+        success: false,
+        error: err.message
+      });
+      console.log('❌ Erreur permission:', err.message);
+    }
+    
+    // Test 3: sans alias
+    try {
+      const test3 = await db.Role.findByPk(testRole.id, {
+        include: [{ 
+          model: db.Permission,
+          through: { attributes: [] }
+        }]
+      });
+      tests.push({
+        alias: 'no-alias',
+        success: true,
+        count: test3.Permissions?.length || 0,
+        data: test3.Permissions?.slice(0, 2)
+      });
+      console.log('✅ Test no-alias:', test3.Permissions?.length || 0);
+    } catch (err) {
+      tests.push({
+        alias: 'no-alias',
+        success: false,
+        error: err.message
+      });
+      console.log('❌ Erreur no-alias:', err.message);
+    }
+    
+    // 4. Vérifier directement la table de liaison
+    let rolePermissionCount = 0;
+    try {
+      rolePermissionCount = await db.RolePermission.count({
+        where: { roleId: testRole.id }
+      });
+      console.log('🔗 Liaisons RolePermission:', rolePermissionCount);
+    } catch (err) {
+      console.log('❌ Erreur RolePermission:', err.message);
+    }
+    
+    // 5. Requête SQL brute pour vérifier
+    let rawPermissions = [];
+    try {
+      const [results] = await db.sequelize.query(`
+        SELECT p.id, p.name, p.description 
+        FROM permissions p 
+        JOIN rolepermissions rp ON p.id = rp.permissionId 
+        WHERE rp.roleId = ?
+      `, {
+        replacements: [testRole.id],
+        type: db.sequelize.QueryTypes.SELECT
+      });
+      rawPermissions = results || [];
+      console.log('🗄️ Permissions via SQL brut:', rawPermissions.length);
+    } catch (err) {
+      console.log('❌ Erreur SQL brut:', err.message);
+    }
+    
+    res.json({
+      success: true,
+      role: {
+        id: testRole.id,
+        name: testRole.name
+      },
+      associations: {
+        Role: Object.keys(db.Role.associations || {}),
+        Permission: Object.keys(db.Permission.associations || {}),
+        User: Object.keys(db.User.associations || {})
+      },
+      tests: tests,
+      rolePermissionCount: rolePermissionCount,
+      rawPermissions: rawPermissions,
+      recommendation: tests.find(t => t.success && t.count > 0)?.alias || 'Problème d\'association'
+    });
+    
+  } catch (error) {
+    console.error('❌ Erreur diagnostic:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      stack: error.stack
+    });
+  }
+});
+
+
+// À ajouter TEMPORAIREMENT dans votre app.js pour identifier le problème
+app.get('/api/debug/test-auth', (req, res) => {
+  console.log('🐛 === DEBUG TEST AUTH ===');
+  console.log('req.user:', req.user);
+  console.log('req.user exists:', !!req.user);
+  console.log('user permissions:', req.user?.permissions);
+  
+  res.json({
+    success: true,
+    message: 'Auth test OK',
+    user: {
+      id: req.user?.id,
+      email: req.user?.email,
+      permissions: req.user?.permissions
+    }
+  });
+});
+
+// pour identifier problème accès aux permissions
+app.get('/api/test-simple', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Route simple OK',
+    user: req.user?.email
+  });
+});
+// Route de test directe pour permissions
+app.get('/api/debug/permissions-direct', async (req, res) => {
+  console.log('🐛 === DEBUG PERMISSIONS DIRECT ===');
+  console.log('req.user au début:', req.user);
+  
+  try {
+    if (!req.user) {
+      console.log('❌ req.user est undefined dans la route permissions');
+      return res.status(401).json({ 
+        success: false,
+        message: 'req.user non défini',
+        debug: 'Middleware auth pas exécuté ou échoué'
+      });
+    }
+
+    console.log('✅ req.user existe:', req.user.id);
+    
+    const userId = req.user.id;
+    
+    const user = await db.User.findByPk(userId, {
+      include: [
+        {
+          model: db.Role,
+          as: 'role',
+          include: [
+            {
+              model: db.Permission,
+              as: 'permissions',
+              through: { attributes: [] }
+            }
+          ]
+        }
+      ]
+    });
+
+    console.log('👤 Utilisateur trouvé:', user ? 'Oui' : 'Non');
+    console.log('👑 Rôle:', user?.role?.name);
+    console.log('🔑 Permissions count:', user?.role?.permissions?.length || 0);
+
+    if (!user) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Utilisateur non trouvé en base' 
+      });
+    }
+
+    const permissions = user.role?.permissions?.map(permission => ({
+      id: permission.id,
+      name: permission.name,
+      description: permission.description
+    })) || [];
+    
+    console.log('✅ Permissions formatées:', permissions.map(p => p.name));
+    
+    res.json({
+      success: true,
+      permissions: permissions,
+      role: user.role?.name,
+      debug: {
+        userId: userId,
+        roleId: user.roleId,
+        permissionsCount: permissions.length,
+        middlewarePermissions: req.user.permissions
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erreur dans debug permissions:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Erreur serveur',
+      error: error.message 
+    });
+  }
+});
+
+
+
 // Log des routes chargées (debug)
 app._router.stack.forEach((r) => {
   if (r.route && r.route.path) {

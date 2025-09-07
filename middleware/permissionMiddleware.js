@@ -1,4 +1,4 @@
-import db from "./models/index.js";/**
+import db from "../models/index.js";/**
 * Middleware vérifiant si l'utilisateur possède une permission spécifique
 * @param {string[]} requiredPermissions - Liste des permissions requises
 * @param {string} type - 'any' ou 'all' pour le type de vérification

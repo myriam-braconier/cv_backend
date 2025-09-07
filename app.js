@@ -63,9 +63,6 @@ import authRoutes from './routes/auth.js';
 app.use('/auth', authRoutes); // routes de login/register/logout
 
 
-
-// VOS AUTRES ROUTES ET MIDDLEWARES...
-
 // Middleware d'authentification global qui protège les routes suivantes
 app.use(authenticateToken);
 
@@ -179,10 +176,17 @@ app.use((req, res) => {
 
 // Gestion globale des erreurs
 app.use((err, req, res, next) => {
-  console.error("❌ Global error handler:", err);
-  res.status(500).json({
+  // Sur Railway, log seulement les vraies erreurs serveur (500+)
+  // et en dev local
+  if (process.env.RAILWAY_ENVIRONMENT !== 'production' || 
+      (err.status && err.status >= 500)) {
+    console.error("❌ Error:", err.message, "Route:", req.path);
+  }
+  
+  const statusCode = err.status || 500;
+  res.status(statusCode).json({
     success: false,
-    error: "Internal server error",
+    error: statusCode >= 500 ? "Internal server error" : err.message,
   });
 });
 

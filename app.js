@@ -31,13 +31,6 @@ const allowedOrigins = [
   "http://localhost:3000",
 ];
 
-// Middleware pour forcer la non-mise en cache
-app.use('/api/auth/login', (req, res, next) => {
-  res.set('Cache-Control', 'no-store');
-  next();
-});
-
-
 // Middleware CORS
 app.use(cors({
   origin: (origin, callback) => {
@@ -53,6 +46,12 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
+// Middleware pour forcer la non-mise en cache
+app.use('/api/auth/login', (req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
+
 // Middlewares globaux
 app.use(cookieParser());
 app.use(express.json());
@@ -62,16 +61,20 @@ import authRoutes from './routes/auth.js';
 // Routes publiques avant le middleware d'authentification
 app.use('/auth', authRoutes); // routes de login/register/logout
 
-
+// Route de base pour tester
+app.get('/', (req, res) => {
+  res.json({ message: 'Serveur fonctionne !', port: PORT });
+});
+// Routes favicon (pour éviter les erreurs 404 liées au favicon)
+app.get("/favicon.ico", (req, res) => res.sendStatus(204));
+app.get("/favicon.png", (req, res) => res.sendStatus(204));
 // Middleware d'authentification global qui protège les routes suivantes
 app.use(authenticateToken);
 
 // Gestion des prévol OPTIONS rapidement
 app.options('*', (req, res) => res.sendStatus(200));
 
-// Routes favicon (pour éviter les erreurs 404 liées au favicon)
-app.get("/favicon.ico", (req, res) => res.sendStatus(204));
-app.get("/favicon.png", (req, res) => res.sendStatus(204));
+
 
 // Import et déclaration des routes
 import synthetiserRoutes from "./routes/synthetisers.js";

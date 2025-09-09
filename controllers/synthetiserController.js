@@ -465,6 +465,8 @@ export const updatePrice = async (req, res) => {
 };
 
 export const getLatestAuctionBySynthetiser = async (req, res) => {
+		console.log('🔥 FONCTION APPELÉE - Params reçus:', req.params);
+	console.log('🔥 URL complète:', req.originalUrl);
 	try {
 		const { id: synthetiserId } = req.params;
 		console.log("Recherche de l'enchère pour le synthétiseur:", synthetiserId);
@@ -478,7 +480,7 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		// Récupère la dernière enchère pour le synthétiseur spécifié
 		const latestAuction = await req.app.get("models").AuctionPrice.findOne({
 			where: { synthetiserId },
-			order: [["createdAt", "DESC"]], // Utilisez created_at à cause de underscored: true
+			order: [["createdAt", "DESC"]], 
 			include: [
 				{
 					model: req.app.get("models").Synthetiser,
@@ -490,30 +492,38 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 
 		console.log("Enchère trouvée dans la BD:", latestAuction);
 
-	
-        if (!latestAuction) {
-            return res.status(404).json({
-                message: 'Aucune enchère trouvée pour ce synthétiseur'
-            });
-        }
+		if (!latestAuction) {
+			return res.status(404).json({
+				message: 'Aucune enchère trouvée pour ce synthétiseur'
+			});
+		}
 
 		const plainAuction = latestAuction.get({ plain: true });
-        console.log('Dates de l\'enchère:', {
-            createdAt: plainAuction.createdAt,
-            updatedAt: plainAuction.updatedAt
-        });
+		console.log('Dates de l\'enchère:', {
+			createdAt: plainAuction.createdAt,
+			updatedAt: plainAuction.updatedAt
+		});
 
-		 // Formatage explicite des dates
-		 const formattedAuction = {
-            ...plainAuction,
-            proposal_price: parseFloat(plainAuction.proposal_price),
-            createdAt: plainAuction.createdAt ? new Date(plainAuction.createdAt).getTime() : now.getTime(),
-            updatedAt: plainAuction.updatedAt ? new Date(plainAuction.updatedAt).toISOString() : now.toISOString(),
-        };
+		// Définir `now` avant de l'utiliser
+		const now = new Date();
+
+		// Formatage explicite des dates
+		const formattedAuction = {
+			...plainAuction,
+			proposal_price: parseFloat(plainAuction.proposal_price) || 0,
+			createdAt: plainAuction.createdAt 
+				? new Date(plainAuction.createdAt).toISOString() 
+				: now.toISOString(),
+			updatedAt: plainAuction.updatedAt 
+				? new Date(plainAuction.updatedAt).toISOString() 
+				: now.toISOString(),
+		};
 
 		console.log("Données formatées envoyées au client:", formattedAuction);
 
-		return res.status(200).json(latestAuction);
+		// CORRECTION PRINCIPALE : retourner formattedAuction au lieu de latestAuction
+		return res.status(200).json(formattedAuction);
+
 	} catch (error) {
 		console.error(
 			"Erreur lors de la récupération de la dernière enchère:",
@@ -525,3 +535,4 @@ export const getLatestAuctionBySynthetiser = async (req, res) => {
 		});
 	}
 };
+
